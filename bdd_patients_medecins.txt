@@ -1,0 +1,6 @@
+p01 mdd5s4g
+p02 0000
+m01 Slgmd58,mf
+m02 anniversaire
+p03 04/12/1985
+a01 01234
