@@ -6,17 +6,18 @@
 
 #include <string>
 
-class Patient
+class Patient : public Profil
 {
     private:
-        int id_patient;
-        string nom;
-        string prenom;
         int age;
         char sexe;
 
     public:
-        Patient(int id, string nom, string prenom, int age, char sexe);
+        Patient(int id, string nom, string prenom, string mot_de_passe, int age, char sexe):Profil(nom, prenom, id, mot_de_passe)
+        {
+            this -> age = age;
+            this -> sexe = sexe;
+        }
         int get_id_patient();
         string get_nom_patient();
         string get_prenom_patient();

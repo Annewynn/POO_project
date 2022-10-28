@@ -17,17 +17,20 @@ class Profil
         string nom;
         string prenom;
 		string id;
+		string mot_de_passe;
     
     private:
         void ajouter();  //ajouter les medecins (spécifique à l'admin)
 
     public: 
-        Profil(string nom, string prenom)
+        Profil(string nom, string prenom, string id, string mot_de_passe)
         {
             this -> nom = nom;
             this -> prenom = prenom;
+            this -> id = id;
+            this -> mot_de_passe = mot_de_passe;
         }
         string get_nom(){return nom;}
         string get_prenom(){return prenom;}
-        void consulter();    //spécifique à l'admin
+        string consulter();    //spécifique à l'admin
 };
