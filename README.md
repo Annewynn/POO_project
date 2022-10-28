@@ -49,14 +49,14 @@ examen: compte_rendu_medical
 
 profil: nom
 profil: prenom
+profil: id
+
 profil: consulter()
 
-patient: id_patient
 patient: age
 patient: sexe
 patient: consulter()
 
-medecin: id_medecin
 medecin: ajouter()
 medecin: consulter()
 ```

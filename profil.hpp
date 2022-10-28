@@ -16,6 +16,7 @@ class Profil
     protected: 
         string nom;
         string prenom;
+		string id;
     
     private:
         void ajouter();  //ajouter les medecins (spécifique à l'admin)
