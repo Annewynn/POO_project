@@ -14,23 +14,24 @@
 class Profil
 {
     protected: 
-        string nom;
-        string prenom;
-		string id;
-		string mot_de_passe;
+        std::string nom;
+        std::string prenom;
+		std::string id;
+		std::string mot_de_passe;
     
     private:
         void ajouter();  //ajouter les medecins (spécifique à l'admin)
 
     public: 
-        Profil(string nom, string prenom, string id, string mot_de_passe)
+        Profil(std::string nom, std::string prenom, std::string id, std::string mot_de_passe)
         {
-            this -> nom = nom;
-            this -> prenom = prenom;
-            this -> id = id;
-            this -> mot_de_passe = mot_de_passe;
+            nom = nom;
+            prenom = prenom;
+            id = id;
+            mot_de_passe = mot_de_passe;
         }
-        string get_nom(){return nom;}
-        string get_prenom(){return prenom;}
-        string consulter();    //spécifique à l'admin
+        std::string get_nom(){return nom;};
+        std::string get_prenom(){return prenom;};
+        void consulter();    //spécifique à l'admin
+        
 };
