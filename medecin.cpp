@@ -1,13 +1,13 @@
 /*#########################################
-## 28/10/2022
+## 09/11/2022
 ## Par Elyna Bouchereau & Naelle Guillon
-## Fichier: profil.cpp
+## Fichier: medecin.cpp
 ###########################################*/
-#include "profil.hpp"
 #include <iostream>
-
+#include "medecin.hpp"
 using namespace std;
 
-void Profil::consulter(){
-	cout << "Enchanté " << nom << " " << prenom <<endl;
+void Medecin::consulter()
+{
+    cout << nom << prenom <<endl;
 }

@@ -1,12 +1,16 @@
-title 
-*-*
+/*#########################################
+## 09/11/2022
+## Par Elyna Bouchereau & Naelle Guillon
+## Fichier: medecin.hpp
+###########################################*/
 
+#include "profil.hpp"
 #include <string>
 
-class Medecin : public Profil
+class Medecin: public Profil
 {
     public:
-        Medecin(string nom, string prenom, string id, string mot_de_passe):Profil(nom, prenom, id, mot_de_passe){}
+        Medecin(std::string nom, std::string prenom, std::string id, std::string mot_de_passe):Profil(nom, prenom, id, mot_de_passe);
         void consulter();   //spécifique au medecin
-        Patient ajouter(string nom, string prenom, string id, string mot_de_passe):Profil(nom, prenom, id, mot_de_passe){}
-}
+        void ajouter(std::string nom, std::string prenom, std::string id, std::string mot_de_passe):Profil(nom, prenom, id, mot_de_passe);
+};

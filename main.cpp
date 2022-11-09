@@ -1,3 +1,8 @@
+/*#########################################
+## 09/11/2022
+## Par Elyna Bouchereau & Naelle Guillon
+## Fichier: main.cpp
+###########################################*/
 #include "profil.hpp"
 #include "patient.hpp"
 #include "medecin.hpp"

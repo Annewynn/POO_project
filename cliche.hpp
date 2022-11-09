@@ -10,5 +10,5 @@ class Cliche
 {
     private:
         int num_prise;
-        string image;
+        std::string image;
 };
