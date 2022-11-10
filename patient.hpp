@@ -5,16 +5,15 @@
 ###########################################*/
 
 #include <string>
-#include "profil.hpp"
 
-class Patient: public Profil
+class Patient
 {
     private:
         int age;
         char sexe;
 
     public:
-        Patient(int id, std::string nom, std::string prenom, std::string mot_de_passe, int age, char sexe):Profil(nom, prenom, id, mot_de_passe)
+        Patient(int id, std::string nom, std::string prenom, std::string mot_de_passe, int age, char sexe)
         {
             this -> age = age;
             this -> sexe = sexe;

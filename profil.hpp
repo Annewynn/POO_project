@@ -4,13 +4,13 @@
 ## Fichier: profil.hpp
 ###########################################*/
 #include <string>
-
+using namespace std;
 
 /*
 	Ceci est une classe qui gère les profils de manière simple pour
 	les sous classes "patient" et "medecin".
 	Elle joue aussi des rôles plus avancés pour l'admin.
-*/
+*//*
 class Profil
 {
     protected: 
@@ -34,4 +34,28 @@ class Profil
         std::string get_prenom(){return prenom;};
         void consulter();    //spécifique à l'admin
         
+};
+*/
+//
+typedef enum Ptype{patient, medecin, admin} Ptype;
+
+class Profil
+{
+    private:
+        string nom;
+        string prenom;
+        string id;
+        string mdp;
+        Ptype type_profil;
+        int age;
+        char sexe;
+    public:
+        Profil(string nom, string prenom, string id, string mdp, int age, char sexe);
+        Profil ajouter(string name, string first_name, string ident, string pwd,Ptype profile_type, int years, char sex)
+        {
+            if (this -> type_profil == medecin || this -> type_profil == admin)
+            return Profil(name, first_name, ident, pwd, years, sex);
+        };
+		void consulter();
+        void afficher();
 };

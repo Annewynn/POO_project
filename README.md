@@ -30,6 +30,7 @@ radiographie: afficher()
 cliché: NumPrise
 cliché: image
 cliché: légende
+cliché: afficher_image()
 
 compte_rendu_medical: mot_de_passe
 compte_rendu_medical: texte

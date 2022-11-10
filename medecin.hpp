@@ -7,7 +7,7 @@
 #include "profil.hpp"
 #include <string>
 
-class Medecin: public Profil
+class Medecin
 {
     public:
         Medecin(std::string nom, std::string prenom, std::string id, std::string mot_de_passe):Profil(nom, prenom, id, mot_de_passe);
