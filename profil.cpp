@@ -8,14 +8,14 @@
 
 using namespace std;
 
-Profil::Profil(string name, string f_name, string idi, string pwd, int fhekfh, char sex)
+Profil::Profil(string name, string f_name, string idi, string pwd, int annee, char sex)
         {
             nom = name;
             prenom = f_name;
             id = idi;
             mdp = pwd;
-          
-            age = fhekfh;
+			type_profil = id[0];
+            age = annee;
             sexe = sex;
         }
 void Profil::consulter(){

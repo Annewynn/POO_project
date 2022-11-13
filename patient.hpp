@@ -4,23 +4,21 @@
 ## Fichier: patient.hpp
 ###########################################*/
 
+#include "profil.hpp"
 #include <string>
 
-class Patient
-{
-    private:
-        int age;
-        char sexe;
+#ifndef PATIENT_HPP
+#define PATIENT_HPP
 
+class Patient: public Profil
+{
     public:
-        Patient(int id, std::string nom, std::string prenom, std::string mot_de_passe, int age, char sexe)
-        {
-            this -> age = age;
-            this -> sexe = sexe;
-        }
+        Patient(std::string nom, std::string prenom, std::string id, std::string mot_de_passe, int age, char sexe):Profil(nom, prenom, id, mot_de_passe, age, sexe){};
         int get_id_patient();
         std::string get_nom_patient();
         std::string get_prenom_patient();
         int get_age();
         char get_sexe();
+        void consulter();
 };
+#endif

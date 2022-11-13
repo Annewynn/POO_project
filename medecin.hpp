@@ -4,13 +4,15 @@
 ## Fichier: medecin.hpp
 ###########################################*/
 
-#include "profil.hpp"
+#include "patient.hpp"
 #include <string>
 
-class Medecin
+class Medecin: public Profil
 {
     public:
-        Medecin(std::string nom, std::string prenom, std::string id, std::string mot_de_passe):Profil(nom, prenom, id, mot_de_passe);
-        void consulter();   //spécifique au medecin
-        void ajouter(std::string nom, std::string prenom, std::string id, std::string mot_de_passe):Profil(nom, prenom, id, mot_de_passe);
+        Medecin(std::string nom, std::string prenom, std::string id, std::string mot_de_passe, int age, char sexe):Profil(nom, prenom, id, mot_de_passe, age, sexe){};
+        void ajouter(std::string nom, std::string prenom, std::string id, std::string mot_de_passe, int age, char sexe){
+            Patient(nom, prenom, id, mot_de_passe, age, sexe);
+        };
+        void consulter();
 };

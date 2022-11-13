@@ -7,5 +7,11 @@
 //classe Patient
 
 #include "patient.hpp"
+#include <iostream>
+#include <string>
+using namespace std;
 
-
+void Patient::consulter()
+{
+    cout << "patient " << nom << " " << prenom << endl;
+}

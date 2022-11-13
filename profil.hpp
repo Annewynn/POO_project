@@ -37,25 +37,28 @@ class Profil
 };
 */
 //
-typedef enum Ptype{patient, medecin, admin} Ptype;
+//typedef enum Ptype{patient, medecin, admin} Ptype;
+#ifndef PROFIL_HPP
+#define PROFIL_HPP
 
 class Profil
 {
-    private:
+    protected:
         string nom;
         string prenom;
         string id;
         string mdp;
-        Ptype type_profil;
+        char type_profil;
         int age;
         char sexe;
     public:
         Profil(string nom, string prenom, string id, string mdp, int age, char sexe);
-        Profil ajouter(string name, string first_name, string ident, string pwd,Ptype profile_type, int years, char sex)
+        Profil ajouter(string name, string first_name, string ident, string pwd, int years, char sex)
         {
-            if (this -> type_profil == medecin || this -> type_profil == admin)
+            if (this -> type_profil == 'm' || this -> type_profil == 'a')
             return Profil(name, first_name, ident, pwd, years, sex);
         };
 		void consulter();
         void afficher();
 };
+#endif
