@@ -14,7 +14,6 @@ Profil::Profil(string name, string f_name, string idi, string pwd, int annee, ch
             prenom = f_name;
             id = idi;
             mdp = pwd;
-			type_profil = id[0];
             age = annee;
             sexe = sex;
         }

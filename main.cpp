@@ -66,18 +66,16 @@ int main()
 		int age = stoi(tokens[4]);
 		const char *sexe= tokens[5].c_str();
 
-        //Medecin med(nom, prenom, id, mdp, age, sexe[0]);
-        //Patient pat(nom, prenom, id, mdp, age, sexe[0]);
-        Profil user(nom, prenom, id, mdp, age, sexe[0]);
+        Medecin med(nom, prenom, id, mdp, age, sexe[0]);
+        Patient pat(nom, prenom, id, mdp, age, sexe[0]);
+        Profil adm(nom, prenom, id, mdp, age, sexe[0]);
         
-        //if (tokens[0][0] == 'm') user = med;
-        //else if (tokens[0][0] == 'p') user = pat;
+        if (tokens[0][0] == 'm') Medecin user = med;
+        else if (tokens[0][0] == 'p') Patient user = pat;
+        else Profil user = adm;
         user.afficher();
         user.consulter();
-        cout << "end" <<endl;
         }
         else cout << "connard :) essaie encore !" <<endl;
-
     }
-    cout << "real end" <<endl;
 }

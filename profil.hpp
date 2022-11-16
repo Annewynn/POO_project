@@ -48,17 +48,15 @@ class Profil
         string prenom;
         string id;
         string mdp;
-        char type_profil;
         int age;
         char sexe;
     public:
         Profil(string nom, string prenom, string id, string mdp, int age, char sexe);
         Profil ajouter(string name, string first_name, string ident, string pwd, int years, char sex)
         {
-            if (this -> type_profil == 'm' || this -> type_profil == 'a')
             return Profil(name, first_name, ident, pwd, years, sex);
         };
-		void consulter();
+		void virtual consulter();
         void afficher();
 };
 #endif
