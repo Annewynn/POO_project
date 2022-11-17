@@ -1,2 +1,2 @@
 numéro	technique	patient	medecin	date	etat
-00010	Rayons X	p02	m02	01/12/2005	EFFECTUEE
+424242	Rayons X	p02	m02	01/12/2005	EFFECTUEE

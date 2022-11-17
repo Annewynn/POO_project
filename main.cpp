@@ -161,15 +161,11 @@ int main()
             //entrer un numéro d'examen :
             cout << "Entrer un numéro d'examen : ";
             string num;
-            std::cin.ignore();
-            getline (cin, num);
-            cout << num;
+            //std::cin.ignore();
+            cin >> num;
             //rechercher dans la liste des examens celle qui a le bon numéro
-            cout << "foofoo";
             filesystem::path cwd = filesystem::current_path();
-            cout <<"foo";
             string s = cwd.generic_string() + "/examens/" + num;
-             cout << s;
             struct stat buffer;
             if (stat(s.c_str(), &buffer) == 0)
             {
@@ -185,7 +181,6 @@ int main()
                 //trouver le médecin à partir de son id
                 vector<string> tokens_medecin;
                 string medecin_id = tokens_r[3];
-                 cout << "avant medic tout va bien";
                 tokens_medecin = trouver_profil_dans_bdd(tokens_medecin, medecin_id, "bdd_patients_medecins.txt");
                 //créer médecin avec tokens_medecin
                 Medecin medic = creer_med(tokens_medecin);
@@ -193,26 +188,23 @@ int main()
                 istringstream iss(tokens_r[4]);
                 vector<string> tokens;
                 string token;
-                cout << "avant la date tout va bien";
                 while(getline(iss, token, '/'))  tokens.push_back(token);
                 vector<int> date = {stoi(tokens[0]), stoi(tokens[1]), stoi(tokens[2])};
                 //ouvrir num_images.txt pour en récuppérer les images
                 vector<vector<string>> vect_tokens_images;
                 string mon_fichier2 = "examens/" + num + "/" + num + "_images.txt";
                 vector<Cliche> images;
-                cout << "avant les images tout va bien";
                 vect_tokens_images = trouver_tous_profil_dans_bdd(vect_tokens_images, mon_fichier2);
                 for (int i =0; i<vect_tokens_images.size(); i++)
                 {
-                    cout << vect_tokens_images[i][0];
                     string image_path = vect_tokens_images[i][1];
                     string legende = vect_tokens_images[i][2];
                     images.push_back(Cliche (i, image_path, legende));
                 }
-
                 if (user -> get_id()[0] == 'm' || user -> get_id()[0] == 'a' || user -> get_id() == id_pat){
                     Radiographie radio(numero, tech, id_pat, medic, date, false, images);
                     radio.afficher_radio();
+					
 					Compte_rendu_medical cpt_rendu(034513, "PIWI", pat);
 					cpt_rendu.get_Compte_Rendu();
 					cpt_rendu.print_Compte_Rendu();            
