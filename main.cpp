@@ -13,6 +13,7 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include <sys/stat.h>
 
 using namespace std;
 
@@ -98,6 +99,10 @@ int main()
             string num;
             cin >> num;
             //rechercher dans la liste des examens celle qui a le bon numéro
+            string s = "/home";
+            struct stat buffer;
+            cout << stat(s.c_str(), &buffer);
+
 			int numero = 10;
             string tech = "x ray";
             string id_pat = "p03";
@@ -108,8 +113,14 @@ int main()
                 string legende2 = "ahahaha";
             vector<Cliche> images = {Cliche (5, image_path, legende), Cliche (10, img2, legende2)};
 
-            Radiographie radio(numero, tech, id_pat, med, date, false, images);
-			radio.afficher_radio();
+			if (user -> get_id()[0] == 'm' || user -> get_id()[0] == 'a' || user -> get_id() == id_pat){
+				Radiographie radio(numero, tech, id_pat, med, date, false, images);
+				radio.afficher_radio();                
+			} else {
+				cout << user -> get_id() << endl;
+				cout << "C'est pas toi, arrête ! >:(\n";
+			}
+            
         }
         else cout << "connard :) essaie encore !" <<endl;
     }

@@ -59,5 +59,6 @@ class Profil
         };
 		void virtual consulter();
         void afficher();
+        string get_id();
 };
 #endif

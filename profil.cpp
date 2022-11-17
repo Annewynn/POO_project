@@ -24,3 +24,8 @@ void Profil::afficher(){
 	cout << "Nom et prénom: " << nom << " " << prenom << endl;
 	cout << "Age: " << age << "\t" << "Sexe: " << sexe << endl;
 }
+
+string Profil::get_id()
+{
+    return id;
+}
