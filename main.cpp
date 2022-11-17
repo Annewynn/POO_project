@@ -6,6 +6,8 @@
 
 #include "patient.hpp"
 #include "medecin.hpp"
+#include "radiographie.hpp"
+#include "cliche.hpp"
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -95,7 +97,19 @@ int main()
             cout << "Entrer un numéro d'examen : ";
             string num;
             cin >> num;
-            cout << num <<endl;
+            //rechercher dans la liste des examens celle qui a le bon numéro
+			int numero = 10;
+            string tech = "x ray";
+            string id_pat = "p03";
+            vector<int> date = {01,10,2022};
+                string image_path = "truc";
+                string legende = "machin";
+                string img2 = "ajkhukg";
+                string legende2 = "ahahaha";
+            vector<Cliche> images = {Cliche (5, image_path, legende), Cliche (10, img2, legende2)};
+
+            Radiographie radio(numero, tech, id_pat, med, date, false, images);
+			radio.afficher_radio();
         }
         else cout << "connard :) essaie encore !" <<endl;
     }

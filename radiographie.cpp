@@ -11,13 +11,13 @@
 #include "cliche.hpp"
 using namespace std;
 
-Radiographie::Radiographie(int numero, string techno, int id, Medecin docteur, vector<int> jour, 
+Radiographie::Radiographie(int numero, string techno, string id, Medecin docteur, vector<int> jour, 
 bool isDone, vector<Cliche> images):medecin{docteur},liste_cliche{images}
 {
 	NumExamen = numero;
 	type = techno;
 	id_patient = id;
-	//medecin = docteur;
+	medecin = docteur;
 	date.jour = jour[0];
 	date.mois = jour[1];
 	date.annee = jour[2];
@@ -26,7 +26,7 @@ bool isDone, vector<Cliche> images):medecin{docteur},liste_cliche{images}
 	{
 		liste_cliche.push_back(images[i]);
 	}*/
-};
+}
 
 string Radiographie::get_etat(){
 	if(etat)return "Effectuée";
@@ -39,7 +39,7 @@ Date Radiographie::get_date(){
 
 void Radiographie::get_liste_cliche(){
 	for(int i=0; i<liste_cliche.size();i++){
-		cout << "-\t";
+		cout << "\t-";
 		liste_cliche[i].get_cliche();
 	}
 }
@@ -50,7 +50,7 @@ void Radiographie::afficher_radio(){
 	cout << "\t\tDate: " << date.jour << "/" << date.mois << "/" << date.annee <<endl;
 	cout << "Type de radio: " << type << endl;
 	cout << "N° patient: " << id_patient;
-	cout << "Medecin:\n";
+	cout << "  Medecin:\n";
 	medecin.afficher();
 	cout << this -> get_etat();
 	cout << "Liste des clichés:\n";

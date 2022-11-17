@@ -12,6 +12,7 @@ Cliche::Cliche(int numero, string img_path, string text)
 	num_prise = numero;
 	image = img_path;
 	legend = text;
+	//cout << "ok corral"<< endl;
 }
 void Cliche::afficher_image(){
 	cout << "\tChemin d'accès: " << image << endl;
@@ -19,6 +20,6 @@ void Cliche::afficher_image(){
 }
 
 void Cliche::get_cliche(){
-	cout << "\tN°: " << num_prise << endl;
+	cout << "N°: " << num_prise << endl;
 	this -> afficher_image();
 }

@@ -8,7 +8,7 @@
 
 #ifndef CLICHE_HPP
 #define CLICHE_HPP
-
+//images des radiographies
 class Cliche
 {
     private:
@@ -17,7 +17,7 @@ class Cliche
 		std::string legend;
 	public:
 		Cliche(int numero, std::string img_path, std::string text);
-		~Cliche();
+		virtual ~Cliche() = default;	// It just works !
 		void afficher_image();
 		void get_cliche();
 };
