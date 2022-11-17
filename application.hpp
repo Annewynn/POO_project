@@ -8,16 +8,19 @@
 #include "radiographie.hpp"
 using namespace std;
 
+#ifndef APPLICATION_HPP
+#define APPLICATION_HPP
 
 class application{
 	private:
-		std::vector <radiographie> liste_radiographie;
+		vector<Radiographie> liste_radiographie;
 	public:
-		application();		//charger le fichier avec la liste des radiographies
+		Application();		//charger le fichier avec la liste des radiographies
 							//Equivalent à charger_liste_radios()
-		~application();
+		~Application();
 		void connexion();
 		void sauvegarder_liste_radios();
-		std::vector <radiographie> trier_liste();
+		vector<Radiographie> trier_liste();
 		void afficher_liste(trier_liste());
 };
+#endif

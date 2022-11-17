@@ -52,6 +52,7 @@ class Profil
         char sexe;
     public:
         Profil(string nom, string prenom, string id, string mdp, int age, char sexe);
+        Profil();
         Profil ajouter(string name, string first_name, string ident, string pwd, int years, char sex)
         {
             return Profil(name, first_name, ident, pwd, years, sex);

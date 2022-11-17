@@ -15,6 +15,7 @@ class Patient: public Profil
 {
     public:
         Patient(string nom, string prenom, string id, string mot_de_passe, int age, char sexe):Profil(nom, prenom, id, mot_de_passe, age, sexe){};
+        Patient();
         int get_id_patient();
         string get_nom_patient();
         string get_prenom_patient();

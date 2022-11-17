@@ -5,44 +5,39 @@
 ###########################################*/
 
 #include <string>
-#include "application.hpp"
+#include <vector>
+#include "medecin.hpp"
+#include "cliche.hpp"
 
-typedef enum etat_radio("fait", "planifié") etat_radio;
-struct Date{
-	int jour;
-	int mois;
-	int annee;
-};
+#ifndef RADIOGRAPHIE_HPP
+#define RADIOGRAPHIE_HPP
 
-class Radiographie : public Application
+// typedef enum etat_radio("effectuée", "planifié") etat_radio;
+struct Date
 {
-    private:
-        int NumExamen;
-        std::string type;
-        int id_patient;
-        Medecin medecin;
-        Date date;
-        etat_radio etat;
-        Cliche liste_cliche;
-
-    public:
-        Radiographie(int NumExamen, std::string type, int id_patient, Medecin medecin, Date date, etat_radio etat, Cliche liste_cliche);
-        {
-            this <- NumExamen = NumExamen;
-        }
-        int get_NumExamen();
-        std::string get_type();
-        int get_id_patient();
-        Medecin get_medecin();
-        Date get_date();
-        etat_radio get_etat();
-        Cliche[] get_liste_cliche();
+    int jour;
+    int mois;
+    int annee;
 };
 
+class Radiographie
+{
+protected:
+    int NumExamen;
+    std::string type; // Rayon X, IRM, ultrason
+    int id_patient;
+    Medecin medecin;
+    Date date;
+    bool etat;
+    vector<Cliche> liste_cliche;
 
-
-
-
-
-
-
+public:
+    Radiographie(int numero, std::string techno, int id, Medecin docteur, vector<int> jour, bool isDone, vector<Cliche> images);
+    std::string get_type();
+    Medecin get_medecin();
+    Date get_date();
+    std::string get_etat();
+    void get_liste_cliche();
+    void afficher_radio();
+};
+#endif

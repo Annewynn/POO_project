@@ -1,0 +1,7 @@
+ID	mot_de_passe
+00010	pomme
+02002	42
+0326	truite
+0246464	2_O_methylation
+034513	PIWI
+0113213	miRNA
