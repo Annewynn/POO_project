@@ -5,6 +5,7 @@
 ###########################################*/
 #include "examen.hpp"
 #include "radiographie.hpp"
+#include "compte_rendu_medical.hpp"
 using namespace std;
 
 /*

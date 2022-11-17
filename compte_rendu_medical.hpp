@@ -18,7 +18,9 @@ class Compte_rendu_medical
         Patient patient;
 
     public:
-        Compte_rendu_medical(int id, string mdp, string text, Patient pat);
+        Compte_rendu_medical(int id, string mdp, Patient pat);
         //ouvrir un fichier et laisser le médecin y entrer le texte
+		void get_Compte_Rendu();	// Rentrer dans le terminal le compte rendu.
+		void print_Compte_Rendu();
 };
 #endif

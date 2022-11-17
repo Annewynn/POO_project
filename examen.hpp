@@ -7,6 +7,9 @@
 #include "compte_rendu_medical.hpp"
 #include <string>
 
+#ifndef EXAMEN
+#define EXAMEN
+
 class Examen
 {
     private:
@@ -16,6 +19,8 @@ class Examen
     public:
         Examen(Radiographie R, Compte_rendu_medical CR):radio{R}, crm{CR}
         {};
+		void sauvegarder_examen();
 };
 
 //https://www.learncpp.com/cpp-tutorial/composition/
+#endif

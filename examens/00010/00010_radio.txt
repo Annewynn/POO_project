@@ -1,12 +1,2 @@
-Radio N°00010
-##################################
-Rayons X
-#################################
-patient p02
-
-int NumExamen;
-    std::string type; // Rayon X, IRM, ultrason
-    int id_patient;
-    Medecin medecin;
-    Date date;
-    bool etat;
+numéro	technique	patient	medecin	date	etat
+00010	Rayons X	p02	m02	01/12/2005	EFFECTUEE
