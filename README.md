@@ -105,15 +105,26 @@ Medecin: ajouter_Patient()
 Medecin: consulter()
 ```
 
-## Construction du logiciel:
+## Documentation
+### Construction du logiciel:
 * [![C++][C++-shield]][C++-url]
 * [![Mermaid][mermaid-shield]][mermaid-url]
 
-## Utilisation du logiciel
+### Utilisation du logiciel
 Ce utilise uniquement le language C++ et ne nécessite donc aucuns prérequis. Il suffit de lancer le fichier _main_.
 ```bash
 ./main
 ```
+
+### Dépendances nécessaires
+Les packages utilisées ne sont pas des packages extérieurs. Leur liste:
+- iostream
+- string
+- fstream
+- sstream
+- vector
+- sys/stat.h
+- filesystem
 
 ## Plan de finalisation du logiciel
 - [ ] Fonctionnalités élémentaires
@@ -131,7 +142,7 @@ Pour avoir une liste des fonctionnalités proposées (et bugs découverts), suiv
 ## Disclaimer & Copyright
 P.O.O FM est une application en développement.  
 Les auteurs demandent que tout travail nécessitant l'utilisation de cette application incorpore une référence au [github](https://github.com/Annewynn/POO_project), ainsi que les références suivantes:  
-  BOUCHEREAU E., GUILLON N. "P.O.O FM: Logiciel de gestion de radiographies", 2022
+  _BOUCHEREAU E., GUILLON N._ "P.O.O FM: Logiciel de gestion de radiographies", 2022
 
 ## Références
 <a href="https://www.flaticon.com/fr/icones-gratuites/mri" title="mri icônes">Mri icônes créées par mavadee - Flaticon</a>
