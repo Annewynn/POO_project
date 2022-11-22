@@ -35,8 +35,28 @@ void Compte_rendu_medical::print_Compte_Rendu(){
 	if(cpt < 3 && mdp_cr == mdp){
 		cout << "#############################################\n";
 		cout << "Numéro d'examen: " << NumExam << endl;
-		patient.consulter();
+		cout << patient.consulter() << endl;
 		cout << "Compte rendu:\n"<< texte << endl;
 		cout << "#############################################\n";
 	} else {cout << "\033[1;31mNombre d'essais dépassé.\033[0m\n";}
+}
+
+string Compte_rendu_medical::return_Compte_Rendu(){
+	string mdp;
+	string CompteRendu = "";
+	int cpt = 0;
+	cout << "Entrez le mot de passe du compte rendu: "; cin >> mdp; cout << endl;
+	while(mdp_cr != mdp && cpt<3){
+		cout << "\033[1;31mMot de passe incorrect\033[0m\n";
+		cin >> mdp;
+		cpt++;
+	}
+	if(cpt < 3 && mdp_cr == mdp){
+		CompteRendu += "#############################################\n";
+		CompteRendu += "Numéro d'examen: " + to_string(NumExam);
+		cout << patient.consulter() << endl;
+		CompteRendu += "Compte rendu:\n" + texte;
+		CompteRendu += "#############################################\n";
+	} else {cout << "\033[1;31mNombre d'essais dépassé.\033[0m\n";}
+	return CompteRendu;
 }

@@ -19,6 +19,9 @@ Examen::Examen(int numero, string techno, int id, Medecin docteur, vector<int> j
 
 void Examen::sauvegarder_examen(){
 	ofstream examen_file(to_string(NumExam));
-	//examen_file;
+	examen_file << "######### Compte Rendu ########\n";
+	examen_file << crm.return_Compte_Rendu() << '\n';
+	examen_file << "######### Radiographies ########\n";
+	examen_file << radio.afficher_radio() << '\n';
 	examen_file.close();
 }

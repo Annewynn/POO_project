@@ -4,6 +4,7 @@
 ## Fichier: medecin.cpp
 ###########################################*/
 #include <iostream>
+#include <string>
 #include "medecin.hpp"
 using namespace std;
 
@@ -17,7 +18,9 @@ Medecin::Medecin(string name, string f_name, string idi, string pwd, int annee, 
 	sexe = sex;
 };
 
-void Medecin::consulter()
+string Medecin::consulter()
 {
-    cout << nom << prenom <<endl;
+	string medecin_consult = "";
+    medecin_consult += nom + " " + prenom;
+	return medecin_consult;
 }

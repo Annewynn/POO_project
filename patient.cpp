@@ -11,7 +11,9 @@
 #include <string>
 using namespace std;
 
-void Patient::consulter()
+string Patient::consulter()
 {
-    cout << "patient " << nom << " " << prenom << endl;
+    string patient_consult = "";
+	patient_consult += "patient " + nom + " " + prenom;
+	return patient_consult;
 }

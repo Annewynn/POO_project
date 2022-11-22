@@ -57,8 +57,13 @@ class Profil
         {
             return Profil(name, first_name, ident, pwd, years, sex);
         };
-		void virtual consulter();
-        void afficher();
+		std::string virtual consulter();
+        std::string afficher();
         string get_id();
+		string get_mdp();
+        string get_nom();
+        string get_prenom();
+        int get_age();
+        char get_sexe();
 };
 #endif

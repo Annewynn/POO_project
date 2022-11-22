@@ -37,7 +37,9 @@ public:
     Medecin get_medecin();
     Date get_date();
     std::string get_etat();
-    void get_liste_cliche();
-    void afficher_radio();
+	void set_etat();
+    std::string get_liste_cliche();
+	std::string get_id();
+    std::string afficher_radio();
 };
 #endif

@@ -22,10 +22,6 @@ bool isDone, vector<Cliche> images):medecin{docteur},liste_cliche{images}
 	date.mois = jour[1];
 	date.annee = jour[2];
 	etat = isDone;
-	/*for (int i = 0; i < images.size(); i++)
-	{
-		liste_cliche.push_back(images[i]);
-	}*/
 }
 
 string Radiographie::get_etat(){
@@ -37,23 +33,37 @@ Date Radiographie::get_date(){
 	return date;
 }
 
-void Radiographie::get_liste_cliche(){
+string Radiographie::get_liste_cliche(){
+	string list_cliche = "";
 	for(int i=0; i<liste_cliche.size();i++){
-		cout << "\t-";
+		list_cliche += "\t-";
 		liste_cliche[i].get_cliche();
 	}
+	return list_cliche;
 }
 
-void Radiographie::afficher_radio(){
-	cout << "#############################################\n";
-	cout << "N° d'examen: " << NumExamen;
-	cout << "\t\tDate: " << date.jour << "/" << date.mois << "/" << date.annee <<endl;
-	cout << "Type de radio: " << type << endl;
-	cout << "N° patient: " << id_patient;
-	cout << "  Medecin:\n";
-	medecin.afficher();
-	cout << this -> get_etat();
-	cout << "Liste des clichés:\n";
-	this -> get_liste_cliche();
-	cout << "#############################################\n";
+string Radiographie::afficher_radio(){
+	string radio_pretty = "";
+	radio_pretty += "#############################################\n";
+	radio_pretty += "N° d'examen: " + NumExamen;
+	radio_pretty += "\t\tDate: " + to_string(date.jour) + "/" + to_string(date.mois) + "/" + to_string(date.annee) +"\n";
+	radio_pretty += "Type de radio: " + type + '\n';
+	radio_pretty += "N° patient: " + id_patient;
+	radio_pretty += "\nMedecin:\n";
+	radio_pretty += medecin.afficher() + "\n";
+	radio_pretty += this -> get_etat() + '\n';
+	radio_pretty += "Liste des clichés:\n";
+	radio_pretty += this -> get_liste_cliche() + '\n';
+	radio_pretty += "#############################################\n";
+	return radio_pretty;
+}
+
+void Radiographie::set_etat()
+{
+	etat = 1;
+}
+
+string Radiographie::get_id()
+{
+	return id_patient;
 }

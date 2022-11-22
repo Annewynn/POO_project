@@ -19,6 +19,6 @@ class Medecin: public Profil
         void ajouter(string nom, string prenom, string id, string mot_de_passe, int age, char sexe){
             Patient(nom, prenom, id, mot_de_passe, age, sexe);
         };
-        void consulter();
+        std::string consulter();
 };
 #endif
