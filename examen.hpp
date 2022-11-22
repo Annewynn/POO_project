@@ -13,11 +13,12 @@
 class Examen
 {
     private:
+		int NumExam;
         Radiographie radio;
         Compte_rendu_medical crm;
 
     public:
-        Examen(Radiographie R, Compte_rendu_medical CR):radio{R}, crm{CR}
+        Examen(int numero, Radiographie R, Compte_rendu_medical CR):radio{R}, crm{CR}
         {};
 		void sauvegarder_examen();
 };

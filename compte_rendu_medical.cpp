@@ -28,7 +28,7 @@ void Compte_rendu_medical::print_Compte_Rendu(){
 	int cpt = 0;
 	cout << "Entrez le mot de passe du compte rendu: "; cin >> mdp; cout << endl;
 	while(mdp_cr != mdp && cpt<3){
-		cout << "Mot de passe incorrect\n";
+		cout << "\033[1;31mMot de passe incorrect\033[0m\n";
 		cin >> mdp;
 		cpt++;
 	}
@@ -38,5 +38,5 @@ void Compte_rendu_medical::print_Compte_Rendu(){
 		patient.consulter();
 		cout << "Compte rendu:\n"<< texte << endl;
 		cout << "#############################################\n";
-	} else {cout << "Nombre d'essais dépassé.\n";}
+	} else {cout << "\033[1;31mNombre d'essais dépassé.\033[0m\n";}
 }

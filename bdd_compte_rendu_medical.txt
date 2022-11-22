@@ -1,7 +1,7 @@
 ID	mot_de_passe
-424242	pomme
+10	pomme
 8556	42
-0326	truite
-0246464	2_O_methylation
-034513	PIWI
-0113213	miRNA
+424242	truite
+246464	2_O_methylation
+34513	PIWI
+113213	miRNA

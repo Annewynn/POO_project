@@ -6,6 +6,8 @@
 #include "examen.hpp"
 #include "radiographie.hpp"
 #include "compte_rendu_medical.hpp"
+#include <iostream>
+#include <fstream>
 using namespace std;
 
 /*
@@ -15,3 +17,8 @@ Examen::Examen(int numero, string techno, int id, Medecin docteur, vector<int> j
     crm = Compte_rendu_medical(id_crm, mdp, text, pat);
 };*/
 
+void Examen::sauvegarder_examen(){
+	ofstream examen_file(to_string(NumExam));
+	//examen_file;
+	examen_file.close();
+}
