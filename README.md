@@ -1,7 +1,5 @@
 <a name="readme-top"></a>
 <!-- PROJECT SHIELDS -->
-
-
 <!-- PROJECT TITLE -->
 <br />
 <div align="center">
