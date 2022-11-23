@@ -8,6 +8,7 @@
 #include <vector>
 #include "medecin.hpp"
 #include "cliche.hpp"
+#include "patient.hpp"
 
 #ifndef RADIOGRAPHIE_HPP
 #define RADIOGRAPHIE_HPP
@@ -25,14 +26,14 @@ class Radiographie
 protected:
     int NumExamen;
     std::string type; // Rayon X, IRM, ultrason
-    std::string id_patient;
+    Patient patient;
     Medecin medecin;
     Date date;
     bool etat;
     vector<Cliche> liste_cliche;
 
 public:
-    Radiographie(int numero, std::string techno, std::string id, Medecin docteur, vector<int> jour, bool isDone, vector<Cliche> images);
+    Radiographie(int numero, std::string techno, Patient nom, Medecin docteur, vector<int> jour, bool isDone, vector<Cliche> images);
     std::string get_type();
     Medecin get_medecin();
     Date get_date();

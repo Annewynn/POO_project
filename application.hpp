@@ -14,6 +14,9 @@ using namespace std;
 class Application{
 	private:
 		vector<Radiographie> liste_radiographie;
+		bool comparePatient(const vector<Radiographie> &a, const vector<Radiographie> &b);
+		bool compareDate(const vector<Radiographie> &a, const vector<Radiographie> &b);
+		bool compareNumExam(const vector<Radiographie> &a, const vector<Radiographie> &b);
 	public:
 		Application();		//charger le fichier avec la liste des radiographies
 							//Equivalent à charger_liste_radios()
@@ -22,5 +25,8 @@ class Application{
 		vector<Radiographie> trier_liste();
 		void afficher_liste(vector<Radiographie> radios);
 		void ajouter(Radiographie radio);
+		vector<Radiographie> afficher_liste_examen_Patient();
+		vector<Radiographie> afficher_liste_examen_date();
+		vector<Radiographie> afficher_liste_examen_NumExam();
 };
 #endif

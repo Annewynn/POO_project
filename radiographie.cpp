@@ -11,12 +11,13 @@
 #include "cliche.hpp"
 using namespace std;
 
-Radiographie::Radiographie(int numero, string techno, string id, Medecin docteur, vector<int> jour, 
+Radiographie::Radiographie(int numero, string techno, Patient pat, Medecin docteur, vector<int> jour, 
 bool isDone, vector<Cliche> images):medecin{docteur},liste_cliche{images}
 {
 	NumExamen = numero;
 	type = techno;
-	id_patient = id;
+
+	Patient patient.Patient();
 	medecin = docteur;
 	date.jour = jour[0];
 	date.mois = jour[1];
