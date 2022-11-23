@@ -26,14 +26,14 @@ class Radiographie
 protected:
     int NumExamen;
     std::string type; // Rayon X, IRM, ultrason
-    Patient patient;
     Medecin medecin;
     Date date;
     bool etat;
     vector<Cliche> liste_cliche;
 
 public:
-    Radiographie(int numero, std::string techno, Patient nom, Medecin docteur, vector<int> jour, bool isDone, vector<Cliche> images);
+	Patient patient;	// Permet à Application d'accéder facilement aux méthodes de la classe patient.
+    Radiographie(int numero, std::string techno, Patient pat, Medecin docteur, vector<int> jour, bool isDone, vector<Cliche> images);
     std::string get_type();
     Medecin get_medecin();
     Date get_date();
@@ -42,5 +42,6 @@ public:
     std::string get_liste_cliche();
 	std::string get_id();
     std::string afficher_radio();
+	std::string afficher_radio_as_table();
 };
 #endif

@@ -17,3 +17,4 @@ string Patient::consulter()
 	patient_consult += "patient " + nom + " " + prenom;
 	return patient_consult;
 }
+

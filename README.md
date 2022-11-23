@@ -139,6 +139,7 @@ Les packages utilisées ne sont pas des packages extérieurs. Leur liste:
   - [x] Pouvoir accéder aux examens (radiographies et clichés associés + compte rendu)
   - [ ] Pouvoir créer et sauvegarder des examens/radiographies.
   - [ ] Pouvoir afficher la liste des examens/radiographies.
+  - [ ] Pouvoir trier la liste des radiographies et l'exporter.
 - [ ] Fonctionnalités supplémentaires
   - [ ] Ajouter des fonctionnalités pour les patients
   - [ ] Affichage des clichés associés aux radiographies

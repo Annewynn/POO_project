@@ -20,5 +20,6 @@ class Cliche
 		virtual ~Cliche() = default;	// It just works !
 		void afficher_image();
 		void get_cliche();
+		std::string return_cliche();
 };
 #endif

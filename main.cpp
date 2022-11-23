@@ -22,6 +22,16 @@
 using namespace std;
 
 //################################################################################################
+/*______  __    __    ______    __  ___   ___       .______      ___   .___________. __   _______ .__   __. .___________.
+ /      ||  |  |  |  /  __  \  |  | \  \ /  /       |   _  \    /   \  |           ||  | |   ____||  \ |  | |           |
+|  ,----'|  |__|  | |  |  |  | |  |  \  V  /        |  |_)  |  /  ^  \ `---|  |----`|  | |  |__   |   \|  | `---|  |----`
+|  |     |   __   | |  |  |  | |  |   >   <         |   ___/  /  /_\  \    |  |     |  | |   __|  |  . `  |     |  |     
+|  `----.|  |  |  | |  `--'  | |  |  /  .  \        |  |     /  _____  \   |  |     |  | |  |____ |  |\   |     |  |     
+ \______||__|  |__|  \______/  |__| /__/ \__\  _____| _|    /__/     \__\  |__|     |__| |_______||__| \__|     |__|     
+                                              |______|                                                                   
+*/
+
+//################################################################################################
 /*_                                                     __ _ _        _                     _         _     _ 
  | |_ _ __ ___  _   ___   _____ _ __   _ __  _ __ ___  / _(_) |    __| | __ _ _ __  ___    | |__   __| | __| |
  | __| '__/ _ \| | | \ \ / / _ \ '__| | '_ \| '__/ _ \| |_| | |   / _` |/ _` | '_ \/ __|   | '_ \ / _` |/ _` |
@@ -209,6 +219,71 @@ int rng(int min, int max)
     return dist(randomng);
 }
 
+Patient choix_patient(vector<Patient> &patients){
+	string nom, prenom;
+	vector<Patient> patients_trouver;
+	int choix=0;
+	int cpt=0;
+	cout << "Saisir un nom: ";
+	cin >> nom;
+	cout << "Saisir un prenom: ";
+	cin >> prenom;
+	for(int i=0;i < patients.size();i++){
+		if(patients[i].get_nom() == nom){
+			if(patients[i].get_prenom() == prenom){
+				patients_trouver.push_back(patients[i]);
+				cpt ++;
+			}
+		}
+	}
+	if(cpt > 1){
+		cout << "Plusieurs patients avec le nom et prénom.\n";
+		for(int i=0;i<patients_trouver.size();i++){
+			cout << "Patient "<< i << endl;;
+			cout << patients_trouver[i].consulter() << endl;
+		}
+		cout << "Quel patient choisi (sur " << patients_trouver.size() << ") ? Entrez le nombre correspondant.\n";
+		cin >> choix;
+		return patients_trouver[choix];
+	}
+	if (cpt == 1) return patients_trouver[0];
+	else 
+	{
+		vector<string> tokens_pat;
+		cout << "Patient pas encore dans la base de données. Veuillez entrer ses informations." <<endl;;
+		//id
+		cout << "Id: ";
+		string id;
+		cin >> id;
+		tokens_pat.push_back(id);
+		//mdp
+		//généré aléatoirement
+		string mdp;
+		for (int i = 0; i< 4; i++)
+		{
+			mdp += to_string(rng(0, 9));
+		}
+		tokens_pat.push_back(mdp);
+		//nom
+		tokens_pat.push_back(nom);
+		//prenom
+		tokens_pat.push_back(prenom);
+		//age
+		cout << "Age: ";
+		int age_pat;
+		cin >> age_pat;
+		tokens_pat.push_back(to_string(age_pat));
+		//sexe
+		cout << "Sexe: ";
+		char sexe_pat;
+		cin >> sexe_pat;
+		string s{sexe_pat};
+		tokens_pat.push_back(s);
+		Patient pat = creer_pat(tokens_pat);
+		ajouter_bdd(pat, "bdd_patients_medecins.txt");
+		return pat;
+	}
+}
 //################################################################################################
 /*
   ______ .______       _______  _______ .______            .______          ___       _______   __    ______   
@@ -221,11 +296,12 @@ int rng(int min, int max)
  */
 /// @brief Interface pour créer une radio. accessible uniquement à un médecin
 /// @param numero Numéro d'examen
-/// @param id_profil Id du médecin en charge de la radiographie (donc de user)
 /// @param med Médecin en charge de la radiographie
+/// @param patients Vecteur de tous les patients
 /// @return Renvoie une radiographie.
-Radiographie creer_radio(string numero, string id_profil, Medecin med)
+Radiographie creer_radio(string numero, Medecin med, vector<Patient> &patients)
 {
+	string id_profil = med.get_id();
 	cout << "#############################################\n";
 	//numéro d'examen
 	cout << "N° d'examen: " << numero;
@@ -250,51 +326,8 @@ Radiographie creer_radio(string numero, string id_profil, Medecin med)
 	cin.ignore();
 	getline(cin, rtype, '\n');
 	cout << endl;
-	cout << "N° Patient : ";
-	string id_patient;
-	cin >> id_patient;
-	//vérifier si ce patient existe : 
-	vector<string> tokens_pat;
-	tokens_pat = trouver_profil_dans_bdd(tokens_pat, id_patient, "bdd_patients_medecins.txt");
-	//si la patient n'a pas été trouvé dans la bdd on le crée
-	if (tokens_pat.size() == 0)
-	{
-		cout << "Patient pas encore dans la base de données. Veuillez entrer ses informations." <<endl;;
-		//id
-		tokens_pat.push_back(id_patient);
-		//mdp
-		//généré aléatoirement
-		string mdp;
-		for (int i = 0; i< 4; i++)
-		{
-			mdp += to_string(rng(0, 9));
-		}
-		tokens_pat.push_back(mdp);
-		//nom
-		cout << "Nom: ";
-		string nom_pat;
-		cin >> nom_pat;
-		tokens_pat.push_back(nom_pat);
-		//prenom
-		cout << "Prénom: ";
-		string prenom_pat;
-		cin >> prenom_pat;
-		tokens_pat.push_back(prenom_pat);
-		//age
-		cout << "Age: ";
-		int age_pat;
-		cin >> age_pat;
-		tokens_pat.push_back(to_string(age_pat));
-		//sexe
-		cout << "Sexe: ";
-		char sexe_pat;
-		cin >> sexe_pat;
-		string s{sexe_pat};
-		tokens_pat.push_back(s);
-		Patient pat = creer_pat(tokens_pat);
-		ajouter_bdd(pat, "bdd_patients_medecins.txt");
-	}
-	Patient pat = creer_pat(tokens_pat);
+	//patient : 
+	Patient pat = choix_patient(patients);
 	cout << "  Medecin: ";
 	cout << id_profil << endl;
 	cout << "Plannifée\n";
@@ -330,7 +363,7 @@ Radiographie creer_radio(string numero, string id_profil, Medecin med)
 	int num = stoi(numero);
 	//Radiographie(int numero, string techno, string id, Medecin docteur, vector<int> jour, 
 	//bool isDone, vector<Cliche> images)
-	Radiographie radio(num, rtype, id_patient, med, date, etat, images);
+	Radiographie radio(num, rtype, pat, med, date, etat, images);
 	cout << radio.afficher_radio() << endl;
 	return radio;
 	//créer un fichier crm.txt vide
@@ -403,6 +436,7 @@ int main()
 				pmed = &medecins[i];
 				user = pmed; 
 				trouve = true;
+				break;
 			}
 		}
 	}
@@ -413,7 +447,9 @@ int main()
 			{
 				ppat = &patients[i];
 				user = ppat; 
-				trouve = true;}
+				trouve = true;
+				break;
+			}
 		}
 	}
 	else if (id[0] == 'a') {
@@ -423,6 +459,7 @@ int main()
 			{
 				user = &admins[i];
 				trouve = true;
+				break;
 			}
 		}
 	}
@@ -499,13 +536,28 @@ int main()
                 //créer radiographie
                 int numero = stoi(tokens_r[0]);
                 string tech = tokens_r[1];
+				//trouver le bon patient à partir de son id
                 string id_pat = tokens_r[2];
+				Patient pat = patients[0];
+				for (int i=0; i<patients.size(); i++)
+				{
+					if (patients[i].get_id() == id_pat)
+					{
+						pat = patients[i];
+						break;
+					}
+				}
                 //trouver le médecin à partir de son id
-                vector<string> tokens_medecin;
                 string medecin_id = tokens_r[3];
-                tokens_medecin = trouver_profil_dans_bdd(tokens_medecin, medecin_id, "bdd_patients_medecins.txt");
-                //créer médecin avec tokens_medecin
-                Medecin medic = creer_med(tokens_medecin);
+				Medecin medic = medecins[0];
+				for (int i=0; i<medecins.size(); i++)
+				{
+					if (medecins[i].get_id() == medecin_id)
+					{
+						medic = medecins[i];
+						break;
+					}
+				}
                 //date
                 istringstream iss(tokens_r[4]);
                 vector<string> tokens;
@@ -524,7 +576,8 @@ int main()
                     images.push_back(Cliche (i, image_path, legende));
                 }
                 if (user -> get_id()[0] == 'm' || user -> get_id()[0] == 'a' || user -> get_id() == id_pat){
-                    Radiographie radio(numero, tech, id_pat, medic, date, false, images);
+                    cout << "foo";
+					Radiographie radio(numero, tech, pat, medic, date, false, images);
                     cout << radio.afficher_radio() << endl;
 					//on va chercher le crm si user est un médecin
 					if (radio.get_etat() == "Effectuée" && user->get_id()[0] == 'm')
@@ -535,9 +588,15 @@ int main()
 						string mdp = tokens_crm[2];
 						//patient correspondant au crm : id_path
 						//aller chercher le patient par son id dans bdd patients médecins
-						vector<string> tokens_pat;
-                		tokens_pat = trouver_profil_dans_bdd(tokens_pat, id_pat, "bdd_patients_medecins.txt");
-						Patient pat = creer_pat(tokens_pat);
+                		Patient pat = patients[0];
+						for (int i=0; i<patients.size(); i++)
+						{
+							if (patients[i].get_id() == id_pat)
+							{
+								pat = patients[i];
+								break;
+							}
+						}
 						//créer crm
 						Compte_rendu_medical cpt_rendu(numero, mdp, pat);
 						cpt_rendu.print_Compte_Rendu();
@@ -557,9 +616,15 @@ int main()
 						string mdp = tokens_crm[2];
 						//patient correspondant au crm : id_path
 						//aller chercher le patient par son id dans bdd patients médecins
-						vector<string> tokens_pat;
-                		tokens_pat = trouver_profil_dans_bdd(tokens_pat, id_pat, "bdd_patients_medecins.txt");
-						Patient pat = creer_pat(tokens_pat);
+						Patient pat = patients[0];
+						for (int i=0; i<patients.size(); i++)
+						{
+							if (patients[i].get_id() == id_pat)
+							{
+								pat = patients[i];
+								break;
+							}
+						}
 						//créer crm
 						Compte_rendu_medical cpt_rendu(numero, mdp, pat);
 						//veut-on créer un crm ?
@@ -584,7 +649,15 @@ int main()
             else if (user -> get_id()[0] != 'm') cout << "\033[1;31mAncun examen n'a ce numéro *-*\033[0m" <<endl;
 				else 
 				{
-					Radiographie radio = creer_radio(num, user -> get_id(), medecins[0]);
+					vector<string> tokens;
+					tokens.push_back(user-> get_id());
+					tokens.push_back(user -> get_mdp());
+					tokens.push_back(user-> get_nom());
+					tokens.push_back(user-> get_prenom());
+					tokens.push_back(to_string(user -> get_age()));
+					tokens.push_back(string{user -> get_sexe()});
+					Medecin med = creer_med(tokens);
+					Radiographie radio = creer_radio(num, med, patients);
 					app.ajouter(radio);
 					//créer crm
 					//mdp
@@ -598,5 +671,4 @@ int main()
 			
         }
         else cout << "\033[1;31mConnard :) essaie encore !\033[0m" <<endl;
-		*/
 }
