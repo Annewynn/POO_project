@@ -134,9 +134,7 @@ Profil creer_adm(vector<string> tokens)
     string prenom = tokens[3];
     string id = tokens[0];
     string mdp = tokens[1];
-    int age;// = stoi(tokens[4]);
-	cout << tokens[4];
-	age = 45;
+    int age = stoi(tokens[4]);
     const char *sexe= tokens[5].c_str();
     return Profil (nom, prenom, id, mdp, age, sexe[0]);
 }
@@ -170,6 +168,8 @@ vector<vector<string>> trouver_tous_profil_dans_bdd(vector<vector<string>> vect_
     if(fichier)  // si l'ouverture a réussi
     {
         string ligne;  // déclaration d'une chaîne qui contiendra la ligne lue
+		//oter la première ligne dans bdd patients médecins
+		if (mon_fichier == "bdd_patients_medecins.txt") getline(fichier, ligne);
         while(getline(fichier, ligne))  // tant que l'on peut mettre la ligne dans "contenu"
         {   vector<string> tokens;
             //https://stackoverflow.com/questions/10617094/how-to-split-a-file-lines-with-space-and-tab-differentiation
@@ -370,19 +370,17 @@ int main()
 	vect_tokens_profils = trouver_tous_profil_dans_bdd(vect_tokens_profils, mon_fichier);
 	for (int i =0; i<vect_tokens_profils.size(); i++)
 	{
-		for (int j = 0; j<vect_tokens_profils[i].size(); j++)
+		/*for (int j = 0; j<vect_tokens_profils[i].size(); j++)
 		{
-			cout << vect_tokens_profils[i][j];
-		}
-		admins.push_back(creer_adm(vect_tokens_profils[i]));
-}/*
+			cout << vect_tokens_profils[i][j] <<endl;
+		}*/
 		if (vect_tokens_profils[i][0][0] == 'a')
 			admins.push_back(creer_adm(vect_tokens_profils[i]));
 		else if (vect_tokens_profils[i][0][0] == 'm')
 			medecins.push_back(creer_med(vect_tokens_profils[i]));
 		else patients.push_back(creer_pat(vect_tokens_profils[i]));
-	}*/
-/*
+	}
+
 	cout << "id : ";
     string id;
     cin >> id;
@@ -400,24 +398,36 @@ int main()
 	if (id[0] == 'm') {
 		for (int i =0; i<medecins.size(); i++)
 		{
-			if (medecins[i].get_id() == id && medecins[i].get_mdp() == mdp) {user = pmed; trouve = true;}
+			if (medecins[i].get_id() == id && medecins[i].get_mdp() == mdp) 
+			{
+				pmed = &medecins[i];
+				user = pmed; 
+				trouve = true;
+			}
 		}
 	}
 	else if (id[0] == 'p') {
 		for (int i =0; i<patients.size(); i++)
 		{
-			if (patients[i].get_id() == id && patients[i].get_mdp() == mdp) {user = ppat; trouve = true;}
+			if (patients[i].get_id() == id && patients[i].get_mdp() == mdp) 
+			{
+				ppat = &patients[i];
+				user = ppat; 
+				trouve = true;}
 		}
 	}
 	else if (id[0] == 'a') {
 		for (int i =0; i<admins.size(); i++)
 		{
-			if (admins[i].get_id() == id && admins[i].get_mdp() == mdp) {trouve = true;}
+			if (admins[i].get_id() == id && admins[i].get_mdp() == mdp) 
+			{
+				user = &admins[i];
+				trouve = true;
+			}
 		}
 	}
-	cout << user -> afficher() << endl;
-    cout << user -> consulter() << endl;
 
+	/*
 	vector<string> tokens;
     tokens = trouver_profil_dans_bdd(tokens, id, mdp, "bdd_patients_medecins.txt");
         if (tokens.size() != 0)
@@ -458,8 +468,12 @@ int main()
             //si user est patient : 
                 //il voit les radios qui lui sont associées : ok
                 //il peut accéder aux clichés mais pas au crm : ok
+		*/
 		if (trouve)
 		{
+			//profil reconnu
+			cout << user -> afficher() << endl;
+    		cout << user -> consulter() << endl;
 			//pour le médecin : accéder ou créer une radio
 			if (user->get_id()[0] == 'm')
 			{
