@@ -26,7 +26,7 @@ class Radiographie
 protected:
     int NumExamen;
     std::string type; // Rayon X, IRM, ultrason
-    Medecin medecin;
+	Medecin medecin;
     Date date;
     bool etat;
     vector<Cliche> liste_cliche;

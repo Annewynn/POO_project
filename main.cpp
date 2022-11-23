@@ -75,6 +75,8 @@ vector<string> trouver_profil_dans_bdd(vector<string> tokens, string id, string 
     if(fichier)  // si l'ouverture a réussi
     {
         string ligne;  // déclaration d'une chaîne qui contiendra la ligne lue
+		//éviter de lire le header
+		if (mon_fichier == "bdd_compte_rendu_medical.txt") getline(fichier, ligne);
         while(getline(fichier, ligne))  // tant que l'on peut mettre la ligne dans "contenu"
         {
                 //https://stackoverflow.com/questions/10617094/how-to-split-a-file-lines-with-space-and-tab-differentiation
@@ -391,6 +393,21 @@ MMMMMMMM               MMMMMMMMAAAAAAA                   AAAAAAAIIIIIIIIIINNNNNN
 */
 int main()
 {
+	int MenuPrincipal;
+	cout << "#############################################\n";
+	cout << "##         Bienvenue sur P.O.O FM          ##\n";
+	cout << "##     Gestionnaire de radiographies       ##\n";
+	cout << "#############################################\n";
+	cout << "## Menu principal:\n";
+	cout << "   [1]: Admin, Medecin ou Patient\n";
+	cout << "   [2]: Quitter\n";
+	cin >> MenuPrincipal;
+	switch(MenuPrincipal){
+		case 1: break;
+		case 2: return 0;
+		default: cout << "\033[1;31mSaisi incorrecte.\033[0m";return 1;
+	}
+
 	//initialisation : instancier une application contenant une liste de radiographies
 	Application app;
 
@@ -413,11 +430,11 @@ int main()
 			medecins.push_back(creer_med(vect_tokens_profils[i]));
 		else patients.push_back(creer_pat(vect_tokens_profils[i]));
 	}
-
-	cout << "id : ";
+	cout << "## Menu de connection:\n";
+	cout << "Votre identifiant : ";
     string id;
     cin >> id;
-    cout << "mot de passe : ";
+    cout << "Votre mot de passe : ";
     string mdp;
     cin >> mdp;
 	//aller chercher dans le bon tableau (id[0]) les id/mdp entrées
@@ -511,6 +528,17 @@ int main()
 			//profil reconnu
 			cout << user -> afficher() << endl;
     		cout << user -> consulter() << endl;
+			int menu_examen;
+			cout << "## Menu: consulter un examen\n";
+			cout << "   [1]: Consulter/saisi\n";
+			cout << "   [2]: Retour au menu principal\n";
+			cin >> menu_examen;
+			switch(menu_examen){
+				case 1: break;
+				case 2: break;
+				default: break;
+			}
+
 			//pour le médecin : accéder ou créer une radio
 			if (user->get_id()[0] == 'm')
 			{
@@ -576,9 +604,8 @@ int main()
                     images.push_back(Cliche (i, image_path, legende));
                 }
                 if (user -> get_id()[0] == 'm' || user -> get_id()[0] == 'a' || user -> get_id() == id_pat){
-                    cout << "foo";
 					Radiographie radio(numero, tech, pat, medic, date, false, images);
-                    cout << radio.afficher_radio() << endl;
+					cout << radio.afficher_radio() << endl;
 					//on va chercher le crm si user est un médecin
 					if (radio.get_etat() == "Effectuée" && user->get_id()[0] == 'm')
 					{
@@ -613,7 +640,7 @@ int main()
 						//trouver le crm à partir de son id
                 		vector<string> tokens_crm;
                 		tokens_crm = trouver_profil_dans_bdd(tokens_crm, to_string(numero), "bdd_compte_rendu_medical.txt");
-						string mdp = tokens_crm[2];
+						string mdp = tokens_crm[1];
 						//patient correspondant au crm : id_path
 						//aller chercher le patient par son id dans bdd patients médecins
 						Patient pat = patients[0];
@@ -638,15 +665,20 @@ int main()
 							dossier.sauvegarder_examen();
 						}
 						else cpt_rendu.print_Compte_Rendu();
-					}
-					            
-                } else {
+					}	            
+                } 
+				else 
+				{
                     cout << user -> get_id() << endl;
                     cout << "\033[1;31mC'est pas toi, arrête ! >:(\033[0m\n";
                 }
-            
             }
-            else if (user -> get_id()[0] != 'm') cout << "\033[1;31mAncun examen n'a ce numéro *-*\033[0m" <<endl;
+            else 
+			{
+				if (user -> get_id()[0] != 'm') 
+				{
+					cout << "\033[1;31mAncun examen n'a ce numéro *-*\033[0m" <<endl;
+				}
 				else 
 				{
 					vector<string> tokens;
@@ -668,7 +700,9 @@ int main()
 					//Patient pat = 
 					//Compte_rendu_medical cpt_rendu(num, mdp, pat);
 				}
-			
+			}
         }
         else cout << "\033[1;31mConnard :) essaie encore !\033[0m" <<endl;
+	cout << "foo";
+	
 }

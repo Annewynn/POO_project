@@ -16,8 +16,8 @@ bool isDone, vector<Cliche> images):patient{pat},medecin{docteur},liste_cliche{i
 {
 	NumExamen = numero;
 	type = techno;
-	//patient = pat;
-	//medecin = docteur;
+	patient = pat;
+	medecin = docteur;
 	date.jour = jour[0];
 	date.mois = jour[1];
 	date.annee = jour[2];
@@ -49,7 +49,7 @@ string Radiographie::afficher_radio()
 {
 	string radio_pretty = "";
 	radio_pretty += "#############################################\n";
-	radio_pretty += "N° d'examen: " + NumExamen;
+	radio_pretty += "N° d'examen: " + to_string(NumExamen);
 	radio_pretty += "\t\tDate: " + to_string(date.jour) + "/" + to_string(date.mois) + "/" + to_string(date.annee) +"\n";
 	radio_pretty += "Type de radio: " + type + '\n';
 	radio_pretty += "N° patient: " + patient.get_id();
