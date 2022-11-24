@@ -30,7 +30,8 @@ MMMMMMMM               MMMMMMMMAAAAAAA                   AAAAAAAIIIIIIIIIINNNNNN
 int main()
 {
 	int MenuPrincipal = 1;
-	int Menu_Lister_ou_Creer = 1;
+	int Menu_Lister_ou_Creer;
+	int menu_examen;
 	while(MenuPrincipal == 1)
 	{
 		cout << "#############################################\n";
@@ -124,11 +125,11 @@ int main()
 			//profil reconnu
 			cout << user -> afficher() << endl;
 			cout << user -> consulter() << endl;
-
+			Menu_Lister_ou_Creer = 1;
 			while(Menu_Lister_ou_Creer == 1 || Menu_Lister_ou_Creer == 2)
 			{
 				cout << "#############################################\n";
-				cout << "## Menu: consulter un examen\n";
+				cout << "## Menu: Lister ou consulter des radiographies\n";
 				cout << "   [1]: Lister les radiographies effectuées.\n";
 				cout << "   [2]: Consulter un examen\n";
 				cout << "   [3]: Retour au menu principal\n";
@@ -136,21 +137,23 @@ int main()
 				switch(Menu_Lister_ou_Creer)
 				{
 					case 1:
+						{
+						vector<Radiographie> radios;
 						cout << "## Lister les radiographies effectuées.\n";
 						//cout << app.afficher_liste(trouver_radios_dans_bdd("bdd_compte_rendu_medical.txt", admins, medecins, patients)) << endl;
-						trouver_radios_dans_bdd("bdd_compte_rendu_medical.txt", admins, medecins, patients);
+						radios = trouver_radios_dans_bdd("bdd_compte_rendu_medical.txt", admins, medecins, patients);
 						
-						break;
+						}break;
 					case 2:
 					{
 						cout << "## Consulter un examen.\n";
-						int menu_examen = 1;
+						menu_examen = 1;
 						while(menu_examen == 1)
 						{
 							cout << "#############################################\n";
 							cout << "## Menu: consulter un examen\n";
 							cout << "   [1]: Consulter/saisi\n";
-							cout << "   [2]: Retour au menu principal\n";
+							cout << "   [2]: Retour au menu consulter actions\n";
 							menu_examen = input();
 							switch(menu_examen)
 							{

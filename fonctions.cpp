@@ -81,6 +81,7 @@ vector<string> trouver_profil_dans_bdd(vector<string> tokens, string id, string 
         string ligne;  // déclaration d'une chaîne qui contiendra la ligne lue
 		//éviter de lire le header
 		if (mon_fichier == "bdd_compte_rendu_medical.txt") getline(fichier, ligne);
+
         while(getline(fichier, ligne))  // tant que l'on peut mettre la ligne dans "contenu"
         {
                 //https://stackoverflow.com/questions/10617094/how-to-split-a-file-lines-with-space-and-tab-differentiation
@@ -163,6 +164,15 @@ void ajouter_bdd(Patient pat, string mon_fichier)
 	patient_file << "\t" << pat.get_prenom() << "\t" << pat.get_age() << "\t" << pat.get_sexe();
 	patient_file.close();
 }
+
+void ajouter_bdd(vector<string> vec, string mon_fichier)
+{
+	ofstream file;
+	file.open(mon_fichier, ios_base::app);
+	file <<'\n'<< vec[0] << "\t" << vec[1];
+	file.close();
+}
+
 
 //################################################################################################
 /*
@@ -268,6 +278,7 @@ Radiographie trouver_radio(string num, vector<Profil> admins,vector<Medecin> med
 	Radiographie radio(numero, tech, pat, medic, date, etat, images); 
 	return radio;
 }
+
 /// @brief Instencie l'ensemble des radiographies répertoriées à partit d'un fichier tsv.
 /// @param mon_fichier Chemin du fichier à lire
 /// @return Renvoie un vecteur de l'ensemble des radiographies trouvées.
@@ -289,14 +300,13 @@ vector<Radiographie> trouver_radios_dans_bdd(string mon_fichier, vector<Profil> 
             istringstream iss(ligne);
             string token;
             while(getline(iss, token, '\t'))  tokens.push_back(token);
-            vect_tokens_radios.push_back(0);
+            vect_tokens_radios.push_back(tokens[0]);
         }
     fichier.close();  // je referme le fichier
     }
     else cout << "Le fichier source n'a pas pu être ouvert (tous profils). Veuillez réessayer" <<endl;
 	for(int i=0;i<vect_tokens_radios.size();i++){
 		num = vect_tokens_radios[i];
-		cout << num;
 		liste_radios.push_back(trouver_radio(num, admins, medecins, patients));
 	}
     return liste_radios;
@@ -633,6 +643,9 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 				{
 					radio.set_etat();
 					cpt_rendu.get_Compte_Rendu();
+					//sauvegarder le contenu du compte rendu
+					string chemin = "examens/" + num;
+					cpt_rendu.sauvegarder_crm(chemin);
 					bool shittyflute = cpt_rendu.print_Compte_Rendu();
 					Examen dossier(numero, radio, cpt_rendu);
 					//demander si on veut sauvegarder l'exam au format txt :
@@ -676,6 +689,11 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 			cout << "Mot de passe du compte-rendu ? ";
 			string mdp;
 			cin >> mdp;
+			//stocker le mdp et l'id dans la bdd compte rendu
+			vector<string> infos;
+			infos.push_back(num);
+			infos.push_back(mdp);
+			ajouter_bdd(infos, "bdd_compte_rendu_medical.txt");
 			//patient
 			Patient pat = trouve_pat(patients, radio.get_id());
 			int id_exam_radio_crm = stoi(num);
@@ -689,6 +707,9 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 			{
 				radio.set_etat();
 				cpt_rendu.get_Compte_Rendu();
+				//sauvegarder le contenu du compte rendu
+				string chemin = "examens/" + num;
+				cpt_rendu.sauvegarder_crm(chemin);
 				bool shittyflute = cpt_rendu.print_Compte_Rendu();
 				Examen dossier(id_exam_radio_crm, radio, cpt_rendu);
 				//créer le dossier, fichiers... et les remplir

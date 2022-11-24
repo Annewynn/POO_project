@@ -1,0 +1,3 @@
+00	examens/4568/ceci/est/uneimage	une légende
+01	examens/4568/ceci/esuune/autreimage	plus d'inspiration
+c'est terrible

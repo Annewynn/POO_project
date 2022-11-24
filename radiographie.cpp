@@ -121,7 +121,7 @@ void Radiographie::sauvegarder_cliches(string chemin)
 		else examen_file << to_string(i) << "\t";
 		examen_file << liste_cliche[i].get_path() << "\t";
 		examen_file << liste_cliche[i].get_legende();
-		if (i != liste_cliche.size()-1) examen_file << "\n";
+		//if (i != liste_cliche.size()-1) examen_file << "\n";
 	}
 	examen_file.close();
 }
