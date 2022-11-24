@@ -22,7 +22,9 @@ class Compte_rendu_medical
         //ouvrir un fichier et laisser le médecin y entrer le texte
 		void get_Compte_Rendu();	// Rentrer dans le terminal le compte rendu.
 		void get_Compte_Rendu(std::string compte_rendu);	// Prend en paramètre le compte rendu.
-		void print_Compte_Rendu();	// Permet d'afficher proprement le compte rendu
+		bool print_Compte_Rendu();	// Permet d'afficher proprement le compte rendu
 		std::string return_Compte_Rendu(); // Même fonction mais récupérer sous format de string et ne demande pas de mdp
+		void modifier_Compte_Rendu();
+		void sauvegarder_crm(string chemin);
 };
 #endif

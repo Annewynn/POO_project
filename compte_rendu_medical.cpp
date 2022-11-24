@@ -5,6 +5,7 @@
 ###########################################*/
 #include "compte_rendu_medical.hpp"
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <cctype>
 using namespace std;
@@ -24,12 +25,22 @@ void Compte_rendu_medical::get_Compte_Rendu(){
 	}
 }
 
+void Compte_rendu_medical::modifier_Compte_Rendu()
+{
+	string line;
+    cout << "Veuillez saisir le compte rendu médical:\n";
+	cin.ignore();	// Nécessite de clear "cin" car utilisé précédement et sinon casse getline()
+    while ( getline(cin, line) && !line.empty() ){
+		texte += line + "\n" ;
+	}
+}
+
 void Compte_rendu_medical::get_Compte_Rendu(std::string compte_rendu){
 	texte = compte_rendu;
 }
 
 /// @brief Permet d'afficher proprement le compte rendu
-void Compte_rendu_medical::print_Compte_Rendu(){
+bool Compte_rendu_medical::print_Compte_Rendu(){
 	string mdp;
 	int cpt;
 	cpt = 0;
@@ -47,7 +58,12 @@ void Compte_rendu_medical::print_Compte_Rendu(){
 		cout << patient.consulter() << endl;
 		cout << "Compte rendu:\n"<< texte << endl;
 		cout << "#############################################\n";
-	} else {cout << "\033[1;31mNombre d'essais dépassé.\033[0m\n";}
+		return true;
+	} else 
+	{
+		cout << "\033[1;31mNombre d'essais dépassé.\033[0m\n";
+		return false;
+	}
 }
 
 /// @brief Permet de renvoyer sous forme de string le compte rendu medical sans demaner le mot de passe
@@ -60,4 +76,16 @@ string Compte_rendu_medical::return_Compte_Rendu(){
 	CompteRendu += "Compte rendu:\n" + texte;
 	CompteRendu += "\n#############################################\n";
 	return CompteRendu;
+}
+
+//inspiré de examen
+void Compte_rendu_medical::sauvegarder_crm(string chemin)
+{
+	string filename = chemin + "/" + to_string(NumExam) + "_crm.txt";
+	cout <<filename << " créé"  << endl;
+	ofstream examen_file(filename);
+	examen_file << to_string(NumExam) << "\t";
+	examen_file << patient.get_id() << "\t";
+	examen_file << texte;
+	examen_file.close();
 }

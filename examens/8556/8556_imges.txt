@@ -1,11 +1,2 @@
->01
-##############
-00010_01_image-geniale.jpg
-##############
-cette image est très jolie !
-##############
->02
-##############
-00010_02_autre_image_kawaii.jpg
-##############
-une autre image
+01	examens/8556/8556_01_echo1trim.webp	Echographie d'un foetus de 3 mois
+02	examens/8556/8556_02_ultrasons_foetus.webp	Schéma de l'échographie.

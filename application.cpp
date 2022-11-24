@@ -5,8 +5,10 @@
 ###########################################*/
 
 #include "application.hpp"
+#include "fonctions.hpp"
 #include <iostream>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -20,30 +22,43 @@ void Application::ajouter(Radiographie radio)
 	liste_radiographie.push_back(radio);
 }
 
-bool Application::comparePatient(Radiographie &a, Radiographie &b){
-	if(a.patient.get_nom() < b.patient.get_nom()){
-		return a.patient.get_prenom() < b.patient.get_prenom();
-	} else {return false;}
-}
-bool compareDate(Radiographie &a, Radiographie &b){
-	if(a.get_date().annee == b.get_date().annee){
-		if(a.get_date().mois == b.get_date().mois){
-			return a.get_date().jour < b.get_date().jour;
-		}
-		else return a.get_date().mois < b.get_date().mois;
-	}
-	else return a.get_date().annee < b.get_date().annee;
-}
-bool compareNumExam(Radiographie &a, Radiographie &b){
-	return a.get_id() < b.get_id();	
-}
 
-
-void Application::afficher_liste(vector<Radiographie> radios){
+string Application::afficher_liste(vector<Radiographie> radios){
+	string liste_trier = "";
 	cout << "Quel type de tri ?\n";
 	cout << "(Par défaut:1 , par patient: 2, par date: 3, par numéro d'axamen: 4)\n";
-	
-	for(int i=0;i<radios.size();i++){
-		cout << radios[i].afficher_radio_as_table() << endl;
+	int choix = input();
+	switch(choix){
+		case 1:
+			cout << "Affichage par défaut:\n";
+			for(int i=0;i<radios.size();i++){
+				liste_trier += radios[i].afficher_radio_as_table() + "\n";
+			}
+			break;
+		case 2:
+			cout << "Affichage par patient:\n";
+			sort(radios.begin(),radios.end(), comparePatient);
+			for(int i=0;i<radios.size();i++){
+				liste_trier += radios[i].afficher_radio_as_table() + "\n";
+			}
+			break;
+		case 3:
+			cout << "Affichage par date:\n";
+			sort(radios.begin(),radios.end(), compareDate);
+			for(int i=0;i<radios.size();i++){
+				liste_trier += radios[i].afficher_radio_as_table() + "\n";
+			}
+			break;
+		case 4:
+			cout << "Affichage par numéro d'examen:\n";
+			sort(radios.begin(),radios.end(), compareNumExam);
+			for(int i=0;i<radios.size();i++){
+				liste_trier += radios[i].afficher_radio_as_table() + "\n";
+			}
+			break;
+		default:
+			cout << "\033[1;31mSaisie incorrecte.\033[0m\n";
+			break;
 	}
+	return liste_trier;
 }

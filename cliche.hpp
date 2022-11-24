@@ -21,5 +21,7 @@ class Cliche
 		std::string afficher_image();
 		std::string get_cliche();
 		std::string return_cliche();
+		std::string get_path();
+		std::string get_legende();
 };
 #endif

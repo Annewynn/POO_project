@@ -5,6 +5,7 @@
 ###########################################*/
 #include <string>
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include "radiographie.hpp"
 #include "profil.hpp"
@@ -85,4 +86,42 @@ void Radiographie::set_etat()
 string Radiographie::get_id()
 {
 	return patient.get_id();
+}
+
+int Radiographie::get_numexam()
+{
+	return NumExamen;
+}
+
+//inspiré de sauvegarder_examen
+void Radiographie::sauvegarder_radio(string chemin)
+{
+	string filename = chemin + "/" + to_string(NumExamen) + "_radio.txt";
+	cout <<filename << " créé"  << endl;
+	ofstream examen_file(filename);
+	examen_file << "numéro\ttechnique\tpatient\tmedecin\tdate\tetat\n";
+	examen_file << to_string(NumExamen) << "\t";
+	examen_file << type << "\t";
+	examen_file << patient.get_id() << "\t";
+	examen_file << medecin.get_id() << "\t";
+	examen_file << to_string(date.jour) << "/" << to_string(date.mois) << "/" << to_string(date.annee) << "\t";
+	if (etat) examen_file << "EFFECTUEE\n";
+	else examen_file << "PLANIFIEE";
+	examen_file.close();
+}
+
+void Radiographie::sauvegarder_cliches(string chemin)
+{
+	string filename = chemin + "/" + to_string(NumExamen) + "_images.txt";
+	cout <<filename << " créé"  << endl;
+	ofstream examen_file(filename);
+	for (int i=0; i<liste_cliche.size(); i++)
+	{
+		if (i <10) examen_file << "0" << to_string(i) << "\t";
+		else examen_file << to_string(i) << "\t";
+		examen_file << liste_cliche[i].get_path() << "\t";
+		examen_file << liste_cliche[i].get_legende();
+		if (i != liste_cliche.size()-1) examen_file << "\n";
+	}
+	examen_file.close();
 }

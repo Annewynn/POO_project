@@ -28,3 +28,13 @@ void Examen::sauvegarder_examen()
 	examen_file << radio.afficher_radio() << '\n';
 	examen_file.close();
 }
+
+void Examen::sauvegarder_examen_restreint()
+{
+	string filename = to_string(NumExam) + "_restreint";
+	cout <<filename << " créé"  << endl;
+	ofstream examen_file(filename + ".txt");
+	examen_file << "######### Radiographies ########\n";
+	examen_file << radio.afficher_radio() << '\n';
+	examen_file.close();
+}

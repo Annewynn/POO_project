@@ -43,5 +43,8 @@ public:
 	std::string get_id();
     std::string afficher_radio();
 	std::string afficher_radio_as_table();
+	int get_numexam();
+	void sauvegarder_radio(std::string chemin);
+	void sauvegarder_cliches(std::string chemin);
 };
 #endif

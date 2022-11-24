@@ -1,0 +1,21 @@
+######### Compte Rendu ########
+#############################################
+Numéro d'examen: 8556Compte rendu:
+On peut oberserver un caillot de sang suite à un AVC.
+#############################################
+
+######### Radiographies ########
+#############################################
+N° d'examen: 8556		Date: 17/8/2010
+Type de radio: IRM
+N° patient: p01
+	Nom et prénom: Heude Paul
+Age: 43	Sexe: H
+
+Medecin:
+	Supper Adolphe
+Effectuée
+Liste des clichés:
+
+#############################################
+

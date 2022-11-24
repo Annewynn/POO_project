@@ -30,7 +30,9 @@ MMMMMMMM               MMMMMMMMAAAAAAA                   AAAAAAAIIIIIIIIIINNNNNN
 int main()
 {
 	int MenuPrincipal = 1;
-	while(MenuPrincipal == 1){
+	int Menu_Lister_ou_Creer = 1;
+	while(MenuPrincipal == 1)
+	{
 		cout << "#############################################\n";
 		cout << "##         Bienvenue sur P.O.O FM          ##\n";
 		cout << "##     Gestionnaire de radiographies       ##\n";
@@ -38,11 +40,11 @@ int main()
 		cout << "## Menu principal:\n";
 		cout << "   [1]: Admin, Medecin ou Patient\n";
 		cout << "   [2]: Quitter\n";
-		cin >> MenuPrincipal;
+		MenuPrincipal = input();
 		switch(MenuPrincipal){
 			case 1: cout << "[1]: Admin, Medecin ou Patient\n"; break;
 			case 2: cout << "[2]: Quitter\n"; return 0;
-			default: cout << "\033[1;31mSaisie incorrecte.\033[0m";continue;
+			default: cout << "\033[1;31mSaisie incorrecte.\033[0m\n";continue;
 		}
 
 		//initialisation : instancier une application contenant une liste de radiographies
@@ -118,6 +120,7 @@ int main()
 			}
 		}
 
+		while(Menu_Lister_ou_Creer)
 		/*
 		vector<string> tokens;
 		tokens = trouver_profil_dans_bdd(tokens, id, mdp, "bdd_patients_medecins.txt");
@@ -167,10 +170,11 @@ int main()
 				cout << user -> consulter() << endl;
 				int menu_examen = 1;
 				while(menu_examen == 1){
+					cout <<"#############################################\n";
 					cout << "## Menu: consulter un examen\n";
 					cout << "   [1]: Consulter/saisi\n";
 					cout << "   [2]: Retour au menu principal\n";
-					cin >> menu_examen;
+					menu_examen = input();
 					switch(menu_examen){
 						case 1: {
 							cout << "[1]: Consulter/saisi\n";
@@ -178,7 +182,10 @@ int main()
 							acces_radio(app, user, admins,medecins,patients);
 						} break;
 						case 2: cout << "[2]: Retour au menu principal\n"; continue;
-						default: cout << "\033[1;31mMauvaise entrée, retour au menu.\033[0m"; break;
+						default: 
+							cout << "\033[1;31mMauvaise entrée, retour au menu.\033[0m\n";
+							menu_examen = 1;
+							break;	// On réinitialise à 1 
 					}					
 				}
 			}

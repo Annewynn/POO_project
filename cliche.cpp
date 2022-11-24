@@ -32,3 +32,13 @@ string Cliche::get_cliche(){
 string Cliche::return_cliche(){
 	return to_string(num_prise) + '[' + image + "]:" + legend;
 }
+
+string Cliche::get_path()
+{
+	return image;
+}
+
+string Cliche::get_legende()
+{
+	return legend;
+}

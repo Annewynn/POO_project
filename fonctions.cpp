@@ -17,15 +17,23 @@
 
 using namespace std;
 
-//################################################################################################
-/*______  __    __    ______    __  ___   ___       .______      ___   .___________. __   _______ .__   __. .___________.
- /      ||  |  |  |  /  __  \  |  | \  \ /  /       |   _  \    /   \  |           ||  | |   ____||  \ |  | |           |
-|  ,----'|  |__|  | |  |  |  | |  |  \  V  /        |  |_)  |  /  ^  \ `---|  |----`|  | |  |__   |   \|  | `---|  |----`
-|  |     |   __   | |  |  |  | |  |   >   <         |   ___/  /  /_\  \    |  |     |  | |   __|  |  . `  |     |  |     
-|  `----.|  |  |  | |  `--'  | |  |  /  .  \        |  |     /  _____  \   |  |     |  | |  |____ |  |\   |     |  |     
- \______||__|  |__|  \______/  |__| /__/ \__\  _____| _|    /__/     \__\  |__|     |__| |_______||__| \__|     |__|     
-                                              |______|                                                                   
-*/
+bool comparePatient(Radiographie a, Radiographie b){
+	if(a.patient.get_nom() < b.patient.get_nom()){
+		return a.patient.get_prenom() < b.patient.get_prenom();
+	} else {return false;}
+}
+bool compareDate( Radiographie a, Radiographie b){
+	if(a.get_date().annee == b.get_date().annee){
+		if(a.get_date().mois == b.get_date().mois){
+			return a.get_date().jour < b.get_date().jour;
+		}
+		else return a.get_date().mois < b.get_date().mois;
+	}
+	else return a.get_date().annee < b.get_date().annee;
+}
+bool compareNumExam(Radiographie a, Radiographie b){
+	return a.get_id() < b.get_id();	
+}
 
 //################################################################################################
 /*_                                                     __ _ _        _                     _         _     _ 
@@ -58,7 +66,7 @@ vector<string> trouver_profil_dans_bdd(vector<string> tokens, string id, string 
         }
     fichier.close();  // je referme le fichier
     }
-    else std::cout << "Le fichier source n'a pas pu être ouvert(id+mdp). Veuillez réessayer" <<endl;
+    else cout << "Le fichier source n'a pas pu être ouvert(id+mdp). Veuillez réessayer" <<endl;
 
     return tokens;
 }
@@ -89,7 +97,7 @@ vector<string> trouver_profil_dans_bdd(vector<string> tokens, string id, string 
         }
     fichier.close();  // je referme le fichier
     }
-    else std::cout << "Le fichier source n'a pas pu être ouvert(bdd 1 arg). Veuillez réessayer" <<endl;
+    else cout << "Le fichier source n'a pas pu être ouvert(bdd 1 arg). Veuillez réessayer" <<endl;
 
     return tokens;
 }
@@ -188,10 +196,111 @@ vector<vector<string>> trouver_tous_profil_dans_bdd(vector<vector<string>> vect_
         }
     fichier.close();  // je referme le fichier
     }
-    else std::cout << "Le fichier source n'a pas pu être ouvert (tous profils). Veuillez réessayer" <<endl;
+    else cout << "Le fichier source n'a pas pu être ouvert (tous profils). Veuillez réessayer" <<endl;
 
     return vect_tokens_images;
 }
+//################################################################################################
+/*_                                                 _ _                  _                     _         _     _ 
+ | |_ _ __ ___  _   ___   _____ _ __  _ __ __ _  __| (_) ___  ___     __| | __ _ _ __  ___    | |__   __| | __| |
+ | __| '__/ _ \| | | \ \ / / _ \ '__|| '__/ _` |/ _` | |/ _ \/ __|   / _` |/ _` | '_ \/ __|   | '_ \ / _` |/ _` |
+ | |_| | | (_) | |_| |\ V /  __/ |   | | | (_| | (_| | | (_) \__ \  | (_| | (_| | | | \__ \   | |_) | (_| | (_| |
+  \__|_|  \___/ \__,_| \_/ \___|_|___|_|  \__,_|\__,_|_|\___/|___/___\__,_|\__,_|_| |_|___/___|_.__/ \__,_|\__,_|
+                                |_____|                         |_____|                  |_____|                 
+*/
+/// @brief Cherche un radiographie existante dans la base de donnée et l'instancie.
+/// @param num Numéro d'examen pour la radiographie associée.
+/// @param admins Liste des administrateurs sous forme de vecteur de Profil.
+/// @param medecins Liste des médecins sous forme de vecteur d'objets Medecin.
+///
+/// @return Retourne une instance de Radiographie, celle trouvée avec grâce à son numéro d'examen
+Radiographie trouver_radio(string num, vector<Profil> admins,vector<Medecin> medecins,vector<Patient> patients){
+	//on est dans le bon dossier : créer la radio correspondante
+	vector<string> tokens_r;
+	//lire le fichier num_radio.txt pour en faire un objet radio
+	string mon_fichier = "examens/" + num + "/" + num + "_radio.txt";  // je stocke dans la chaîne mon_fichier le nom du fichier à ouvrir
+	tokens_r = trouver_profil_dans_bdd(tokens_r, num, mon_fichier);
+	//créer radiographie
+	int numero = stoi(tokens_r[0]);
+	string tech = tokens_r[1];
+	//trouver le bon patient à partir de son id
+	string id_pat = tokens_r[2];
+	Patient pat = patients[0];
+	for (int i=0; i<patients.size(); i++)
+	{
+		if (patients[i].get_id() == id_pat)
+		{
+			pat = patients[i];
+			break;
+		}
+	}
+	//trouver le médecin à partir de son id
+	string medecin_id = tokens_r[3];
+	Medecin medic = medecins[0];
+	for (int i=0; i<medecins.size(); i++)
+	{
+		if (medecins[i].get_id() == medecin_id)
+		{
+			medic = medecins[i];
+			break;
+		}
+	}
+	//date
+	istringstream iss(tokens_r[4]);
+	vector<string> tokens;
+	string token;
+	while(getline(iss, token, '/'))  tokens.push_back(token);
+	vector<int> date = {stoi(tokens[0]), stoi(tokens[1]), stoi(tokens[2])};
+	//etat
+	bool etat = false;
+	if (tokens_r[5] == "EFFECTUEE") etat = true;
+	//ouvrir num_images.txt pour en récuppérer les images
+	vector<vector<string>> vect_tokens_images;
+	string mon_fichier2 = "examens/" + num + "/" + num + "_images.txt";
+	vector<Cliche> images;
+	vect_tokens_images = trouver_tous_profil_dans_bdd(vect_tokens_images, mon_fichier2);
+	for (int i =0; i<vect_tokens_images.size(); i++)
+	{
+		string image_path = vect_tokens_images[i][1];
+		string legende = vect_tokens_images[i][2];
+		images.push_back(Cliche (i, image_path, legende));
+	}
+	Radiographie radio(numero, tech, pat, medic, date, etat, images); 
+	return radio;
+}
+/// @brief Instencie l'ensemble des radiographies répertoriées à partit d'un fichier tsv.
+/// @param mon_fichier Chemin du fichier à lire
+/// @return Renvoie un vecteur de l'ensemble des radiographies trouvées.
+vector<Radiographie> trouver_radios_dans_bdd(string mon_fichier, vector<Profil> admins,vector<Medecin> medecins,vector<Patient> patients)
+{
+	vector<string> vect_tokens_radios;
+	vector<Radiographie> liste_radios;
+	string num;
+      // je stocke dans la chaîne mon_fichier le nom du fichier à ouvrir
+    ifstream fichier(mon_fichier.c_str(), ios::in);
+    if(fichier)  // si l'ouverture a réussi
+    {
+        string ligne;  // déclaration d'une chaîne qui contiendra la ligne lue
+		//oter la première ligne dans bdd patients médecins
+		if (mon_fichier == "bdd_compte_rendu_medical.txt") getline(fichier, ligne);
+        while(getline(fichier, ligne))  // tant que l'on peut mettre la ligne dans "contenu"
+        {   vector<string> tokens;
+            //https://stackoverflow.com/questions/10617094/how-to-split-a-file-lines-with-space-and-tab-differentiation
+            istringstream iss(ligne);
+            string token;
+            while(getline(iss, token, '\t'))  tokens.push_back(token);
+            vect_tokens_radios.push_back(0);
+        }
+    fichier.close();  // je referme le fichier
+    }
+    else cout << "Le fichier source n'a pas pu être ouvert (tous profils). Veuillez réessayer" <<endl;
+	for(int i=0;i<vect_tokens_radios.size();i++){
+		num = vect_tokens_radios[i];
+		liste_radios.push_back(trouver_radio(num, admins, medecins, patients));
+	}
+    return liste_radios;
+}
+
 //#####################################################################################################
 /*
 .-------.    ,---.   .--.  .-_'''-.    
@@ -216,7 +325,38 @@ int rng(int min, int max)
     uniform_int_distribution<mt19937::result_type> dist(min,max); // distribution in range [min, max]
     return dist(randomng);
 }
+//################################################################################################
+/*
+.-./`) ,---.   .--..-------.   ___    _ ,---------.  
+\ .-.')|    \  |  |\  _(`)_ \.'   |  | |\          \ 
+/ `-' \|  ,  \ |  || (_ o._)||   .'  | | `--.  ,---' 
+ `-'`"`|  |\_ \|  ||  (_,_) /.'  '_  | |    |   \    
+ .---. |  _( )_\  ||   '-.-' '   ( \.-.|    :_ _:    
+ |   | | (_ o _)  ||   |     ' (`. _` /|    (_I_)    
+ |   | |  (_,_)\  ||   |     | (_ (_) _)   (_(=)_)   
+ |   | |  |    |  |/   )      \ /  . \ /    (_I_)    
+ '---' '--'    '--'`---'       ``-'`-''     '---'    
+*/
+int input(){
+	string entree = "";
+	cin >> entree;
+	try{
+		stoi(entree);
+	} catch(exception &err){
+		return 0;
+	}
+	return stoi(entree);
+}
 
+//################################################################################################
+/*______  __    __    ______    __  ___   ___       .______      ___   .___________. __   _______ .__   __. .___________.
+ /      ||  |  |  |  /  __  \  |  | \  \ /  /       |   _  \    /   \  |           ||  | |   ____||  \ |  | |           |
+|  ,----'|  |__|  | |  |  |  | |  |  \  V  /        |  |_)  |  /  ^  \ `---|  |----`|  | |  |__   |   \|  | `---|  |----`
+|  |     |   __   | |  |  |  | |  |   >   <         |   ___/  /  /_\  \    |  |     |  | |   __|  |  . `  |     |  |     
+|  `----.|  |  |  | |  `--'  | |  |  /  .  \        |  |     /  _____  \   |  |     |  | |  |____ |  |\   |     |  |     
+ \______||__|  |__|  \______/  |__| /__/ \__\  _____| _|    /__/     \__\  |__|     |__| |_______||__| \__|     |__|     
+                                              |______|                                                                   
+*/
 Patient choix_patient(vector<Patient> &patients){
 	string nom, prenom;
 	vector<Patient> patients_trouver;
@@ -325,6 +465,7 @@ Radiographie creer_radio(string numero, Medecin med, vector<Patient> &patients)
 	getline(cin, rtype, '\n');
 	cout << endl;
 	//patient : 
+	cout << "  Patient: \n";
 	Patient pat = choix_patient(patients);
 	cout << "  Medecin: ";
 	cout << id_profil << endl;
@@ -368,8 +509,36 @@ Radiographie creer_radio(string numero, Medecin med, vector<Patient> &patients)
 	//créer un fichier radio.txt comprennant tout ce qu'il y a dans la radio
 }
 
+//crée l'arborescence, les fichiers et leur contenu pour une nouvelle radiographie
+void creer_nouvelle_radio(Radiographie radio, Compte_rendu_medical cpt_rendu, bool isTextInitialized)
+{
+	//créer un dossier dans examens
+	string num = to_string(radio.get_numexam());
+	string new_path = "examens/"+num;
+	filesystem::create_directory(new_path);
+	//créer le fichier de la radio, le remplir
+	radio.sauvegarder_radio(new_path);
+	//créer le fichier des images, le remplir
+	radio.sauvegarder_cliches(new_path);
+	//créer le fichier du crm et le remplir. si text n'a pas été rentré, entrer ""
+	if (isTextInitialized) cpt_rendu.sauvegarder_crm(new_path);
+	else 
+	{
+		cpt_rendu.get_Compte_Rendu("");
+		cpt_rendu.sauvegarder_crm(new_path);
+	}
+}
 
 //################################################################################################
+/*
+     ___       ______   ______  _______     _______.      .______          ___       _______   __    ______   
+    /   \     /      | /      ||   ____|   /       |      |   _  \        /   \     |       \ |  |  /  __  \  
+   /  ^  \   |  ,----'|  ,----'|  |__     |   (----`      |  |_)  |      /  ^  \    |  .--.  ||  | |  |  |  | 
+  /  /_\  \  |  |     |  |     |   __|     \   \          |      /      /  /_\  \   |  |  |  ||  | |  |  |  | 
+ /  _____  \ |  `----.|  `----.|  |____.----)   |         |  |\  \----./  _____  \  |  '--'  ||  | |  `--'  | 
+/__/     \__\ \______| \______||_______|_______/     _____| _| `._____/__/     \__\ |_______/ |__|  \______/  
+                                                    |______|                                                  
+*/
 // Pour le médecin: accéder ou créer une radio
 void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Medecin> medecins,vector<Patient> patients)
 {
@@ -385,58 +554,9 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 	//dossier de l'examen existe déjà
 	if (stat(s.c_str(), &buffer) == 0)
 	{
-		//on est dans le bon dossier : créer la radio correspondante
-		vector<string> tokens_r;
-		//lire le fichier num_radio.txt pour en faire un objet radio
-		string mon_fichier = "examens/" + num + "/" + num + "_radio.txt";  // je stocke dans la chaîne mon_fichier le nom du fichier à ouvrir
-		tokens_r = trouver_profil_dans_bdd(tokens_r, num, mon_fichier);
-		//créer radiographie
-		int numero = stoi(tokens_r[0]);
-		string tech = tokens_r[1];
-		//trouver le bon patient à partir de son id
-		string id_pat = tokens_r[2];
-		Patient pat = patients[0];
-		for (int i=0; i<patients.size(); i++)
-		{
-			if (patients[i].get_id() == id_pat)
-			{
-				pat = patients[i];
-				break;
-			}
-		}
-		//trouver le médecin à partir de son id
-		string medecin_id = tokens_r[3];
-		Medecin medic = medecins[0];
-		for (int i=0; i<medecins.size(); i++)
-		{
-			if (medecins[i].get_id() == medecin_id)
-			{
-				medic = medecins[i];
-				break;
-			}
-		}
-		//date
-		istringstream iss(tokens_r[4]);
-		vector<string> tokens;
-		string token;
-		while(getline(iss, token, '/'))  tokens.push_back(token);
-		vector<int> date = {stoi(tokens[0]), stoi(tokens[1]), stoi(tokens[2])};
-		//etat
-		bool etat = false;
-		if (tokens_r[5] == "EFFECTUEE") etat = true;
-		//ouvrir num_images.txt pour en récuppérer les images
-		vector<vector<string>> vect_tokens_images;
-		string mon_fichier2 = "examens/" + num + "/" + num + "_images.txt";
-		vector<Cliche> images;
-		vect_tokens_images = trouver_tous_profil_dans_bdd(vect_tokens_images, mon_fichier2);
-		for (int i =0; i<vect_tokens_images.size(); i++)
-		{
-			string image_path = vect_tokens_images[i][1];
-			string legende = vect_tokens_images[i][2];
-			images.push_back(Cliche (i, image_path, legende));
-		}
-		if (user -> get_id()[0] == 'm' || user -> get_id()[0] == 'a' || user -> get_id() == id_pat){
-			Radiographie radio(numero, tech, pat, medic, date, etat, images);
+		Radiographie radio = trouver_radio(num, admins, medecins, patients);
+		int numero = radio.get_numexam();
+		if (user -> get_id()[0] == 'm' || user -> get_id()[0] == 'a' || user -> get_id() == radio.get_id()){
 			cout << radio.afficher_radio() << endl;
 			//on va chercher le crm si user est un médecin
 			if (radio.get_etat() == "Effectuée" && user->get_id()[0] == 'm')
@@ -450,7 +570,7 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 				Patient pat = patients[0];
 				for (int i=0; i<patients.size(); i++)
 				{
-					if (patients[i].get_id() == id_pat)
+					if (patients[i].get_id() == radio.get_id())
 					{
 						pat = patients[i];
 						break;
@@ -464,10 +584,25 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 				tokens_tcrm = trouver_profil_dans_bdd(tokens_tcrm, to_string(numero), fichier_crm);
 				string text = tokens_tcrm[2];
 				cpt_rendu.get_Compte_Rendu(text);
-				cpt_rendu.print_Compte_Rendu();
+				bool shittyflute = cpt_rendu.print_Compte_Rendu();
+				//modifier le crm écrit : 
+				if (shittyflute) 
+				{
+					cout << "Modifier le compte_rendu ? (y/n) ";
+					string rep_modif;
+					cin >> rep_modif;
+					if (rep_modif == "y") 
+					{
+						cpt_rendu.get_Compte_Rendu();
+					}
+				}
 				Examen dossier(numero, radio, cpt_rendu);
-				//demander si on veut 
-				dossier.sauvegarder_examen();
+				//demander si on veut sauvegarder l'exam au format txt :
+				cout << "Enregistrer cet examen au format txt (y/n) ? ";
+				string rep_sauv;
+				cin >> rep_sauv;
+				if (rep_sauv == "y" && shittyflute) dossier.sauvegarder_examen();
+				else if (rep_sauv == "y" && ! shittyflute) dossier.sauvegarder_examen_restreint();
 			}
 			else if (radio.get_etat() == "Planifiée" && user->get_id()[0] == 'm')
 			{
@@ -485,7 +620,7 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 				Patient pat = patients[0];
 				for (int i=0; i<patients.size(); i++)
 				{
-					if (patients[i].get_id() == id_pat)
+					if (patients[i].get_id() == radio.get_id())
 					{
 						pat = patients[i];
 						break;
@@ -499,9 +634,14 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 				{
 					radio.set_etat();
 					cpt_rendu.get_Compte_Rendu();
-					cpt_rendu.print_Compte_Rendu();
+					bool shittyflute = cpt_rendu.print_Compte_Rendu();
 					Examen dossier(numero, radio, cpt_rendu);
-					dossier.sauvegarder_examen();
+					//demander si on veut sauvegarder l'exam au format txt :
+					cout << "Enregistrer cet examen au format txt (y/n) ? ";
+					string rep_sauv;
+					cin >> rep_sauv;
+					if (rep_sauv == "y" && shittyflute) dossier.sauvegarder_examen();
+					else if (rep_sauv == "y" && ! shittyflute) dossier.sauvegarder_examen_restreint();
 				}
 				//else cpt_rendu.print_Compte_Rendu();
 			}      
@@ -520,6 +660,7 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 		}
 		else 
 		{
+			//créer une radiographie et son dossier, ses fichiers...
 			vector<string> tokens;
 			tokens.push_back(user-> get_id());
 			tokens.push_back(user -> get_mdp());
@@ -529,15 +670,48 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 			tokens.push_back(string{user -> get_sexe()});
 			Medecin med = creer_med(tokens);
 			Radiographie radio = creer_radio(num, med, patients);
+			//radio ajoutée à application
 			app.ajouter(radio);
 			//créer crm
 			//mdp
 			cout << "Mot de passe du compte-rendu ? ";
 			string mdp;
 			cin >> mdp;
+			//patient
 			string patientid = radio.get_id();
-			//Patient pat = 
-			//Compte_rendu_medical cpt_rendu(num, mdp, pat);
+			Patient pat = patients[0];
+			for (int i=0; i<patients.size(); i++)
+			{
+				if (patients[i].get_id() == patientid)
+				{
+					pat = patients[i];
+					break;
+				}
+			}
+			int id_exam_radio_crm = stoi(num);
+			Compte_rendu_medical cpt_rendu(id_exam_radio_crm, mdp, pat);
+			//demander au med si il il veut écrire le compte_rendu
+			cout << "Ecrire le compte-rendu ? (y/n) ";
+			string rep;
+			cin >> rep;
+			if (rep == "y")
+			//passer etat à 1, et écrire le crm
+			{
+				radio.set_etat();
+				cpt_rendu.get_Compte_Rendu();
+				bool shittyflute = cpt_rendu.print_Compte_Rendu();
+				Examen dossier(id_exam_radio_crm, radio, cpt_rendu);
+				//créer le dossier, fichiers... et les remplir
+				creer_nouvelle_radio(radio, cpt_rendu, true);
+				//demander si on veut sauvegarder l'exam au format txt :
+				cout << "Enregistrer cet examen au format txt (y/n) ? ";
+				string rep_sauv;
+				cin >> rep_sauv;
+				if (rep_sauv == "y" && shittyflute) dossier.sauvegarder_examen();
+				else if (rep_sauv == "y" && ! shittyflute) dossier.sauvegarder_examen_restreint();
+			}
+			//créer le dossier, fichiers... et les remplir
+			else creer_nouvelle_radio(radio, cpt_rendu, false);
 		}
 	}
 }

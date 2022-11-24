@@ -1,8 +1,1 @@
-CR 00010
-###########################################
-patient p02 
-Cramp Justine 
-Age : 28 
-Sexe : F
-###########################################
-Les clichés ont clairement montré une fracture du poignet
+8556	p01	Feotus après 3 mois de gestation.

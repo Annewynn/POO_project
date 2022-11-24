@@ -20,6 +20,7 @@ class Examen
     public:
         Examen(int numero, Radiographie R, Compte_rendu_medical CR);
 		void sauvegarder_examen();
+		void sauvegarder_examen_restreint();
 };
 
 //https://www.learncpp.com/cpp-tutorial/composition/
