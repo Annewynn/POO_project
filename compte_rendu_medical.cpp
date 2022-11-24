@@ -23,6 +23,12 @@ void Compte_rendu_medical::get_Compte_Rendu(){
 		texte += line + "\n" ;
 	}
 }
+
+void Compte_rendu_medical::get_Compte_Rendu(std::string compte_rendu){
+	texte = compte_rendu;
+}
+
+/// @brief Permet d'afficher proprement le compte rendu
 void Compte_rendu_medical::print_Compte_Rendu(){
 	string mdp;
 	int cpt;
@@ -44,22 +50,14 @@ void Compte_rendu_medical::print_Compte_Rendu(){
 	} else {cout << "\033[1;31mNombre d'essais dépassé.\033[0m\n";}
 }
 
+/// @brief Permet de renvoyer sous forme de string le compte rendu medical sans demaner le mot de passe
+/// @return string Le compte rendu de manière jolie
 string Compte_rendu_medical::return_Compte_Rendu(){
-	string mdp;
 	string CompteRendu = "";
-	int cpt = 0;
-	cout << "Entrez le mot de passe du compte rendu: "; cin >> mdp; cout << endl;
-	while(mdp_cr != mdp && cpt<3){
-		cout << "\033[1;31mMot de passe incorrect\033[0m\n";
-		cin >> mdp;
-		cpt++;
-	}
-	if(cpt < 3 && mdp_cr == mdp){
-		CompteRendu += "#############################################\n";
-		CompteRendu += "Numéro d'examen: " + to_string(NumExam);
-		cout << patient.consulter() << endl;
-		CompteRendu += "Compte rendu:\n" + texte;
-		CompteRendu += "#############################################\n";
-	} else {cout << "\033[1;31mNombre d'essais dépassé.\033[0m\n";}
+	CompteRendu += "#############################################\n";
+	CompteRendu += "Numéro d'examen: " + to_string(NumExam);
+	cout << patient.consulter() << endl;
+	CompteRendu += "Compte rendu:\n" + texte;
+	CompteRendu += "\n#############################################\n";
 	return CompteRendu;
 }

@@ -137,7 +137,8 @@ Les packages utilisées ne sont pas des packages extérieurs. Leur liste:
 - [ ] Fonctionnalités élémentaires
   - [x] Interface de connection lors du lancement.
   - [x] Pouvoir accéder aux examens (radiographies et clichés associés + compte rendu)
-  - [ ] Pouvoir créer et sauvegarder des examens/radiographies.
+  - [x] Menu de navigation au sein du logiciel
+  - [x] Pouvoir créer et sauvegarder des examens/radiographies.
   - [ ] Pouvoir afficher la liste des examens/radiographies.
   - [ ] Pouvoir trier la liste des radiographies et l'exporter.
 - [ ] Fonctionnalités supplémentaires

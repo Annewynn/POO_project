@@ -1,8 +1,1 @@
-CR 424242
-###########################################
-patient p02 
-Cramp Justine 
-Age : 28 
-Sexe : F
-###########################################
-Les clichés ont clairement montré une fracture du poignet
+424242	p02	Les clichés ont clairement montré une fracture du poignet

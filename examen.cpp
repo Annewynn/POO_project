@@ -10,15 +10,18 @@
 #include <fstream>
 using namespace std;
 
-/*
-Examen::Examen(int numero, string techno, int id, Medecin docteur, vector<int> jour, bool isDone, vector<Cliche> images, int id_crm, string mdp, string text, Patient pat):Radiographie(numero, techno, id, docteur, jour, isDone, images)
+Examen::Examen(int numero, Radiographie R, Compte_rendu_medical CR):radio{R}, crm{CR}
 {
-    radio = Radiographie(numero, techno, id, docteur, jour, isDone, images);
-    crm = Compte_rendu_medical(id_crm, mdp, text, pat);
-};*/
+	NumExam = numero;
+	radio = R;
+	crm = CR; 
+}
 
-void Examen::sauvegarder_examen(){
-	ofstream examen_file(to_string(NumExam));
+void Examen::sauvegarder_examen()
+{
+	string filename = to_string(NumExam);
+	cout <<filename << " créé"  << endl;
+	ofstream examen_file(filename + ".txt");
 	examen_file << "######### Compte Rendu ########\n";
 	examen_file << crm.return_Compte_Rendu() << '\n';
 	examen_file << "######### Radiographies ########\n";

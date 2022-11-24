@@ -1,6 +1,10 @@
 ## Compilation du main
-main: main.cpp application.o cliche.o compte_rendu_medical.o examen.o medecin.o patient.o profil.o radiographie.o
-	g++ -o main main.cpp application.o cliche.o compte_rendu_medical.o examen.o medecin.o patient.o profil.o radiographie.o
+main: main.cpp application.o cliche.o compte_rendu_medical.o examen.o medecin.o patient.o profil.o radiographie.o fonctions.o
+	g++ -o main main.cpp application.o cliche.o compte_rendu_medical.o examen.o medecin.o patient.o profil.o radiographie.o fonctions.o
+
+## Compilation des fonctions
+fonctions.o: fonctions.cpp
+	g++ -c fonctions.cpp
 
 ## Compilation des classes
 application.o: application.cpp

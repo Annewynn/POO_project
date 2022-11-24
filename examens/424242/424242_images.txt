@@ -1,2 +1,2 @@
-01	424242_01_image-geniale.jpg	cette image est très jolie !
-02	424242_02_autre_image_kawaii.jpg	une autre image
+01	424242/424242_01_image-geniale.jpg	cette image est très jolie !
+02	424242/424242_02_autre_image_kawaii.jpg	une autre image

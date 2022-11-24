@@ -1,0 +1,27 @@
+######### Compte Rendu ########
+#############################################
+Numéro d'examen: 424242Compte rendu:
+Les clichés ont clairement montré une fracture du poignet
+#############################################
+
+######### Radiographies ########
+#############################################
+N° d'examen: 424242		Date: 1/12/2005
+Type de radio: Rayons X
+N° patient: p02
+	Nom et prénom: Cramp Justine
+Age: 28	Sexe: F
+
+Medecin:
+	Stopp Madeleine
+Effectuée
+Liste des clichés:
+N°: 0
+	Chemin d'accès: 424242_01_image-geniale.jpg
+	Légende: cette image est très jolie !
+N°: 1
+	Chemin d'accès: 424242_02_autre_image_kawaii.jpg
+	Légende: une autre image
+
+#############################################
+

@@ -18,8 +18,8 @@ class Cliche
 	public:
 		Cliche(int numero, std::string img_path, std::string text);
 		virtual ~Cliche() = default;	// It just works !
-		void afficher_image();
-		void get_cliche();
+		std::string afficher_image();
+		std::string get_cliche();
 		std::string return_cliche();
 };
 #endif

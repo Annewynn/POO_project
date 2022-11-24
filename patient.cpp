@@ -14,7 +14,7 @@ using namespace std;
 string Patient::consulter()
 {
     string patient_consult = "";
-	patient_consult += "patient " + nom + " " + prenom;
+	patient_consult += "Patient " + nom + " " + prenom;
 	return patient_consult;
 }
 

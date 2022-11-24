@@ -18,8 +18,7 @@ class Examen
         Compte_rendu_medical crm;
 
     public:
-        Examen(int numero, Radiographie R, Compte_rendu_medical CR):radio{R}, crm{CR}
-        {};
+        Examen(int numero, Radiographie R, Compte_rendu_medical CR);
 		void sauvegarder_examen();
 };
 

@@ -13,17 +13,20 @@ Cliche::Cliche(int numero, string img_path, string text)
 	num_prise = numero;
 	image = img_path;
 	legend = text;
-	//cout << "ok corral"<< endl;
 }
 
-void Cliche::afficher_image(){
-	cout << "\tChemin d'accès: " << image << endl;
-	cout << "\tLégende: " << legend << endl;
+string Cliche::afficher_image(){
+	string img = "";
+	img += "\tChemin d'accès: " + image + '\n';
+	img += "\tLégende: " + legend + '\n';
+	return img;
 }
 
-void Cliche::get_cliche(){
-	cout << "N°: " << num_prise << endl;
-	this -> afficher_image();
+string Cliche::get_cliche(){
+	string clicher = "";
+	clicher += "N°: " + to_string(num_prise) + '\n';
+	clicher += this -> afficher_image();
+	return clicher;
 }
 
 string Cliche::return_cliche(){

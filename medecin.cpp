@@ -20,7 +20,7 @@ Medecin::Medecin(string name, string f_name, string idi, string pwd, int annee, 
 
 string Medecin::consulter()
 {
-	string medecin_consult = "";
-    medecin_consult += nom + " " + prenom;
-	return medecin_consult;
+	//string medecin_consult = "";
+    //medecin_consult += nom + " " + prenom;
+	return nom + " " + prenom;
 }

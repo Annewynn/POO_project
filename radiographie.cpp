@@ -39,8 +39,8 @@ string Radiographie::get_liste_cliche()
 	string list_cliche = "";
 	for(int i=0; i<liste_cliche.size();i++)
 	{
-		list_cliche += "\t-";
-		liste_cliche[i].get_cliche();
+		//list_cliche += "\t-";
+		list_cliche += liste_cliche[i].get_cliche();
 	}
 	return list_cliche;
 }
@@ -53,8 +53,9 @@ string Radiographie::afficher_radio()
 	radio_pretty += "\t\tDate: " + to_string(date.jour) + "/" + to_string(date.mois) + "/" + to_string(date.annee) +"\n";
 	radio_pretty += "Type de radio: " + type + '\n';
 	radio_pretty += "N° patient: " + patient.get_id();
-	radio_pretty += "\nMedecin:\n";
-	radio_pretty += medecin.afficher() + "\n";
+	radio_pretty += "\n\t" + patient.afficher();
+	radio_pretty += "\nMedecin:\n\t";
+	radio_pretty += medecin.consulter() + "\n";
 	radio_pretty += this -> get_etat() + '\n';
 	radio_pretty += "Liste des clichés:\n";
 	radio_pretty += this -> get_liste_cliche() + '\n';

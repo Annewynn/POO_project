@@ -6,3 +6,4 @@ m02	2_O_methylation	Stopp	Madeleine	37	F
 p03	PIWI	Mangeonjean	Pierre	58	H
 a01	miRNA	Mde	Admin	0	N
 p05	0432	rainette	vert	50	N
+p10	0049	Angel	Hazbin	115	B
