@@ -42,8 +42,8 @@ int main()
 		cout << "   [2]: Quitter\n";
 		MenuPrincipal = input();
 		switch(MenuPrincipal){
-			case 1: cout << "[1]: Admin, Medecin ou Patient\n"; break;
-			case 2: cout << "[2]: Quitter\n"; return 0;
+			case 1: cout << "> Admin, Medecin ou Patient\n"; break;
+			case 2: cout << "> Quitter\n"; return 0;
 			default: cout << "\033[1;31mSaisie incorrecte.\033[0m\n";continue;
 		}
 
@@ -119,78 +119,65 @@ int main()
 				}
 			}
 		}
+		if (trouve)
+		{
+			//profil reconnu
+			cout << user -> afficher() << endl;
+			cout << user -> consulter() << endl;
 
-		while(Menu_Lister_ou_Creer)
-		/*
-		vector<string> tokens;
-		tokens = trouver_profil_dans_bdd(tokens, id, mdp, "bdd_patients_medecins.txt");
-			if (tokens.size() != 0)
+			while(Menu_Lister_ou_Creer == 1 || Menu_Lister_ou_Creer == 2)
 			{
-				//bdd
-				//ID	mot_de_passe	nom	prenom	age	sexe
-				//profil
-				//Profil(string nom, string prenom, string id, string mdp, int age, char sexe)
-			
-				string nom = tokens[2];
-				string prenom = tokens[3];
-				string id = tokens[0];
-				string mdp = tokens[1];
-				int age = stoi(tokens[4]);
-				const char *sexe= tokens[5].c_str();
-
-				Medecin med(nom, prenom, id, mdp, age, sexe[0]);
-				Patient pat(nom, prenom, id, mdp, age, sexe[0]);
-				Profil adm(nom, prenom, id, mdp, age, sexe[0]);
-				Medecin *pmed;
-				pmed = &med;
-				Patient *ppat;
-				ppat = &pat;
-				Profil *user;
-				user = &adm;
-				
-				if (tokens[0][0] == 'm') user = pmed;
-				else if (tokens[0][0] == 'p') user = ppat;
-				cout << user -> afficher() << endl;
-				cout << user -> consulter() << endl;
-
-				//si user est un admin : 
-					//il peut voir les radiographies mais pas les crm : ok
-					//il peut ajouter un médecin
-				//si user est médecin : 
-					//il peut ajouter un patient : ok
-					//il peut voir les radios et les crm si il a le mp : ok
-				//si user est patient : 
-					//il voit les radios qui lui sont associées : ok
-					//il peut accéder aux clichés mais pas au crm : ok
-			*/
-			if (trouve)
-			{
-				//profil reconnu
-				cout << user -> afficher() << endl;
-				cout << user -> consulter() << endl;
-				int menu_examen = 1;
-				while(menu_examen == 1){
-					cout <<"#############################################\n";
-					cout << "## Menu: consulter un examen\n";
-					cout << "   [1]: Consulter/saisi\n";
-					cout << "   [2]: Retour au menu principal\n";
-					menu_examen = input();
-					switch(menu_examen){
-						case 1: {
-							cout << "[1]: Consulter/saisi\n";
-							//pour le médecin : accéder ou créer une radio
-							acces_radio(app, user, admins,medecins,patients);
-						} break;
-						case 2: cout << "[2]: Retour au menu principal\n"; continue;
-						default: 
-							cout << "\033[1;31mMauvaise entrée, retour au menu.\033[0m\n";
-							menu_examen = 1;
-							break;	// On réinitialise à 1 
-					}					
+				cout << "#############################################\n";
+				cout << "## Menu: consulter un examen\n";
+				cout << "   [1]: Lister les radiographies effectuées.\n";
+				cout << "   [2]: Consulter un examen\n";
+				cout << "   [3]: Retour au menu principal\n";
+				Menu_Lister_ou_Creer = input();
+				switch(Menu_Lister_ou_Creer)
+				{
+					case 1:
+						cout << "## Lister les radiographies effectuées.\n";
+						//cout << app.afficher_liste(trouver_radios_dans_bdd("bdd_compte_rendu_medical.txt", admins, medecins, patients)) << endl;
+						trouver_radios_dans_bdd("bdd_compte_rendu_medical.txt", admins, medecins, patients);
+						
+						break;
+					case 2:
+					{
+						cout << "## Consulter un examen.\n";
+						int menu_examen = 1;
+						while(menu_examen == 1)
+						{
+							cout << "#############################################\n";
+							cout << "## Menu: consulter un examen\n";
+							cout << "   [1]: Consulter/saisi\n";
+							cout << "   [2]: Retour au menu principal\n";
+							menu_examen = input();
+							switch(menu_examen)
+							{
+								case 1: {
+									cout << "> Consulter/saisi\n";
+									//pour le médecin : accéder ou créer une radio
+									acces_radio(app, user, admins,medecins,patients);
+								} break;
+								case 2: cout << "> Retour au menu principal\n"; continue;
+								default: 
+									cout << "\033[1;31mMauvaise entrée, retour au menu.\033[0m\n";
+									menu_examen = 1;
+									break;	// On réinitialise à 1 
+							}					
+						}
+					}
+					break;
+					case 3:
+						cout << "## Retour au menu prinicpal.\n";
+						continue;
+					default:
+						cout << "\033[1;31mMauvaise entrée, retour au menu.\033[0m\n";
+						Menu_Lister_ou_Creer = 1;
+						break;	// On réinitialise à 1 
 				}
 			}
-			else cout << "\033[1;31mConnard :) essaie encore !\033[0m" <<endl;
+		}
+		else cout << "\033[1;31mConnard :) essaie encore !\033[0m" <<endl;
 	}
-	
-	
 }

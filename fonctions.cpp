@@ -296,6 +296,7 @@ vector<Radiographie> trouver_radios_dans_bdd(string mon_fichier, vector<Profil> 
     else cout << "Le fichier source n'a pas pu être ouvert (tous profils). Veuillez réessayer" <<endl;
 	for(int i=0;i<vect_tokens_radios.size();i++){
 		num = vect_tokens_radios[i];
+		cout << num;
 		liste_radios.push_back(trouver_radio(num, admins, medecins, patients));
 	}
     return liste_radios;
@@ -347,6 +348,17 @@ int input(){
 	}
 	return stoi(entree);
 }
+
+//aller chercher le patient par son id dans bdd patients médecins
+Patient trouve_pat(vector<Patient> patients, string id)
+{
+	for (int i=0; i<patients.size(); i++)
+	{
+		if (patients[i].get_id() == id) return patients[i];
+	}
+	return patients[0];
+}
+				
 
 //################################################################################################
 /*______  __    __    ______    __  ___   ___       .______      ___   .___________. __   _______ .__   __. .___________.
@@ -567,15 +579,7 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 				string mdp = tokens_crm[1];
 				//patient correspondant au crm : id_path
 				//aller chercher le patient par son id dans bdd patients médecins
-				Patient pat = patients[0];
-				for (int i=0; i<patients.size(); i++)
-				{
-					if (patients[i].get_id() == radio.get_id())
-					{
-						pat = patients[i];
-						break;
-					}
-				}
+				Patient pat = trouve_pat(patients, radio.get_id());
 				//créer crm
 				Compte_rendu_medical cpt_rendu(numero, mdp, pat);
 				//le texte est dans le fichier num_crm.txt
@@ -593,7 +597,10 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 					cin >> rep_modif;
 					if (rep_modif == "y") 
 					{
-						cpt_rendu.get_Compte_Rendu();
+						cpt_rendu.modifier_Compte_Rendu();
+						//sauvegarder le contenu du compte rendu
+						string chemin = "examens/" + num;
+						cpt_rendu.sauvegarder_crm(chemin);
 					}
 				}
 				Examen dossier(numero, radio, cpt_rendu);
@@ -617,15 +624,7 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 				string mdp = tokens_crm[1];
 				//patient correspondant au crm : id_path
 				//aller chercher le patient par son id dans bdd patients médecins
-				Patient pat = patients[0];
-				for (int i=0; i<patients.size(); i++)
-				{
-					if (patients[i].get_id() == radio.get_id())
-					{
-						pat = patients[i];
-						break;
-					}
-				}
+				Patient pat = trouve_pat(patients, radio.get_id());
 				//créer crm
 				Compte_rendu_medical cpt_rendu(numero, mdp, pat);
 				//veut-on créer un crm ?
@@ -678,16 +677,7 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 			string mdp;
 			cin >> mdp;
 			//patient
-			string patientid = radio.get_id();
-			Patient pat = patients[0];
-			for (int i=0; i<patients.size(); i++)
-			{
-				if (patients[i].get_id() == patientid)
-				{
-					pat = patients[i];
-					break;
-				}
-			}
+			Patient pat = trouve_pat(patients, radio.get_id());
 			int id_exam_radio_crm = stoi(num);
 			Compte_rendu_medical cpt_rendu(id_exam_radio_crm, mdp, pat);
 			//demander au med si il il veut écrire le compte_rendu

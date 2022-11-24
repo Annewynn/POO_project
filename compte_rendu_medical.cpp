@@ -27,8 +27,9 @@ void Compte_rendu_medical::get_Compte_Rendu(){
 
 void Compte_rendu_medical::modifier_Compte_Rendu()
 {
+	texte = "";
 	string line;
-    cout << "Veuillez saisir le compte rendu médical:\n";
+    cout << "Veuillez réécrire le compte rendu médical:\n";
 	cin.ignore();	// Nécessite de clear "cin" car utilisé précédement et sinon casse getline()
     while ( getline(cin, line) && !line.empty() ){
 		texte += line + "\n" ;
