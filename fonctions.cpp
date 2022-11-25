@@ -91,29 +91,36 @@ vector<string> trouver_profil_dans_bdd(vector<string> tokens, string id, string 
 }
 
 //################################################################################################
-vector<string> trouver_profil_dans_bdd(vector<string> tokens, string id, string mon_fichier)
+vector<string> trouver_profil_dans_bdd(vector<string> tokens, string id, string mon_fichier, bool isOnManyLines)
 {
       // je stocke dans la chaîne mon_fichier le nom du fichier à ouvrir
     ifstream fichier(mon_fichier.c_str(), ios::in);
     if(fichier)  // si l'ouverture a réussi
     {
         string ligne;  // déclaration d'une chaîne qui contiendra la ligne lue
+		int iLigne = 0;
 		//éviter de lire le header
 		if (mon_fichier == "bdd_compte_rendu_medical.txt") getline(fichier, ligne);
-
         while(getline(fichier, ligne))  // tant que l'on peut mettre la ligne dans "contenu"
         {
                 //https://stackoverflow.com/questions/10617094/how-to-split-a-file-lines-with-space-and-tab-differentiation
                 istringstream iss(ligne);
                 string token;
-                while(getline(iss, token, '\t'))  { // but we can specify a different one
+				//si on est sur plusieurs lignes, iLigne peut ne pas être égal à 0
+                if (iLigne == 0) 
+				{
+					while(getline(iss, token, '\t'))   // but we can specify a different one
                     tokens.push_back(token);
-                    }
-                if (tokens[0] == id)
-                { 
-                    break;
-                }
-                tokens.clear();
+					if (isOnManyLines) iLigne ++;
+				}
+				else if (isOnManyLines) 
+				{
+					getline(iss, token, '\n');  // but we can specify a different one
+                    tokens.push_back(token);
+				}
+                if (tokens[0] == id && ! isOnManyLines) break;
+				//si on est sur plusieurs lignes, il ne faut pas clear tokens
+				if (! isOnManyLines) tokens.clear();
         }
     fichier.close();  // je referme le fichier
     }
@@ -188,7 +195,7 @@ void ajouter_bdd(vector<string> vec, string mon_fichier)
 {
 	ofstream file;
 	file.open(mon_fichier, ios_base::app);
-	file <<'\n'<< vec[0] << "\t" << vec[1];
+	file << vec[0] << "\t" << vec[1];
 	file.close();
 }
 
@@ -205,30 +212,44 @@ void ajouter_bdd(vector<string> vec, string mon_fichier)
 /// @brief Remplit un tableau 2d de strings avec celles qu'il récuppère dans un fichier type csv, avec tab pour délimiteur.
 /// @param vect_tokens_images Tableau de strins à renvoyer
 /// @param mon_fichier Chemin du fichier à lire
+/// @param isOnManyLines Les informations à lire sont-elles par ligne ou sur plusieurs lignes ?
 /// @return Renvoie un tableau à deux dimensions contenant la transcription du fichier.
-vector<vector<string>> trouver_tous_profil_dans_bdd(vector<vector<string>> vect_tokens_images, string mon_fichier)
+vector<vector<string>> trouver_tous_profil_dans_bdd(vector<vector<string>> vect_tokens_images, string mon_fichier, bool isOnManyLines)
 {
       // je stocke dans la chaîne mon_fichier le nom du fichier à ouvrir
     ifstream fichier(mon_fichier.c_str(), ios::in);
     if(fichier)  // si l'ouverture a réussi
     {
         string ligne;  // déclaration d'une chaîne qui contiendra la ligne lue
+		int iLigne = 0;
+		vector<string> tokens;
 		//oter la première ligne dans bdd patients médecins
 		if (mon_fichier == "bdd_patients_medecins.txt") getline(fichier, ligne);
         while(getline(fichier, ligne))  // tant que l'on peut mettre la ligne dans "contenu"
-        {   vector<string> tokens;
+        { 
             //https://stackoverflow.com/questions/10617094/how-to-split-a-file-lines-with-space-and-tab-differentiation
             istringstream iss(ligne);
             string token;
-            while(getline(iss, token, '\t'))  tokens.push_back(token);
+			//si on est sur plusieurs lignes, iLigne peut ne pas être égal à 0
+                if (iLigne == 0) 
+				{
+					while(getline(iss, token, '\t')) tokens.push_back(token);
+					if (isOnManyLines) iLigne ++;
+				}
+				else if (isOnManyLines) 
+				{
+					getline(iss, token, '\n');  // but we can specify a different one
+                    tokens.push_back(token);
+				}
             vect_tokens_images.push_back(tokens);
+			if (! isOnManyLines) tokens.clear();
         }
     fichier.close();  // je referme le fichier
     }
     else cout << "Le fichier source n'a pas pu être ouvert (tous profils). Veuillez réessayer" <<endl;
-
     return vect_tokens_images;
 }
+
 //################################################################################################
 /*_                                                 _ _                  _                     _         _     _ 
  | |_ _ __ ___  _   ___   _____ _ __  _ __ __ _  __| (_) ___  ___     __| | __ _ _ __  ___    | |__   __| | __| |
@@ -248,7 +269,7 @@ Radiographie trouver_radio(string num, vector<Profil> admins,vector<Medecin> med
 	vector<string> tokens_r;
 	//lire le fichier num_radio.txt pour en faire un objet radio
 	string mon_fichier = "examens/" + num + "/" + num + "_radio.txt";  // je stocke dans la chaîne mon_fichier le nom du fichier à ouvrir
-	tokens_r = trouver_profil_dans_bdd(tokens_r, num, mon_fichier);
+	tokens_r = trouver_profil_dans_bdd(tokens_r, num, mon_fichier, false);
 	//créer radiographie
 	int numero = stoi(tokens_r[0]);
 	string tech = tokens_r[1];
@@ -287,7 +308,8 @@ Radiographie trouver_radio(string num, vector<Profil> admins,vector<Medecin> med
 	vector<vector<string>> vect_tokens_images;
 	string mon_fichier2 = "examens/" + num + "/" + num + "_images.txt";
 	vector<Cliche> images;
-	vect_tokens_images = trouver_tous_profil_dans_bdd(vect_tokens_images, mon_fichier2);
+	//les légendes sont suceptibles d'être sur plusieurs lignes
+	vect_tokens_images = trouver_tous_profil_dans_bdd(vect_tokens_images, mon_fichier2, true);
 	for (int i =0; i<vect_tokens_images.size(); i++)
 	{
 		string image_path = vect_tokens_images[i][1];
@@ -596,7 +618,6 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 	if (stat(s.c_str(), &buffer) == 0)
 	{
 		Radiographie radio = trouver_radio(num, admins, medecins, patients);
-		cout << "TESTTETTE\n";
 		int numero = radio.get_numexam();
 		if (user -> get_id()[0] == 'm' || user -> get_id()[0] == 'a' || user -> get_id() == radio.get_id()){
 			cout << radio.afficher_radio() << endl;
@@ -605,7 +626,7 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 			{
 				//trouver le crm à partir de son id
 				vector<string> tokens_crm;
-				tokens_crm = trouver_profil_dans_bdd(tokens_crm, to_string(numero), "bdd_compte_rendu_medical.txt");
+				tokens_crm = trouver_profil_dans_bdd(tokens_crm, to_string(numero), "bdd_compte_rendu_medical.txt", false);
 				string mdp = tokens_crm[1];
 				//patient correspondant au crm : id_path
 				//aller chercher le patient par son id dans bdd patients médecins
@@ -615,8 +636,13 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 				//le texte est dans le fichier num_crm.txt
 				string fichier_crm = "examens/" + num + "/" + num + "_crm.txt";
 				vector<string> tokens_tcrm;
-				tokens_tcrm = trouver_profil_dans_bdd(tokens_tcrm, to_string(numero), fichier_crm);
-				string text = tokens_tcrm[2];
+				tokens_tcrm = trouver_profil_dans_bdd(tokens_tcrm, to_string(numero), fichier_crm, true);
+				//de 2 à size() c'est le texte
+				string text;
+				for (int i=2; i<tokens_tcrm.size(); i++)
+				{
+					text += tokens_tcrm[i];
+				}
 				cpt_rendu.get_Compte_Rendu(text);
 				bool shittyflute = cpt_rendu.print_Compte_Rendu();
 				//modifier le crm écrit : 
@@ -650,7 +676,7 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 				//donner au médecin la possibilité d'écrire le crm
 				//trouver le crm à partir de son id
 				vector<string> tokens_crm;
-				tokens_crm = trouver_profil_dans_bdd(tokens_crm, to_string(numero), "bdd_compte_rendu_medical.txt");
+				tokens_crm = trouver_profil_dans_bdd(tokens_crm, to_string(numero), "bdd_compte_rendu_medical.txt", false);
 				string mdp = tokens_crm[1];
 				//patient correspondant au crm : id_path
 				//aller chercher le patient par son id dans bdd patients médecins
@@ -730,7 +756,8 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 				//sauvegarder le contenu du compte rendu
 				string chemin = "examens/" + num;
 				cpt_rendu.sauvegarder_crm(chemin);
-				bool shittyflute = cpt_rendu.print_Compte_Rendu();
+				//le mot de passe a déjà été donné auparevent, et pas besoin de réafficher le crm, on vient de le rentrer
+				bool shittyflute = true;
 				Examen dossier(id_exam_radio_crm, radio, cpt_rendu);
 				//créer le dossier, fichiers... et les remplir
 				creer_nouvelle_radio(radio, cpt_rendu, true);
@@ -738,8 +765,7 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 				cout << "Enregistrer cet examen au format txt (y/n) ? ";
 				string rep_sauv;
 				cin >> rep_sauv;
-				if (rep_sauv == "y" && shittyflute) dossier.sauvegarder_examen();
-				else if (rep_sauv == "y" && ! shittyflute) dossier.sauvegarder_examen_restreint();
+				if (rep_sauv == "y") dossier.sauvegarder_examen();
 			}
 			//créer le dossier, fichiers... et les remplir
 			else creer_nouvelle_radio(radio, cpt_rendu, false);

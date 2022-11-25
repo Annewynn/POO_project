@@ -24,10 +24,13 @@ void Application::ajouter(Radiographie radio)
 
 
 string Application::afficher_liste(vector<Radiographie> radios){
+	/*On commence par initialiser la variable qui récupère le tableau
+	de la liste des radios, et on ajoute un header.
+	*/
 	string liste_trier = "Numéro d'éxamen\tNom patient\tPrénom patient\tAge patient\t";
 	liste_trier += "Type radio\tNom médecin\tPrénom médecin\tDate\tStatut\tListe des clichés (Numéro[Chemin]:Description)\n";
-	cout << "Quel type de tri ?\n";
-	cout << "(Par défaut:1 , par patient: 2, par date: 3, par numéro d'axamen: 4)\n";
+	cout << "\tQuel type de tri ?\n";
+	cout << "\t[1] Par défaut\n\t[2] Par patient\n\t[3] Par date\n\t [4] Par numéro d'examen\n";
 	int choix = input();
 	switch(choix){
 		case 1:

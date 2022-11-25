@@ -1,0 +1,3 @@
+1002	p01	J'ai pas d'inspi pour écrire ce crm
+on peut dire que, heum, il faut entrer du texte au pif pour le remplir.
+Et que une fois cela fait, on pourra détecter les bugs

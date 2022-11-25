@@ -1,0 +1,33 @@
+######### Compte Rendu ########
+#############################################
+Numéro d'examen: 1002Compte rendu:
+J'ai pas d'inspi pour écrire ce crm
+on peut dire que, heum, il faut entrer du texte au pif pour le remplir.
+Et que une fois cela fait, on pourra détecter les bugs
+
+#############################################
+
+######### Radiographies ########
+#############################################
+N° d'examen: 1002		Date: 15/10/2005
+Type de radio: Rayons X
+N° patient: p01
+	Nom et prénom: Princess Kraehe
+Age: 33	Sexe: F
+
+Medecin:
+	Stopp Madeleine
+Effectuée
+Liste des clichés:
+N°: 0
+	Chemin d'accès: examens/1002/image/cute
+	Légende: kawaiiii
+
+N°: 1
+	Chemin d'accès: examens/1002/uneautre/image
+	Légende: On voit bien ici qu'on ne voit rien !
+Ce qui fait donc une radio inutile (en vrai elle devrait pas être dans le cr mais flemme)
+
+
+#############################################
+

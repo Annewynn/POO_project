@@ -39,7 +39,7 @@ int main()
 	time_t date_actuelle = chrono::system_clock::to_time_t(chrono::system_clock::now());
 	while(MenuPrincipal == 1)
 	{
-		cout << "\033[33m╔════════════════════════════════════════╗\n";
+		cout << "\033[33m╔═══════════════════════════════════════════╗\n";
 		cout << "║\033[1;33m         Bienvenue sur P.O.O FM          \033[33m║\n";
 		cout << "║\033[1;33m     Gestionnaire de radiographies       \033[33m║\n";
 		cout << "║\033[1;33m     Date du jour: "<< ctime(&date_actuelle);

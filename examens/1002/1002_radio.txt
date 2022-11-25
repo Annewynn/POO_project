@@ -1,0 +1,2 @@
+numéro	technique	patient	medecin	date	etat
+1002	Rayons X	p01	m02	15/10/2005	EFFECTUEE

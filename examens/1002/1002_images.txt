@@ -1,0 +1,3 @@
+00	examens/1002/image/cute	kawaiiii
+01	examens/1002/uneautre/image	On voit bien ici qu'on ne voit rien !
+Ce qui fait donc une radio inutile (en vrai elle devrait pas être dans le cr mais flemme)
