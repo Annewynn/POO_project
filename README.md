@@ -164,7 +164,8 @@ Les packages utilisées ne sont pas des packages extérieurs. Leur liste:
   - [x] Pouvoir afficher la liste des examens/radiographies.
   - [x] Pouvoir trier la liste des radiographies et l'exporter.
   - [ ]	Afficher liste radio d'un patient
-  - [ ] Utilise les bases de données de radios et de profils si passer en paramètre
+  - [x] Utilise les bases de données de radios et de profils si passer en paramètre
+  - [ ] Administrateut peut ajouter un médecin
 - [ ] Fonctionnalités supplémentaires
   - [ ] Ajouter des fonctionnalités pour les patients
   - [ ] Affichage des clichés associés aux radiographies
