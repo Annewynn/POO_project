@@ -43,7 +43,7 @@ int main()
 		cout << "║\033[1;33m         Bienvenue sur P.O.O FM          \033[33m║\n";
 		cout << "║\033[1;33m     Gestionnaire de radiographies       \033[33m║\n";
 		cout << "║\033[1;33m     Date du jour: "<< ctime(&date_actuelle);
-		cout << "\033[33m╚###########################################╝\n";
+		cout << "\033[33m╚═══════════════════════════════════════════╝\n";
 		cout << "##\033[1;33m Menu principal:\n";
 		cout << "   [1]: Admin, Medecin ou Patient\n";
 		cout << "   [2]: Quitter\n";
