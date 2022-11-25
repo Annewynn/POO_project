@@ -1,0 +1,7 @@
+00	examens/7456/ceci/image/jeghgukghgh	ceci est une légende
+a plusieurs lignes :)
+01	examens/7456/images/captures/foo	une autre légende
+a multiples lignes
+encore une
+je crois que l'affichage de cette légende
+sera fort buggée

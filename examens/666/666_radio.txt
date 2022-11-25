@@ -1,0 +1,2 @@
+numéro	technique	patient	medecin	date	etat
+666	Rayons X	p02	m01	6/6/2066	PLANIFIEE

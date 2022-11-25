@@ -1,0 +1,18 @@
+######### Radiographies ########
+#############################################
+N° d'examen: 45621		Date: 45/85/745
+Type de radio: IRM
+N° patient: p10
+	Nom et prénom: Angel Hazbin
+Age: 115	Sexe: B
+
+Medecin:
+	Supper Adolphe
+Planifiée
+Liste des clichés:
+N°: 0
+	Chemin d'accès: 
+	Légende: 
+
+#############################################
+

@@ -158,13 +158,17 @@ vector<string> trouver_profil_dans_bdd(vector<string> tokens, string id, string 
                 if (iLigne == 0) 
 				{
 					while(getline(iss, token, '\t'))   // but we can specify a different one
-                    tokens.push_back(token);
-					if (isOnManyLines) iLigne ++;
+					if (isOnManyLines) 
+					{
+						iLigne ++;
+						tokens.push_back(token + "\n");
+					}
+					else tokens.push_back(token);
 				}
 				else if (isOnManyLines) 
 				{
 					getline(iss, token, '\n');  // but we can specify a different one
-                    tokens.push_back(token);
+                    tokens.push_back(token + "\n");
 				}
                 if (tokens[0] == id && ! isOnManyLines) break;
 				//si on est sur plusieurs lignes, il ne faut pas clear tokens
@@ -243,7 +247,7 @@ void ajouter_bdd(vector<string> vec, string mon_fichier)
 {
 	ofstream file;
 	file.open(mon_fichier, ios_base::app);
-	file << vec[0] << "\t" << vec[1];
+	file << "\n" << vec[0] << "\t" << vec[1];
 	file.close();
 }
 
@@ -386,9 +390,7 @@ Radiographie trouver_radio(string num, vector<Profil> admins,vector<Medecin> med
 		for (int j=2; j<vect_tokens_images[i].size(); j++)
 		{
 			legende += vect_tokens_images[i][j];
-			cout << vect_tokens_images[i][j];
 		}
-		cout <<endl;
 		images.push_back(Cliche (i, image_path, legende));
 	}
 	Radiographie radio(numero, tech, pat, medic, date, etat, images); 
@@ -730,7 +732,15 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 					if (rep_sauv == "y" && shittyflute) dossier.sauvegarder_examen();
 					else if (rep_sauv == "y" && ! shittyflute) dossier.sauvegarder_examen_restreint();
 				}
-				//else cpt_rendu.print_Compte_Rendu();
+				else 
+				{
+					Examen dossier(numero, radio, cpt_rendu);
+					//demander si on veut sauvegarder l'exam au format txt :
+					cout << "Enregistrer cet examen au format txt (y/n) ? ";
+					string rep_sauv;
+					cin >> rep_sauv;
+					if (rep_sauv == "y") dossier.sauvegarder_examen_restreint();
+				}
 			}      
 		} 
 		else 

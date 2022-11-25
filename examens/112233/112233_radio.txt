@@ -1,0 +1,2 @@
+numéro	technique	patient	medecin	date	etat
+112233	échographie à ultrasons	p007	m01	11/11/2011	PLANIFIEE

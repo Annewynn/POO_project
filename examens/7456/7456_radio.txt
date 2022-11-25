@@ -1,0 +1,2 @@
+numéro	technique	patient	medecin	date	etat
+7456	IRM	p03	m01	20/4/1998	PLANIFIEE

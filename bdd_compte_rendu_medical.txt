@@ -3,3 +3,7 @@ ID	mot_de_passe
 424242	truite
 4568	hotel
 1002	raven
+7456	kiwi
+666	satan
+112233	123soleil
+45621	pilot

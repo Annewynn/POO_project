@@ -166,8 +166,8 @@ int main()
 						menu_examen = 1;
 						while(menu_examen == 1)
 						{
-							cout << "\033[32m╔════════════════════════════════════════════\n";
-							cout << "╚═\033[92m Menu: consulter un examen\n";
+							cout << "\033[92m╔════════════════════════════════════════════\n";
+							cout << "╚═\033[32m Menu: consulter un examen\n";
 							cout << "   [1]: Consulter/saisi\n";
 							cout << "   [2]: Retour au menu consulter actions\n";
 							menu_examen = input();

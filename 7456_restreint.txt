@@ -1,0 +1,26 @@
+######### Radiographies ########
+#############################################
+N° d'examen: 7456		Date: 20/4/1998
+Type de radio: IRM
+N° patient: p03
+	Nom et prénom: Mangeonjean Pierre
+Age: 58	Sexe: H
+
+Medecin:
+	Supper Adolphe
+Planifiée
+Liste des clichés:
+N°: 0
+	Chemin d'accès: examens/7456/ceci/image/jeghgukghgh
+	Légende: ceci est une légendea plusieurs lignes :)
+
+N°: 1
+	Chemin d'accès: examens/7456/images/captures/foo
+	Légende: une autre légendea multiples lignes
+encore une
+je crois que l'affichage de cette légende
+sera fort buggée
+
+
+#############################################
+

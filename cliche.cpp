@@ -5,6 +5,7 @@
 ###########################################*/
 #include <iostream>
 #include <string>
+#include <algorithm>
 #include "cliche.hpp"
 using namespace std;
 
@@ -30,7 +31,11 @@ string Cliche::get_cliche(){
 }
 
 string Cliche::return_cliche(){
-	return to_string(num_prise) + '[' + image + "]:" + legend;
+	//remplacer les \n par /
+	string legend_oneline = legend;
+	replace(legend_oneline.begin(), legend_oneline.end(), '\n', '/' );
+	// Utilisation de pop_back() pour retirer le endline de fin de légende.
+	return to_string(num_prise) + '[' + image + "]:" + legend_oneline.erase(legend_oneline.size()-1);
 }
 
 string Cliche::get_path()
