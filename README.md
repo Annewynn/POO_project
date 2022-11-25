@@ -140,6 +140,8 @@ Medecin: string consulter()
 Ce utilise uniquement le language C++ et ne nécessite donc aucuns prérequis. Il suffit de lancer le fichier _main_.
 ```bash
 ./main
+ou
+./main bdd_patients_medecins.txt
 ```
 
 ### Dépendances nécessaires
@@ -164,7 +166,8 @@ Les packages utilisées ne sont pas des packages extérieurs. Leur liste:
   - [x] Pouvoir afficher la liste des examens/radiographies.
   - [x] Pouvoir trier la liste des radiographies et l'exporter.
   - [ ]	Afficher liste radio d'un patient
-  - [ ] Utilise les bases de données de radios et de profils si passer en paramètre
+  - [x] Utilise les bases de données de radios et de profils si passer en paramètre
+  - [ ] Administrateut peut ajouter un médecin
 - [ ] Fonctionnalités supplémentaires
   - [ ] Ajouter des fonctionnalités pour les patients
   - [ ] Affichage des clichés associés aux radiographies
@@ -188,5 +191,5 @@ Les auteurs demandent que tout travail nécessitant l'utilisation de cette appli
 
 [C++-shield]: https://img.shields.io/badge/C++-Orient%C3%A9_objet-blue.svg?style=for-the-badge&logo=c%2B%2B
 [C++-url]: https://cplusplus.com/
-[mermaid-shield]: https://img.shields.io/badge/mermaid-UML-blue.svg?style=for-the-badge&logo=JavaScript
+[mermaid-shield]: https://img.shields.io/badge/mermaid-UML-blue.svg?style=for-the-badge&logo=Markdown
 [mermaid-url]: https://mermaid-js.github.io/
