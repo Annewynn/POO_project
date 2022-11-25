@@ -4,6 +4,8 @@
 ## Fichier: main.cpp
 ###########################################*/
 #include "fonctions.hpp"
+#include <ctime>
+#include <chrono>
 //fonctions inclut tous les packages nécessaires
 
 using namespace std;
@@ -34,19 +36,21 @@ int main()
 	int menu_examen;
 	char choix_save_list;
 	string name_fichier_list;
+	time_t date_actuelle = chrono::system_clock::to_time_t(chrono::system_clock::now());
 	while(MenuPrincipal == 1)
 	{
-		cout << "#############################################\n";
-		cout << "##         Bienvenue sur P.O.O FM          ##\n";
-		cout << "##     Gestionnaire de radiographies       ##\n";
-		cout << "#############################################\n";
-		cout << "## Menu principal:\n";
+		cout << "\033[33m╔###########################################╗\n";
+		cout << "║\033[1;33m         Bienvenue sur P.O.O FM          \033[33m║\n";
+		cout << "║\033[1;33m     Gestionnaire de radiographies       \033[33m║\n";
+		cout << "║\033[1;33m     Date du jour: "<< ctime(&date_actuelle);
+		cout << "\033[33m╚###########################################╝\n";
+		cout << "##\033[1;33m Menu principal:\n";
 		cout << "   [1]: Admin, Medecin ou Patient\n";
 		cout << "   [2]: Quitter\n";
 		MenuPrincipal = input();
 		switch(MenuPrincipal){
-			case 1: cout << "> Admin, Medecin ou Patient\n"; break;
-			case 2: cout << "> Quitter\n"; return 0;
+			case 1: cout << "> Admin, Medecin ou Patient\033[0m\n"; break;
+			case 2: cout << "> Quitter\033[0m\n"; return 0;
 			default: cout << "\033[1;31mSaisie incorrecte.\033[0m\n";continue;
 		}
 
