@@ -17,11 +17,28 @@
 
 using namespace std;
 
+//################################################################################################
+/*
+,---------. .-------.   .-./`)    .-'''-.                  ________   ___    _ ,---.   .--. 
+\          \|  _ _   \  \ .-.')  / _     \                |        |.'   |  | ||    \  |  | 
+ `--.  ,---'| ( ' )  |  / `-' \ (`' )/`--'                |   .----'|   .'  | ||  ,  \ |  | 
+    |   \   |(_ o _) /   `-'`"`(_ o _).                   |  _|____ .'  '_  | ||  |\_ \|  | 
+    :_ _:   | (_,_).' __ .---.  (_,_). '.                 |_( )_   |'   ( \.-.||  _( )_\  | 
+    (_I_)   |  |\ \  |  ||   | .---.  \  :   _ _     _ _  (_ o._)__|' (`. _` /|| (_ o _)  | 
+   (_(=)_)  |  | \ `'   /|   | \    `-'  |--( ' )---(_I_)-|(_,_)    | (_ (_) _)|  (_,_)\  | 
+    (_I_)   |  |  \    / |   |  \       /  (_{;}_) (_(=)_)|   |      \ /  . \ /|  |    |  | 
+    '---'   ''-'   `'-'  '---'   `-...-'  --(_,_)---(_I_)-'---'       ``-'`-'' '--'    '--' 
+                                                                                            
+*/
+/// @brief Permet de comparer de noms en fonction de l'ordre alphabethique
+/// @return Si le nom de a est après b, alors renvoi faux, sinon renvoi vrai.
 bool comparePatient(Radiographie a, Radiographie b){
 	if(a.patient.get_nom() < b.patient.get_nom()){
 		return a.patient.get_prenom() < b.patient.get_prenom();
 	} else {return false;}
 }
+/// @brief Permet de comparer des dates
+/// @return Si la date de a est après b, alors renvoi faux, sinon renvoi vrai.
 bool compareDate( Radiographie a, Radiographie b){
 	if(a.get_date().annee == b.get_date().annee){
 		if(a.get_date().mois == b.get_date().mois){
@@ -31,8 +48,10 @@ bool compareDate( Radiographie a, Radiographie b){
 	}
 	else return a.get_date().annee < b.get_date().annee;
 }
+/// @brief Permet de comparer des numéro d'examen
+/// @return Si le numéro de a est supérieur b, alors renvoi faux, sinon renvoi vrai.
 bool compareNumExam(Radiographie a, Radiographie b){
-	return a.get_id() < b.get_id();	
+	return  a.get_numexam() < b.get_numexam();	
 }
 
 //################################################################################################
@@ -577,6 +596,7 @@ void acces_radio(Application app, Profil* user, vector<Profil> admins,vector<Med
 	if (stat(s.c_str(), &buffer) == 0)
 	{
 		Radiographie radio = trouver_radio(num, admins, medecins, patients);
+		cout << "TESTTETTE\n";
 		int numero = radio.get_numexam();
 		if (user -> get_id()[0] == 'm' || user -> get_id()[0] == 'a' || user -> get_id() == radio.get_id()){
 			cout << radio.afficher_radio() << endl;

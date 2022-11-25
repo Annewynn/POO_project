@@ -1,2 +1,2 @@
 numéro	technique	patient	medecin	date	etat
-4568	rayons x	p10	m01	52/85/85214	PLANIFIEE
+4568	Rayons x	p10	m01	52/85/2008	PLANIFIEE

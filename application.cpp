@@ -24,7 +24,8 @@ void Application::ajouter(Radiographie radio)
 
 
 string Application::afficher_liste(vector<Radiographie> radios){
-	string liste_trier = "";
+	string liste_trier = "Numéro d'éxamen\tNom patient\tPrénom patient\tAge patient\t";
+	liste_trier += "Type radio\tNom médecin\tPrénom médecin\tDate\tStatut\tListe des clichés (Numéro[Chemin]:Description)\n";
 	cout << "Quel type de tri ?\n";
 	cout << "(Par défaut:1 , par patient: 2, par date: 3, par numéro d'axamen: 4)\n";
 	int choix = input();

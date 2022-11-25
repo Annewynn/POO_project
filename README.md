@@ -24,14 +24,14 @@
 
 <!-- TABLE OF CONTENTS -->
 - [Projet en Programmation Orientée Objet: _Logiciel pour un centre de radiologie_](#projet-en-programmation-orientée-objet-logiciel-pour-un-centre-de-radiologie)
-  - [Schéma U.M.L. de l'architecture du logiciel](#schéma-uml-de-larchitecture-du-logiciel)
-  - [Documentation](#documentation)
-    - [Construction du logiciel:](#construction-du-logiciel)
-    - [Utilisation du logiciel](#utilisation-du-logiciel)
-    - [Dépendances nécessaires](#dépendances-nécessaires)
-  - [Plan de finalisation du logiciel](#plan-de-finalisation-du-logiciel)
-  - [Disclaimer \& Copyright](#disclaimer--copyright)
-  - [Références](#références)
+	- [Schéma U.M.L. de l'architecture du logiciel](#schéma-uml-de-larchitecture-du-logiciel)
+	- [Documentation](#documentation)
+		- [Construction du logiciel:](#construction-du-logiciel)
+		- [Utilisation du logiciel](#utilisation-du-logiciel)
+		- [Dépendances nécessaires](#dépendances-nécessaires)
+	- [Plan de finalisation du logiciel](#plan-de-finalisation-du-logiciel)
+	- [Disclaimer \& Copyright](#disclaimer--copyright)
+	- [Références](#références)
 
 # Projet en Programmation Orientée Objet: _Logiciel pour un centre de radiologie_
 Dans un cabinet de radiologie, il est nécessaire de pouvoir facilement consulter des radiographies associées à des examens sur une base de données numériques. Il est également nécessaire de pouvoir y enregistrer des examens, avec les contre-rendu et la radiographies associées.  
@@ -139,8 +139,11 @@ Les packages utilisées ne sont pas des packages extérieurs. Leur liste:
   - [x] Pouvoir accéder aux examens (radiographies et clichés associés + compte rendu)
   - [x] Menu de navigation au sein du logiciel
   - [x] Pouvoir créer et sauvegarder des examens/radiographies.
-  - [ ] Pouvoir afficher la liste des examens/radiographies.
-  - [ ] Pouvoir trier la liste des radiographies et l'exporter.
+  - [x] Pouvoir écrire/changer un compte rendu
+  - [ ] Pouvoir changer le statut d'un examen 
+  - [ ] Pouvoir créer un examen
+  - [x] Pouvoir afficher la liste des examens/radiographies.
+  - [x] Pouvoir trier la liste des radiographies et l'exporter.
 - [ ] Fonctionnalités supplémentaires
   - [ ] Ajouter des fonctionnalités pour les patients
   - [ ] Affichage des clichés associés aux radiographies

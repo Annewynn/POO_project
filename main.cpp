@@ -32,6 +32,8 @@ int main()
 	int MenuPrincipal = 1;
 	int Menu_Lister_ou_Creer;
 	int menu_examen;
+	char choix_save_list;
+	string name_fichier_list;
 	while(MenuPrincipal == 1)
 	{
 		cout << "#############################################\n";
@@ -140,9 +142,18 @@ int main()
 						{
 						vector<Radiographie> radios;
 						cout << "## Lister les radiographies effectuées.\n";
-						//cout << app.afficher_liste(trouver_radios_dans_bdd("bdd_compte_rendu_medical.txt", admins, medecins, patients)) << endl;
 						radios = trouver_radios_dans_bdd("bdd_compte_rendu_medical.txt", admins, medecins, patients);
-						
+						string list_result = app.afficher_liste(radios);
+						cout << list_result << endl;
+						cout << "Voulez vous sauvegarder la liste ?(Oui: o, Non: n): ";
+						cin >> choix_save_list;
+						if(choix_save_list == 'o'){
+							cout << "Veuillez saisir un nom de fichier: ";
+							cin >> name_fichier_list;
+							ofstream fichier_list(name_fichier_list);
+							fichier_list << list_result;
+							fichier_list.close();	
+						}
 						}break;
 					case 2:
 					{
@@ -162,7 +173,7 @@ int main()
 									//pour le médecin : accéder ou créer une radio
 									acces_radio(app, user, admins,medecins,patients);
 								} break;
-								case 2: cout << "> Retour au menu principal\n"; continue;
+								case 2: cout << "> Retour au menu d'actions\n"; continue;
 								default: 
 									cout << "\033[1;31mMauvaise entrée, retour au menu.\033[0m\n";
 									menu_examen = 1;
