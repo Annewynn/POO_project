@@ -144,6 +144,10 @@ int main(int argc, char** argv)
 				cout << "   [1]: Lister les radiographies effectuées.\n";
 				cout << "   [2]: Consulter un examen\n";
 				cout << "   [3]: Retour au menu principal\n";
+				if (user -> get_id()[0] == 'a')
+				{
+					cout << "   [4]: Ajouter un médecin\n";
+				}
 				Menu_Lister_ou_Creer = input();
 				switch(Menu_Lister_ou_Creer)
 				{
@@ -195,6 +199,15 @@ int main(int argc, char** argv)
 						cout << "> Retour au menu prinicpal.\033[0m\n";
 						continue;
 					default:
+						if (user -> get_id()[0] == 'a')
+						{
+							if (Menu_Lister_ou_Creer == 4)
+							{
+								cout << "## Ajouter un médecin\033[0m\n";
+								ajouter_medecin(medecins);
+								break;
+							}
+						}
 						cout << "\033[1;31mMauvaise entrée, retour au menu.\033[0m\n";
 						Menu_Lister_ou_Creer = 1;
 						break;	// On réinitialise à 1 

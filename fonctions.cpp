@@ -269,6 +269,14 @@ void ajouter_bdd(Patient pat, string mon_fichier)
 	patient_file.close();
 }
 
+void ajouter_bdd(Medecin pat, string mon_fichier)
+{
+	ofstream patient_file;
+	patient_file.open(mon_fichier, ios_base::app);
+	patient_file << '\n'<< pat.get_id() << "\t" << pat.get_mdp() << "\t" << pat.get_nom();
+	patient_file << "\t" << pat.get_prenom() << "\t" << pat.get_age() << "\t" << pat.get_sexe();
+	patient_file.close();
+}
 void ajouter_bdd(vector<string> vec, string mon_fichier)
 {
 	ofstream file;
@@ -497,7 +505,8 @@ Patient choix_patient(vector<Patient> &patients){
 			}
 		}
 	}
-	if(cpt > 1){
+	if(cpt > 1)
+	{
 		cout << "Plusieurs patients avec le nom et prénom.\n";
 		for(int i=0;i<patients_trouver.size();i++){
 			cout << "Patient "<< i << endl;;
@@ -530,6 +539,7 @@ Patient choix_patient(vector<Patient> &patients){
 	{
 		mdp += to_string(rng(0, 9));
 	}
+	cout << "mdp :" <<mdp;
 	tokens_pat.push_back(mdp);
 	//nom
 	tokens_pat.push_back(nom);
@@ -552,6 +562,48 @@ Patient choix_patient(vector<Patient> &patients){
 	patients.push_back(pat);
 	return pat;
 }
+
+void ajouter_medecin(vector<Medecin> &medecins)
+{
+	vector<string> tokens_pat;
+	//id
+	cout << "Id: ";
+	string id;
+	cin >> id;
+	tokens_pat.push_back(id);
+	//mdp
+	//généré par entrée
+	cout << "mot de passe: ";
+	string mdp;
+	cin >> mdp;
+	tokens_pat.push_back(mdp);
+	//nom
+	cout << "Nom: ";
+	string nom;
+	cin >> nom;
+	tokens_pat.push_back(nom);
+	//prenom
+	cout << "Prénom: ";
+	string prenom;
+	cin >> prenom;
+	tokens_pat.push_back(prenom);
+	//age
+	cout << "Age: ";
+	int age_pat;
+	cin >> age_pat;
+	tokens_pat.push_back(to_string(age_pat));
+	//sexe
+	cout << "Sexe: ";
+	char sexe_pat;
+	cin >> sexe_pat;
+	string s{sexe_pat};
+	tokens_pat.push_back(s);
+	Medecin med = creer_med(tokens_pat);
+	ajouter_bdd(med, "bdd_patients_medecins.txt");
+	//maj du vecteur patient
+	medecins.push_back(med);
+}
+
 //################################################################################################
 /*
   ______ .______       _______  _______ .______            .______          ___       _______   __    ______   

@@ -91,7 +91,7 @@ Radiographie trouver_radio(string num, vector<Profil> admins,vector<Medecin> med
 	La fonction renvoie une instance de Patient.
 */
 Patient choix_patient(std::vector<Patient> &patients);
-
+void ajouter_medecin(vector<Medecin> &medecins);
 //################################################################################################
 /*
 	Cette fonction a pour rôle d'stancier une Radiographie à partir du numéro d'examen
@@ -116,3 +116,4 @@ void creer_nouvelle_radio(Radiographie radio, Compte_rendu_medical cpt_rendu);
 	en utilisant les deux fonctions précédantes entre autres.
 */
 void acces_radio(Application app, Profil* user, std::vector<Profil> admins,std::vector<Medecin> medecins,std::vector<Patient> patients);
+
