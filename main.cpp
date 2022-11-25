@@ -5,7 +5,7 @@
 ###########################################*/
 #include "fonctions.hpp"
 #include <ctime>
-#include <chrono>
+#include <cstring>
 //fonctions inclut tous les packages nécessaires
 
 using namespace std;
@@ -36,15 +36,16 @@ int main()
 	int menu_examen;
 	char choix_save_list;
 	string name_fichier_list;
-	time_t date_actuelle = chrono::system_clock::to_time_t(chrono::system_clock::now());
+	time_t date_actuelle = time(NULL);
+	char *date_print = strtok(ctime(&date_actuelle),"\n");
 	while(MenuPrincipal == 1)
 	{
 		cout << "\033[33m╔═══════════════════════════════════════════╗\n";
-		cout << "║\033[1;33m         Bienvenue sur P.O.O FM          \033[33m║\n";
-		cout << "║\033[1;33m     Gestionnaire de radiographies       \033[33m║\n";
-		cout << "║\033[1;33m     Date du jour: "<< ctime(&date_actuelle);
+		cout << "║\033[1;93m         Bienvenue sur P.O.O FM            \033[33m║\n";
+		cout << "║\033[93m Gestionnaire de radiographies             \033[33m║\n";
+		cout << "║\033[93m Date du jour: "<< date_print << "    \033[33m║\n";
 		cout << "\033[33m╚═══════════════════════════════════════════╝\n";
-		cout << "##\033[1;33m Menu principal:\n";
+		cout << "##\033[1;93m Menu principal:\n";
 		cout << "   [1]: Admin, Medecin ou Patient\n";
 		cout << "   [2]: Quitter\n";
 		MenuPrincipal = input();
@@ -63,7 +64,7 @@ int main()
 		vector<Profil> admins;
 		vector<Medecin> medecins;
 		vector<Patient> patients;
-		vect_tokens_profils = trouver_tous_profil_dans_bdd(vect_tokens_profils, mon_fichier);
+		vect_tokens_profils = trouver_tous_profil_dans_bdd(vect_tokens_profils, mon_fichier, false);
 		for (int i =0; i<vect_tokens_profils.size(); i++)
 		{
 			/*for (int j = 0; j<vect_tokens_profils[i].size(); j++)
@@ -134,8 +135,8 @@ int main()
 			Menu_Lister_ou_Creer = 1;
 			while(Menu_Lister_ou_Creer == 1 || Menu_Lister_ou_Creer == 2)
 			{
-				cout << "#############################################\n";
-				cout << "## Menu: Lister ou consulter des radiographies\n";
+				cout << "\033[34m╔════════════════════════════════════════════\n";
+				cout << "╚═\033[36m Menu: Lister ou consulter des radiographies\n";
 				cout << "   [1]: Lister les radiographies effectuées.\n";
 				cout << "   [2]: Consulter un examen\n";
 				cout << "   [3]: Retour au menu principal\n";
@@ -145,7 +146,7 @@ int main()
 					case 1:
 						{
 						vector<Radiographie> radios;
-						cout << "## Lister les radiographies effectuées.\n";
+						cout << "## Lister les radiographies effectuées.\033[0m\n";
 						radios = trouver_radios_dans_bdd("bdd_compte_rendu_medical.txt", admins, medecins, patients);
 						string list_result = app.afficher_liste(radios);
 						cout << list_result << endl;
@@ -161,23 +162,23 @@ int main()
 						}break;
 					case 2:
 					{
-						cout << "## Consulter un examen.\n";
+						cout << "## Consulter un examen.\033[0m\n";
 						menu_examen = 1;
 						while(menu_examen == 1)
 						{
-							cout << "#############################################\n";
-							cout << "## Menu: consulter un examen\n";
+							cout << "\033[32m╔════════════════════════════════════════════\n";
+							cout << "╚═\033[92m Menu: consulter un examen\n";
 							cout << "   [1]: Consulter/saisi\n";
 							cout << "   [2]: Retour au menu consulter actions\n";
 							menu_examen = input();
 							switch(menu_examen)
 							{
 								case 1: {
-									cout << "> Consulter/saisi\n";
+									cout << "> Consulter/saisi\033[0m\n";
 									//pour le médecin : accéder ou créer une radio
 									acces_radio(app, user, admins,medecins,patients);
 								} break;
-								case 2: cout << "> Retour au menu d'actions\n"; continue;
+								case 2: cout << "> Retour au menu d'actions\033[0m\n"; continue;
 								default: 
 									cout << "\033[1;31mMauvaise entrée, retour au menu.\033[0m\n";
 									menu_examen = 1;
@@ -187,7 +188,7 @@ int main()
 					}
 					break;
 					case 3:
-						cout << "## Retour au menu prinicpal.\n";
+						cout << "> Retour au menu prinicpal.\033[0m\n";
 						continue;
 					default:
 						cout << "\033[1;31mMauvaise entrée, retour au menu.\033[0m\n";
@@ -196,6 +197,6 @@ int main()
 				}
 			}
 		}
-		else cout << "\033[1;31mConnard :) essaie encore !\033[0m" <<endl;
+		else cout << "\033[1;31mMauvais mot de passe (Ò﹏Ó ╬) essaie encore !\033[0m" <<endl;
 	}
 }

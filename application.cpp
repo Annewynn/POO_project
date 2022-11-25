@@ -30,7 +30,7 @@ string Application::afficher_liste(vector<Radiographie> radios){
 	string liste_trier = "Numéro d'éxamen\tNom patient\tPrénom patient\tAge patient\t";
 	liste_trier += "Type radio\tNom médecin\tPrénom médecin\tDate\tStatut\tListe des clichés (Numéro[Chemin]:Description)\n";
 	cout << "\tQuel type de tri ?\n";
-	cout << "\t[1] Par défaut\n\t[2] Par patient\n\t[3] Par date\n\t [4] Par numéro d'examen\n";
+	cout << "\t[1] Par défaut\n\t[2] Par patient\n\t[3] Par date\n\t[4] Par numéro d'examen\n";
 	int choix = input();
 	switch(choix){
 		case 1:

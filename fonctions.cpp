@@ -54,6 +54,54 @@ bool compareNumExam(Radiographie a, Radiographie b){
 	return  a.get_numexam() < b.get_numexam();	
 }
 
+//#####################################################################################################
+/*
+.-------.    ,---.   .--.  .-_'''-.    
+|  _ _   \   |    \  |  | '_( )_   \   
+| ( ' )  |   |  ,  \ |  ||(_ o _)|  '  
+|(_ o _) /   |  |\_ \|  |. (_,_)/___|  
+| (_,_).' __ |  _( )_\  ||  |  .-----. 
+|  |\ \  |  || (_ o _)  |'  \  '-   .' 
+|  | \ `'   /|  (_,_)\  | \  `-'`   |  
+|  |  \    / |  |    |  |  \        /  
+''-'   `'-'  '--'    '--'   `'-...-'   
+*/
+/// @brief Produit un entier aléatoire entre deux limites choisies.
+/// @param min Entier de la limite gauche.
+/// @param max Entier de la limite droite.
+/// @return Renvoie un entier aléatoire.
+int rng(int min, int max)
+{
+    random_device dev;
+    mt19937 randomng(dev());
+    //rng= Random number generator
+    uniform_int_distribution<mt19937::result_type> dist(min,max); // distribution in range [min, max]
+    return dist(randomng);
+}
+//################################################################################################
+/*
+.-./`) ,---.   .--..-------.   ___    _ ,---------.  
+\ .-.')|    \  |  |\  _(`)_ \.'   |  | |\          \ 
+/ `-' \|  ,  \ |  || (_ o._)||   .'  | | `--.  ,---' 
+ `-'`"`|  |\_ \|  ||  (_,_) /.'  '_  | |    |   \    
+ .---. |  _( )_\  ||   '-.-' '   ( \.-.|    :_ _:    
+ |   | | (_ o _)  ||   |     ' (`. _` /|    (_I_)    
+ |   | |  (_,_)\  ||   |     | (_ (_) _)   (_(=)_)   
+ |   | |  |    |  |/   )      \ /  . \ /    (_I_)    
+ '---' '--'    '--'`---'       ``-'`-''     '---'    
+*/
+int input(){
+	string entree = "";
+	cin >> entree;
+	try{
+		stoi(entree);
+	} catch(exception &err){
+		return 0;
+	}
+	return stoi(entree);
+}
+
+
 //################################################################################################
 /*_                                                     __ _ _        _                     _         _     _ 
  | |_ _ __ ___  _   ___   _____ _ __   _ __  _ __ ___  / _(_) |    __| | __ _ _ __  ___    | |__   __| | __| |
@@ -231,19 +279,39 @@ vector<vector<string>> trouver_tous_profil_dans_bdd(vector<vector<string>> vect_
             istringstream iss(ligne);
             string token;
 			//si on est sur plusieurs lignes, iLigne peut ne pas être égal à 0
-                if (iLigne == 0) 
+			//si on peut getligne de tab, on le remet à 0 pour avoir toutes les infos
+			if (iLigne != 0)
+			{
+				for(int i = 0; i < ligne.size(); ++i) 
 				{
-					while(getline(iss, token, '\t')) tokens.push_back(token);
-					if (isOnManyLines) iLigne ++;
+					if (ligne[i] == '\t') 
+					{
+						iLigne = 0; 
+						if (isOnManyLines) vect_tokens_images.push_back(tokens);
+						tokens.clear();
+						break;
+					}
 				}
-				else if (isOnManyLines) 
-				{
-					getline(iss, token, '\n');  // but we can specify a different one
-                    tokens.push_back(token);
+			}
+			if (iLigne == 0) 
+			{
+				while(getline(iss, token, '\t')) tokens.push_back(token);
+				if (isOnManyLines) {iLigne ++;
 				}
-            vect_tokens_images.push_back(tokens);
-			if (! isOnManyLines) tokens.clear();
+			}
+			else if (isOnManyLines) 
+			{
+				getline(iss, token, '\n');  // but we can specify a different one
+				token = token + "\n";
+				tokens.push_back(token);
+			}
+			if (! isOnManyLines) 
+			{
+				vect_tokens_images.push_back(tokens);
+				tokens.clear();
+			}
         }
+	if (isOnManyLines) vect_tokens_images.push_back(tokens);
     fichier.close();  // je referme le fichier
     }
     else cout << "Le fichier source n'a pas pu être ouvert (tous profils). Veuillez réessayer" <<endl;
@@ -313,7 +381,14 @@ Radiographie trouver_radio(string num, vector<Profil> admins,vector<Medecin> med
 	for (int i =0; i<vect_tokens_images.size(); i++)
 	{
 		string image_path = vect_tokens_images[i][1];
-		string legende = vect_tokens_images[i][2];
+		//légende : de 2 à size()
+		string legende;
+		for (int j=2; j<vect_tokens_images[i].size(); j++)
+		{
+			legende += vect_tokens_images[i][j];
+			cout << vect_tokens_images[i][j];
+		}
+		cout <<endl;
 		images.push_back(Cliche (i, image_path, legende));
 	}
 	Radiographie radio(numero, tech, pat, medic, date, etat, images); 
@@ -353,52 +428,6 @@ vector<Radiographie> trouver_radios_dans_bdd(string mon_fichier, vector<Profil> 
     return liste_radios;
 }
 
-//#####################################################################################################
-/*
-.-------.    ,---.   .--.  .-_'''-.    
-|  _ _   \   |    \  |  | '_( )_   \   
-| ( ' )  |   |  ,  \ |  ||(_ o _)|  '  
-|(_ o _) /   |  |\_ \|  |. (_,_)/___|  
-| (_,_).' __ |  _( )_\  ||  |  .-----. 
-|  |\ \  |  || (_ o _)  |'  \  '-   .' 
-|  | \ `'   /|  (_,_)\  | \  `-'`   |  
-|  |  \    / |  |    |  |  \        /  
-''-'   `'-'  '--'    '--'   `'-...-'   
-*/
-/// @brief Produit un entier aléatoire entre deux limites choisies.
-/// @param min Entier de la limite gauche.
-/// @param max Entier de la limite droite.
-/// @return Renvoie un entier aléatoire.
-int rng(int min, int max)
-{
-    random_device dev;
-    mt19937 randomng(dev());
-    //rng= Random number generator
-    uniform_int_distribution<mt19937::result_type> dist(min,max); // distribution in range [min, max]
-    return dist(randomng);
-}
-//################################################################################################
-/*
-.-./`) ,---.   .--..-------.   ___    _ ,---------.  
-\ .-.')|    \  |  |\  _(`)_ \.'   |  | |\          \ 
-/ `-' \|  ,  \ |  || (_ o._)||   .'  | | `--.  ,---' 
- `-'`"`|  |\_ \|  ||  (_,_) /.'  '_  | |    |   \    
- .---. |  _( )_\  ||   '-.-' '   ( \.-.|    :_ _:    
- |   | | (_ o _)  ||   |     ' (`. _` /|    (_I_)    
- |   | |  (_,_)\  ||   |     | (_ (_) _)   (_(=)_)   
- |   | |  |    |  |/   )      \ /  . \ /    (_I_)    
- '---' '--'    '--'`---'       ``-'`-''     '---'    
-*/
-int input(){
-	string entree = "";
-	cin >> entree;
-	try{
-		stoi(entree);
-	} catch(exception &err){
-		return 0;
-	}
-	return stoi(entree);
-}
 
 //aller chercher le patient par son id dans bdd patients médecins
 Patient trouve_pat(vector<Patient> patients, string id)
