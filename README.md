@@ -140,6 +140,8 @@ Medecin: string consulter()
 Ce utilise uniquement le language C++ et ne nécessite donc aucuns prérequis. Il suffit de lancer le fichier _main_.
 ```bash
 ./main
+ou
+./main bdd_patients_medecins.txt
 ```
 
 ### Dépendances nécessaires
