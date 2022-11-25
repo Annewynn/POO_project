@@ -1,0 +1,27 @@
+######### Compte Rendu ########
+#############################################
+Numéro d'examen: 4568Compte rendu:
+
+#############################################
+
+######### Radiographies ########
+#############################################
+N° d'examen: 4568		Date: 52/85/2008
+Type de radio: Rayons x
+N° patient: p10
+	Nom et prénom: Angel Hazbin
+Age: 115	Sexe: B
+
+Medecin:
+	Supper Adolphe
+Effectuée
+Liste des clichés:
+N°: 0
+	Chemin d'accès: examens/4568/ceci/est/uneimage
+	Légende: une légende
+N°: 1
+	Chemin d'accès: examens/4568/ceci/esuune/autreimage
+	Légende: plus d'inspiration
+
+#############################################
+

@@ -1,0 +1,4 @@
+Numéro d'éxamen	Nom patient	Prénom patient	Age patient	Type radio	Nom médecin	Prénom médecin	Date	Statut	Liste des clichés (Numéro[Chemin]:Description)
+8556	Princess	Kraehe	33	échographie à ultrasons	Supper	Adolphe	2010/8/17	Effectuée	0[examens/8556/8556_01_echo1trim.webp]:Echographie d'un foetus de 3 mois	1[examens/8556/8556_02_ultrasons_foetus.webp]:Schéma de l'échographie.	
+424242	Cramp	Justine	28	Rayons X	Stopp	Madeleine	2005/12/1	Effectuée	0[examens/424242/424242_01_image-geniale.jpg]:cette image est très jolie !	1[examens/424242/424242_02_autre_image_kawaii.jpg]:une autre image	
+4568	Angel	Hazbin	115	Rayons x	Supper	Adolphe	2008/85/52	Planifiée	0[examens/4568/ceci/est/uneimage]:une légende	1[examens/4568/ceci/esuune/autreimage]:plus d'inspiration	
