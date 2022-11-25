@@ -1,0 +1,18 @@
+######### Radiographies ########
+#############################################
+N° d'examen: 666		Date: 6/6/2066
+Type de radio: Rayons X
+N° patient: p02
+	Nom et prénom: Cramp Justine
+Age: 28	Sexe: F
+
+Medecin:
+	Supper Adolphe
+Planifiée
+Liste des clichés:
+N°: 0
+	Chemin d'accès: 
+	Légende: 
+
+#############################################
+

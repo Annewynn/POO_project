@@ -1,4 +1,8 @@
-
+/*#########################################
+## 25/11/2022
+## Par Elyna Bouchereau & Naelle Guillon
+## Fichier: fonctions.hpp
+###########################################*/
 #include "application.hpp"
 #include "compte_rendu_medical.hpp"
 #include "patient.hpp"
@@ -52,7 +56,7 @@ Profil creer_adm(std::vector<std::string> tokens);
 //################################################################################################
 /*
 	Deux fonctions pour lire le fichier contenant les médecins, patients et admin
-	(bdd_patients_medecins.txt) et renvoi soit un vecteur pour instancier ensuite
+	(bdd_patients_medecins.txt) et renvoie soit un vecteur pour instancier ensuite
 	un Profil, Medecin, Patient, ou pour directement instancier un Patient.
 */
 void ajouter_bdd(Patient pat, std::string mon_fichier);
@@ -60,7 +64,7 @@ void ajouter_bdd(vector<string> vec, string mon_fichier);
 
 //################################################################################################
 /// @brief Remplit un tableau 2d de std::strings avec celles qu'il récuppère dans un fichier type csv, avec tab pour délimiteur.
-/// @param vect_tokens_images Tableau de strins à renvoyer
+/// @param vect_tokens_images Tableau de strings à renvoyer
 /// @param mon_fichier Chemin du fichier à lire
 /// @return Renvoie un tableau à deux dimensions contenant la transcription du fichier.
 std::vector<std::vector<std::string>> trouver_tous_profil_dans_bdd(std::vector<std::vector<std::string>> vect_tokens_images, std::string mon_fichier, bool isOnManyLines);

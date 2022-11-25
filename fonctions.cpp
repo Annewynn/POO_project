@@ -1,4 +1,8 @@
-
+/*#########################################
+## 25/11/2022
+## Par Elyna Bouchereau & Naelle Guillon
+## Fichier: fonctions.cpp
+###########################################*/
 #include "application.hpp"
 #include "compte_rendu_medical.hpp"
 #include "patient.hpp"
@@ -30,28 +34,37 @@ using namespace std;
     '---'   ''-'   `'-'  '---'   `-...-'  --(_,_)---(_I_)-'---'       ``-'`-'' '--'    '--' 
                                                                                             
 */
-/// @brief Permet de comparer de noms en fonction de l'ordre alphabethique
-/// @return Si le nom de a est après b, alors renvoi faux, sinon renvoi vrai.
-bool comparePatient(Radiographie a, Radiographie b){
-	if(a.patient.get_nom() < b.patient.get_nom()){
+/// @brief Permet de comparer des noms en fonction de l'ordre alphabethique
+/// @return Si le nom de a est après b, alors renvoie faux, sinon renvoie vrai.
+bool comparePatient(Radiographie a, Radiographie b)
+{
+	if(a.patient.get_nom() < b.patient.get_nom())
+	{
 		return a.patient.get_prenom() < b.patient.get_prenom();
-	} else {return false;}
+	} 
+	else {return false;}
 }
+
 /// @brief Permet de comparer des dates
-/// @return Si la date de a est après b, alors renvoi faux, sinon renvoi vrai.
-bool compareDate( Radiographie a, Radiographie b){
-	if(a.get_date().annee == b.get_date().annee){
-		if(a.get_date().mois == b.get_date().mois){
+/// @return Si la date de a est après b, alors renvoie faux, sinon renvoie vrai.
+bool compareDate( Radiographie a, Radiographie b)
+{
+	if(a.get_date().annee == b.get_date().annee)
+	{
+		if(a.get_date().mois == b.get_date().mois)
+		{
 			return a.get_date().jour < b.get_date().jour;
 		}
 		else return a.get_date().mois < b.get_date().mois;
 	}
 	else return a.get_date().annee < b.get_date().annee;
 }
-/// @brief Permet de comparer des numéro d'examen
-/// @return Si le numéro de a est supérieur b, alors renvoi faux, sinon renvoi vrai.
-bool compareNumExam(Radiographie a, Radiographie b){
-	return  a.get_numexam() < b.get_numexam();	
+
+/// @brief Permet de comparer des numéros d'examen
+/// @return Si le numéro de a est supérieur b, alors renvoie faux, sinon renvoie vrai.
+bool compareNumExam(Radiographie a, Radiographie b)
+{
+	return a.get_numexam() < b.get_numexam();	
 }
 
 //#####################################################################################################
@@ -90,7 +103,9 @@ int rng(int min, int max)
  |   | |  |    |  |/   )      \ /  . \ /    (_I_)    
  '---' '--'    '--'`---'       ``-'`-''     '---'    
 */
-int input(){
+/// @brief Renvoie d'une manière propre un entier entré.
+int input()
+{
 	string entree = "";
 	cin >> entree;
 	try{
@@ -101,15 +116,20 @@ int input(){
 	return stoi(entree);
 }
 
-
 //################################################################################################
-/*_                                                     __ _ _        _                     _         _     _ 
- | |_ _ __ ___  _   ___   _____ _ __   _ __  _ __ ___  / _(_) |    __| | __ _ _ __  ___    | |__   __| | __| |
- | __| '__/ _ \| | | \ \ / / _ \ '__| | '_ \| '__/ _ \| |_| | |   / _` |/ _` | '_ \/ __|   | '_ \ / _` |/ _` |
- | |_| | | (_) | |_| |\ V /  __/ |    | |_) | | | (_) |  _| | |  | (_| | (_| | | | \__ \   | |_) | (_| | (_| |
-  \__|_|  \___/ \__,_| \_/ \___|_|____| .__/|_|  \___/|_| |_|_|___\__,_|\__,_|_| |_|___/___|_.__/ \__,_|\__,_|
-                                |_____|_|                    |_____|                  |_____|                 
+/*
+.___________..______        ______    __    __  ____    ____    .______   .______        ______    _______  __   __      
+|           ||   _  \      /  __  \  |  |  |  | \   \  /   /    |   _  \  |   _  \      /  __  \  |   ____||  | |  |     
+`---|  |----`|  |_)  |    |  |  |  | |  |  |  |  \   \/   /     |  |_)  | |  |_)  |    |  |  |  | |  |__   |  | |  |     
+    |  |     |      /     |  |  |  | |  |  |  |   \      /      |   ___/  |      /     |  |  |  | |   __|  |  | |  |     
+    |  |     |  |\  \----.|  `--'  | |  `--'  |    \    /       |  |      |  |\  \----.|  `--'  | |  |     |  | |  `----.
+    |__|     | _| `._____| \______/   \______/      \__/        | _|      | _| `._____| \______/  |__|     |__| |_______|
+                                                                                                                         
  */
+/// @brief Trouve une ligne dans un fichier en fonction de l'id et mot de passe fournis
+/// @param tokens Vecteur qui va stocker les infos de la ligne correspondant
+/// @param mon_fichier fichier dans lequel chercher
+/// @return tokens
 vector<string> trouver_profil_dans_bdd(vector<string> tokens, string id, string mdp, string mon_fichier)
 {
       // je stocke dans la chaîne mon_fichier le nom du fichier à ouvrir
@@ -139,6 +159,12 @@ vector<string> trouver_profil_dans_bdd(vector<string> tokens, string id, string 
 }
 
 //################################################################################################
+
+/// @brief Trouve une ou plusieurs lignes dans un fichier, en fonction de l'id fourni. 
+/// @param tokens Vecteur qui va stocker les infos de la ligne correspondant
+/// @param mon_fichier fichier dans lequel chercher
+/// @param isOnManyLines true si l'info recherchée est sur plusieurs lignes (légendes ou comptes-rendu)
+/// @return tokens
 vector<string> trouver_profil_dans_bdd(vector<string> tokens, string id, string mon_fichier, bool isOnManyLines)
 {
       // je stocke dans la chaîne mon_fichier le nom du fichier à ouvrir
@@ -254,12 +280,13 @@ void ajouter_bdd(vector<string> vec, string mon_fichier)
 
 //################################################################################################
 /*
-  _                                  _                                        __ _ _        _                     _         _     _ 
- | |_ _ __ ___  _   ___   _____ _ __| |_ ___  _   _ ___      _ __  _ __ ___  / _(_) |    __| | __ _ _ __  ___    | |__   __| | __| |
- | __| '__/ _ \| | | \ \ / / _ \ '__| __/ _ \| | | / __|    | '_ \| '__/ _ \| |_| | |   / _` |/ _` | '_ \/ __|   | '_ \ / _` |/ _` |
- | |_| | | (_) | |_| |\ V /  __/ |  | || (_) | |_| \__ \    | |_) | | | (_) |  _| | |  | (_| | (_| | | | \__ \   | |_) | (_| | (_| |
-  \__|_|  \___/ \__,_| \_/ \___|_|___\__\___/ \__,_|___/____| .__/|_|  \___/|_| |_|_|___\__,_|\__,_|_| |_|___/___|_.__/ \__,_|\__,_|
-                                |_____|               |_____|_|                    |_____|                  |_____|                 
+.___________..______        ______    __    __  ____    ____    .___________.  ______    __    __       _______.   .______   .______        ______    _______  __   __      
+|           ||   _  \      /  __  \  |  |  |  | \   \  /   /    |           | /  __  \  |  |  |  |     /       |   |   _  \  |   _  \      /  __  \  |   ____||  | |  |     
+`---|  |----`|  |_)  |    |  |  |  | |  |  |  |  \   \/   /     `---|  |----`|  |  |  | |  |  |  |    |   (----`   |  |_)  | |  |_)  |    |  |  |  | |  |__   |  | |  |     
+    |  |     |      /     |  |  |  | |  |  |  |   \      /          |  |     |  |  |  | |  |  |  |     \   \       |   ___/  |      /     |  |  |  | |   __|  |  | |  |     
+    |  |     |  |\  \----.|  `--'  | |  `--'  |    \    /           |  |     |  `--'  | |  `--'  | .----)   |      |  |      |  |\  \----.|  `--'  | |  |     |  | |  `----.
+    |__|     | _| `._____| \______/   \______/      \__/            |__|      \______/   \______/  |_______/       | _|      | _| `._____| \______/  |__|     |__| |_______|
+                                                                                                                                                                                           
 */
 /// @brief Remplit un tableau 2d de strings avec celles qu'il récuppère dans un fichier type csv, avec tab pour délimiteur.
 /// @param vect_tokens_images Tableau de strins à renvoyer
@@ -323,13 +350,14 @@ vector<vector<string>> trouver_tous_profil_dans_bdd(vector<vector<string>> vect_
 }
 
 //################################################################################################
-/*_                                                 _ _                  _                     _         _     _ 
- | |_ _ __ ___  _   ___   _____ _ __  _ __ __ _  __| (_) ___  ___     __| | __ _ _ __  ___    | |__   __| | __| |
- | __| '__/ _ \| | | \ \ / / _ \ '__|| '__/ _` |/ _` | |/ _ \/ __|   / _` |/ _` | '_ \/ __|   | '_ \ / _` |/ _` |
- | |_| | | (_) | |_| |\ V /  __/ |   | | | (_| | (_| | | (_) \__ \  | (_| | (_| | | | \__ \   | |_) | (_| | (_| |
-  \__|_|  \___/ \__,_| \_/ \___|_|___|_|  \__,_|\__,_|_|\___/|___/___\__,_|\__,_|_| |_|___/___|_.__/ \__,_|\__,_|
-                                |_____|                         |_____|                  |_____|                 
-*/
+/*
+.___________..______        ______    __    __  ____    ____    .______          ___       _______   __    ______   
+|           ||   _  \      /  __  \  |  |  |  | \   \  /   /    |   _  \        /   \     |       \ |  |  /  __  \  
+`---|  |----`|  |_)  |    |  |  |  | |  |  |  |  \   \/   /     |  |_)  |      /  ^  \    |  .--.  ||  | |  |  |  | 
+    |  |     |      /     |  |  |  | |  |  |  |   \      /      |      /      /  /_\  \   |  |  |  ||  | |  |  |  | 
+    |  |     |  |\  \----.|  `--'  | |  `--'  |    \    /       |  |\  \----./  _____  \  |  '--'  ||  | |  `--'  | 
+    |__|     | _| `._____| \______/   \______/      \__/        | _| `._____/__/     \__\ |_______/ |__|  \______/  
+                                                                                                                    */
 /// @brief Cherche un radiographie existante dans la base de donnée et l'instancie.
 /// @param num Numéro d'examen pour la radiographie associée.
 /// @param admins Liste des administrateurs sous forme de vecteur de Profil.
@@ -417,13 +445,14 @@ vector<Radiographie> trouver_radios_dans_bdd(string mon_fichier, vector<Profil> 
             //https://stackoverflow.com/questions/10617094/how-to-split-a-file-lines-with-space-and-tab-differentiation
             istringstream iss(ligne);
             string token;
-            while(getline(iss, token, '\t'))  tokens.push_back(token);
+            while(getline(iss, token, '\t')) tokens.push_back(token);
             vect_tokens_radios.push_back(tokens[0]);
         }
     fichier.close();  // je referme le fichier
     }
     else cout << "Le fichier source n'a pas pu être ouvert (tous profils). Veuillez réessayer" <<endl;
-	for(int i=0;i<vect_tokens_radios.size();i++){
+	for(int i=0;i<vect_tokens_radios.size();i++)
+	{
 		num = vect_tokens_radios[i];
 		liste_radios.push_back(trouver_radio(num, admins, medecins, patients));
 	}
@@ -472,49 +501,56 @@ Patient choix_patient(vector<Patient> &patients){
 		cout << "Plusieurs patients avec le nom et prénom.\n";
 		for(int i=0;i<patients_trouver.size();i++){
 			cout << "Patient "<< i << endl;;
-			cout << patients_trouver[i].consulter() << endl;
+			cout << patients_trouver[i].afficher() << endl;
 		}
 		cout << "Quel patient choisi (sur " << patients_trouver.size() << ") ? Entrez le nombre correspondant.\n";
-		cin >> choix;
+		choix = input();
 		return patients_trouver[choix];
 	}
-	if (cpt == 1) return patients_trouver[0];
-	else 
+	if (cpt == 1) 
 	{
-		vector<string> tokens_pat;
-		cout << "Patient pas encore dans la base de données. Veuillez entrer ses informations." <<endl;;
-		//id
-		cout << "Id: ";
-		string id;
-		cin >> id;
-		tokens_pat.push_back(id);
-		//mdp
-		//généré aléatoirement
-		string mdp;
-		for (int i = 0; i< 4; i++)
-		{
-			mdp += to_string(rng(0, 9));
-		}
-		tokens_pat.push_back(mdp);
-		//nom
-		tokens_pat.push_back(nom);
-		//prenom
-		tokens_pat.push_back(prenom);
-		//age
-		cout << "Age: ";
-		int age_pat;
-		cin >> age_pat;
-		tokens_pat.push_back(to_string(age_pat));
-		//sexe
-		cout << "Sexe: ";
-		char sexe_pat;
-		cin >> sexe_pat;
-		string s{sexe_pat};
-		tokens_pat.push_back(s);
-		Patient pat = creer_pat(tokens_pat);
-		ajouter_bdd(pat, "bdd_patients_medecins.txt");
-		return pat;
+		//demander si le patient saisi est bien celui qu'on veut
+		cout << patients_trouver[0].afficher();
+		cout << "Ce patient est-il le bon ? (oui : o, non : n) ";
+		string rep;
+		cin >> rep;
+		if (rep == "o") return patients_trouver[0];
 	}
+	vector<string> tokens_pat;
+	cout << "Patient pas encore dans la base de données. Veuillez entrer ses informations." <<endl;;
+	//id
+	cout << "Id: ";
+	string id;
+	cin >> id;
+	tokens_pat.push_back(id);
+	//mdp
+	//généré aléatoirement
+	string mdp;
+	for (int i = 0; i< 4; i++)
+	{
+		mdp += to_string(rng(0, 9));
+	}
+	tokens_pat.push_back(mdp);
+	//nom
+	tokens_pat.push_back(nom);
+	//prenom
+	tokens_pat.push_back(prenom);
+	//age
+	cout << "Age: ";
+	int age_pat;
+	cin >> age_pat;
+	tokens_pat.push_back(to_string(age_pat));
+	//sexe
+	cout << "Sexe: ";
+	char sexe_pat;
+	cin >> sexe_pat;
+	string s{sexe_pat};
+	tokens_pat.push_back(s);
+	Patient pat = creer_pat(tokens_pat);
+	ajouter_bdd(pat, "bdd_patients_medecins.txt");
+	//maj du vecteur patient
+	patients.push_back(pat);
+	return pat;
 }
 //################################################################################################
 /*
@@ -599,8 +635,6 @@ Radiographie creer_radio(string numero, Medecin med, vector<Patient> &patients)
 	Radiographie radio(num, rtype, pat, med, date, etat, images);
 	cout << radio.afficher_radio() << endl;
 	return radio;
-	//créer un fichier crm.txt vide
-	//créer un fichier radio.txt comprennant tout ce qu'il y a dans la radio
 }
 
 //crée l'arborescence, les fichiers et leur contenu pour une nouvelle radiographie

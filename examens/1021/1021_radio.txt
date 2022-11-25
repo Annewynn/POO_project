@@ -1,0 +1,2 @@
+numéro	technique	patient	medecin	date	etat
+1021	IRM	p09	m01	10/12/2021	PLANIFIEE

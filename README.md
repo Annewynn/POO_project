@@ -58,20 +58,32 @@ Profil -- Application
 
 Radiographie: int NumExamen
 Radiographie: string type
-Radiographie: string id_patient
 Radiographie: Medecin medecin
+Radiographie: Patient patient [public]
 Radiographie: Date date
 Radiographie: bool etat
 Radiographie: vector<Cliché> liste_cliché
-Radiographie: ajouter()
-Radiographie: supprimer()
-Radiographie: afficher()
+Radiographie: string get_type()
+Radiographie: Medecin get_medecin()
+Radiographie: Date get_date()
+Radiographie: string get_etat()
+Radiographie: set_etat()
+Radiographie: string get_liste_cliche()
+Radiographie: string get_id()
+Radiographie: string afficher_radio()
+Radiographie: string afficher_radio_as_table()
+Radiographie: int get_numexam()
+Radiographie: sauvegarder_radio(string chemin)
+Radiographie: sauvegarder_cliches(string chemin)
 
 Cliché: int NumPrise
 Cliché: string chemin_accès_image
 Cliché: string légende
-Cliché: afficher_image()
-Cliché: get_cliche()
+Cliché: string afficher_image()
+Cliché: string get_cliche()
+Cliché: string return_cliche()
+Cliché: string get_path()
+Cliché: string get_legende()
 
 Compte_rendu_medical: int NumExam
 Compte_rendu_medical: string mot_de_passe
@@ -79,16 +91,23 @@ Compte_rendu_medical: string texte
 Compte_rendu_medical: Patient patient
 Compte_rendu_medical: get_Compte_Rendu()
 Compte_rendu_medical: print_Compte_Rendu()
+Compte_rendu_medical: return_Compte_Rendu()
+Compte_rendu_medical: modifier_Compte_Rendu()
+Compte_rendu_medical: sauvegarder_crm(string chemin)
 
 Application: vector<Radiographie> liste_radiographie
 Application: connexion()
-Application: charger_liste_radios()
 Application: sauvegarder_liste_radios()
-Application: trier_liste()
-Application: afficher_liste(trier_liste())
+Application: string afficher_liste(vector<Radiographie> radios)
+Application: vector<Radiographie> afficher_liste_examen_Patient()
+Application: vector<Radiographie> afficher_liste_examen_date()
+Application: vector<Radiographie> afficher_liste_examen_NumExam()
 
-Examen: Radiographie
-Examen: Compte_rendu_medical
+Examen: int numero_exam
+Examen: Radiographie radio
+Examen: Compte_rendu_medical crm
+Examen: sauvegarder_examen()
+Examen: sauvegarder_examen_restreint()
 
 Profil: string nom
 Profil: string prenom
@@ -96,20 +115,20 @@ Profil: string id
 Profil: string mot_de_passe
 Profil: int age
 Profil: char sexe
-Profil: ajouter()
-Profil: virtual consulter()
-Profil: afficher()
-Profil: get_id()
+Profil: Profil ajouter()
+Profil: string virtual consulter()
+Profil: string afficher()
+Profil: string get_id()
+Profil: string get_mdp()
+Profil: string get_nom()
+Profil: string get_prenom()
+Profil: int get_age()
+Profil: char get_sexe()
 
-Patient: get_id_patient()
-Patient: get_nom_patient()
-Patient: get_prenom_patient()
-Patient: get_age()
-Patient: get_sexe()
 Patient: consulter()
 
 Medecin: ajouter_Patient()
-Medecin: consulter()
+Medecin: string consulter()
 ```
 
 ## Documentation
@@ -140,10 +159,12 @@ Les packages utilisées ne sont pas des packages extérieurs. Leur liste:
   - [x] Menu de navigation au sein du logiciel
   - [x] Pouvoir créer et sauvegarder des examens/radiographies.
   - [x] Pouvoir écrire/changer un compte rendu
-  - [ ] Pouvoir changer le statut d'un examen 
-  - [ ] Pouvoir créer un examen
+  - [x] Pouvoir changer le statut d'un examen  
+  - [x] Pouvoir créer un examen
   - [x] Pouvoir afficher la liste des examens/radiographies.
   - [x] Pouvoir trier la liste des radiographies et l'exporter.
+  - [ ]	Afficher liste radio d'un patient
+  - [ ] Utilise les bases de données de radios et de profils si passer en paramètre
 - [ ] Fonctionnalités supplémentaires
   - [ ] Ajouter des fonctionnalités pour les patients
   - [ ] Affichage des clichés associés aux radiographies

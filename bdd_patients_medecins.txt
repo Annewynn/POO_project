@@ -8,3 +8,4 @@ a01	miRNA	Mde	Admin	0	N
 p05	0432	rainette	vert	50	N
 p10	0049	Angel	Hazbin	115	B
 p007	3832	Angel	Dédé	48	H
+p09	5066	rainette	vert	25	F

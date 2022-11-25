@@ -3,10 +3,11 @@
 ## Par Elyna Bouchereau & Naelle Guillon
 ## Fichier: main.cpp
 ###########################################*/
-#include "fonctions.hpp"
+#include "fonctions.hpp" //fonctions inclut tous les packages nécessaires
 #include <ctime>
 #include <cstring>
-//fonctions inclut tous les packages nécessaires
+
+
 
 using namespace std;
 
@@ -29,8 +30,16 @@ M::::::M               M::::::M  A:::::A               A:::::A  I::::::::IN:::::
 M::::::M               M::::::M A:::::A                 A:::::A I::::::::IN::::::N        N::::::N
 MMMMMMMM               MMMMMMMMAAAAAAA                   AAAAAAAIIIIIIIIIINNNNNNNN         NNNNNNN
 */
-int main()
+int main(int argc, char** argv)
 {
+	// Si on passe des fichiers en paramètres
+	string mon_fichier;
+	if(argc != 1){
+		if(argc == 2){
+			mon_fichier = argv[1];
+		} else mon_fichier = "bdd_patients_medecins.txt";
+	} else mon_fichier = "bdd_patients_medecins.txt";
+
 	int MenuPrincipal = 1;
 	int Menu_Lister_ou_Creer;
 	int menu_examen;
@@ -60,17 +69,12 @@ int main()
 
 		//ouvrir bdd_patients_medecins.txt pour en récuppérer les profils
 		vector<vector<string>> vect_tokens_profils;
-		string mon_fichier = "bdd_patients_medecins.txt";
 		vector<Profil> admins;
 		vector<Medecin> medecins;
 		vector<Patient> patients;
 		vect_tokens_profils = trouver_tous_profil_dans_bdd(vect_tokens_profils, mon_fichier, false);
 		for (int i =0; i<vect_tokens_profils.size(); i++)
 		{
-			/*for (int j = 0; j<vect_tokens_profils[i].size(); j++)
-			{
-				cout << vect_tokens_profils[i][j] <<endl;
-			}*/
 			if (vect_tokens_profils[i][0][0] == 'a')
 				admins.push_back(creer_adm(vect_tokens_profils[i]));
 			else if (vect_tokens_profils[i][0][0] == 'm')

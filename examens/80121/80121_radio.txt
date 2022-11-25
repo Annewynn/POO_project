@@ -1,0 +1,2 @@
+numéro	technique	patient	medecin	date	etat
+80121	IRM	p09	m01	10/10/20022	PLANIFIEE

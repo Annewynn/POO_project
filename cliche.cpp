@@ -35,7 +35,7 @@ string Cliche::return_cliche(){
 	string legend_oneline = legend;
 	replace(legend_oneline.begin(), legend_oneline.end(), '\n', '/' );
 	// Utilisation de pop_back() pour retirer le endline de fin de légende.
-	return to_string(num_prise) + '[' + image + "]:" + legend_oneline.erase(legend_oneline.size()-1);
+	return to_string(num_prise) + '[' + image + "]:" + legend_oneline;//.erase(legend_oneline.size()-1);
 }
 
 string Cliche::get_path()
