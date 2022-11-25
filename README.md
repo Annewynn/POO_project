@@ -189,5 +189,5 @@ Les auteurs demandent que tout travail nécessitant l'utilisation de cette appli
 
 [C++-shield]: https://img.shields.io/badge/C++-Orient%C3%A9_objet-blue.svg?style=for-the-badge&logo=c%2B%2B
 [C++-url]: https://cplusplus.com/
-[mermaid-shield]: https://img.shields.io/badge/mermaid-UML-blue.svg?style=for-the-badge&logo=JavaScript
+[mermaid-shield]: https://img.shields.io/badge/mermaid-UML-blue.svg?style=for-the-badge&logo=Markdown
 [mermaid-url]: https://mermaid-js.github.io/
