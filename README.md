@@ -34,7 +34,7 @@
 	- [Références](#références)
 
 # Projet en Programmation Orientée Objet: _Logiciel pour un centre de radiologie_
-Dans un cabinet de radiologie, il est nécessaire de pouvoir facilement consulter des radiographies associées à des examens sur une base de données numériques. Il est également nécessaire de pouvoir y enregistrer des examens, avec les contre-rendu et la radiographies associées.  
+Dans un cabinet de radiologie, il est nécessaire de pouvoir facilement consulter des radiographies associées à des examens sur une base de données numériques. Il est également nécessaire de pouvoir y enregistrer des examens, avec les compte-rendu et les radiographies associées.  
 Pour se faire nous proposons ce logiciel, **P.O.O FM**, utilisable simplement à partir d'un terminal et sans avoir besoin d'accéder manuellement aux fichiers de la base de données. 
 
 ## Schéma U.M.L. de l'architecture du logiciel
