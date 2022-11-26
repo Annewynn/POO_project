@@ -163,11 +163,12 @@ Les packages utilisées ne sont pas des packages extérieurs. Leur liste:
   - [x] Pouvoir écrire/changer un compte rendu
   - [x] Pouvoir changer le statut d'un examen  
   - [x] Pouvoir créer un examen
+  - [ ] Pouvoir supprimer un examen
   - [x] Pouvoir afficher la liste des examens/radiographies.
   - [x] Pouvoir trier la liste des radiographies et l'exporter.
   - [ ]	Afficher liste radio d'un patient
   - [x] Utilise les bases de données de radios et de profils si passer en paramètre
-  - [ ] Administrateut peut ajouter un médecin
+  - [x] Administrateut peut ajouter un médecin
 - [ ] Fonctionnalités supplémentaires
   - [ ] Ajouter des fonctionnalités pour les patients
   - [ ] Affichage des clichés associés aux radiographies
