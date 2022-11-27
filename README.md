@@ -99,9 +99,9 @@ Application: vector<Radiographie> liste_radiographie
 Application: connexion()
 Application: sauvegarder_liste_radios()
 Application: string afficher_liste(vector<Radiographie> radios)
-Application: vector<Radiographie> afficher_liste_examen_Patient()
-Application: vector<Radiographie> afficher_liste_examen_date()
-Application: vector<Radiographie> afficher_liste_examen_NumExam()
+Application: vector|Radiographie| afficher_liste_examen_Patient()
+Application: vector|Radiographie| afficher_liste_examen_date()
+Application: vector|Radiographie| afficher_liste_examen_NumExam()
 
 Examen: int numero_exam
 Examen: Radiographie radio
@@ -166,13 +166,13 @@ Les packages utilisées ne sont pas des packages extérieurs. Leur liste:
   - [ ] Pouvoir supprimer un examen
   - [x] Pouvoir afficher la liste des examens/radiographies.
   - [x] Pouvoir trier la liste des radiographies et l'exporter.
-  - [ ]	Afficher liste radio d'un patient
+  - [ ]	Afficher la liste des radiographies d'un patient
   - [x] Utilise les bases de données de radios et de profils si passer en paramètre
-  - [x] Administrateut peut ajouter un médecin
+  - [x] Administrateur peut ajouter un médecin
 - [ ] Fonctionnalités supplémentaires
   - [ ] Ajouter des fonctionnalités pour les patients
   - [ ] Affichage des clichés associés aux radiographies
-  - [ ] Utilisation d'un racourcie pour éviter de passer par le terminal.
+  - [ ] Utilisation d'un raccourcie pour éviter de passer par le terminal.
 
 Pour avoir une liste des fonctionnalités proposées (et bugs découverts), suivé ce [lien](https://github.com/Annewynn/POO_project/issues).
 
