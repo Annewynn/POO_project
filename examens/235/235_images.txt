@@ -1,0 +1,2 @@
+00	examens/235/chemin/vers/image	Voici la légende de cette image
+en plusieurs lignes.

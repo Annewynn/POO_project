@@ -1,0 +1,2 @@
+numéro	technique	patient	medecin	date	etat
+235	IRM	p08	m04	10/2/2004	PLANIFIEE

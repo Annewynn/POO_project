@@ -1,7 +1,8 @@
 ######### Compte Rendu ########
 #############################################
 Numéro d'examen: 424242Compte rendu:
-Les clichés ont clairement montré une fracture du poignet
+Les clichés ont clairement montré une fracture de poighet. De plus on observe une fracture plus ancienne à l'avant bras.
+
 #############################################
 
 ######### Radiographies ########
@@ -17,10 +18,10 @@ Medecin:
 Effectuée
 Liste des clichés:
 N°: 0
-	Chemin d'accès: 424242_01_image-geniale.jpg
+	Chemin d'accès: examens/424242/424242_01_image-geniale.jpg
 	Légende: cette image est très jolie !
 N°: 1
-	Chemin d'accès: 424242_02_autre_image_kawaii.jpg
+	Chemin d'accès: examens/424242/424242_02_autre_image_kawaii.jpg
 	Légende: une autre image
 
 #############################################

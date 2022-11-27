@@ -12,3 +12,5 @@ p09	5066	rainette	vert	25	F
 m03	7403	Krieg	Jaeger	23	H
 m09	fleur	Erinacea	Erica	23	F
 m07	retour	McFly	Dessert	56	H
+m04	Archon	Buer	Nahida	31	F
+p08	9542	Pierre	Paul	34	H
