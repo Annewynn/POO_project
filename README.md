@@ -11,6 +11,7 @@
 
   <p align="center">
     Une application pour la consultations d'examens réalisées, et des radiographies associées, ainsi que la saisie de nouvelles radiographies.
+	Réalisée par Naelle GUILLON et Elyna BOUCHEREAU.
     <br />
     <a href="https://github.com/Annewynn/POO_project">Home</a>
     ·
